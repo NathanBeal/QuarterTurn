@@ -20,7 +20,7 @@
   }
   * { box-sizing: border-box; }
   body { margin: 0; background: var(--bg); color: var(--text); font: 17px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-  main { max-width: 760px; margin: 0 auto; padding: 32px 16px 48px; }
+  main { max-width: 680px; margin: 0 auto; padding: 32px 16px 48px; }
   a { color: var(--accent); }
 
   nav { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; margin-bottom: 32px; }
@@ -31,46 +31,26 @@
   nav a.here { color: var(--text); font-weight: 600; }
 
   h1 { font-size: 36px; line-height: 1.15; letter-spacing: -0.02em; margin: 0 0 6px; }
-  .lede { color: var(--muted); margin: 0 0 20px; }
+  .lede { color: var(--muted); margin: 0; }
 
-  .jump { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
-  .jump a { padding: 6px 14px; border-radius: 999px; border: 1px solid var(--border); background: var(--card); text-decoration: none; font-size: 15px; }
-  .jump a:hover { border-color: var(--gold); }
-  .filter {
-    width: 100%; padding: 12px 16px; font: inherit; color: var(--text); background: var(--card);
-    border: 1px solid var(--border); border-radius: 12px; outline: none;
-  }
-  .filter:focus { border-color: var(--accent); }
+  .card { margin-top: 16px; padding: 18px 20px; background: var(--card); border: 1px solid var(--border); border-radius: 16px; }
+  .card:first-of-type { margin-top: 28px; }
+  h2 { font-size: 19px; margin: 0 0 4px; }
+  .card > p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.5; }
 
-  section { margin-top: 44px; scroll-margin-top: 16px; }
-  h2 { display: flex; align-items: baseline; gap: 10px; font-size: 22px; margin: 0 0 4px; }
-  h2 .count { font: 600 12px/1 ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--gold); letter-spacing: .06em; }
-  .note { color: var(--muted); font-size: 15px; margin: 0 0 14px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+  .chip { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 999px; background: var(--chip); font-size: 14px; font-weight: 600; }
+  .tag { font-size: 10px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--gold); border: 1px solid var(--gold); border-radius: 999px; padding: 0 6px; }
 
-  .brands { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
-  .brand { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 12px 14px 14px; }
-  .brand h3 { margin: 0 0 8px; font-size: 15px; }
-  .brand ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
-  .brand li { padding: 3px 10px; border-radius: 8px; background: var(--chip); font-size: 14px; line-height: 1.5; }
-  .brand li small { color: var(--muted); }
-  .brand.live { border-color: var(--gold); }
-  .tag { display: inline-block; margin-left: 6px; padding: 1px 8px; border-radius: 999px; background: var(--gold); color: var(--bg); font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; vertical-align: 2px; }
+  details { margin-top: 12px; }
+  summary { cursor: pointer; color: var(--accent); font-size: 15px; font-weight: 600; }
+  dl { margin: 10px 0 0; font-size: 14px; line-height: 1.5; }
+  dt { font-weight: 600; margin-top: 8px; }
+  dd { margin: 0; color: var(--muted); }
 
-  .feature-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; }
-  .feature-row .brand p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.5; }
-
-  .tag.beta { background: transparent; color: var(--gold); border: 1px solid var(--gold); }
-  .hidden { display: none !important; }
-  .empty { color: var(--muted); font-style: italic; }
-
-  .ask {
-    margin-top: 56px; padding: 24px; text-align: center; border-radius: 18px;
-    background: var(--card); border: 1px solid var(--border);
-  }
-  .ask h2 { justify-content: center; }
-  .ask p { color: var(--muted); margin: 6px auto 18px; max-width: 30em; }
+  .ask { margin-top: 40px; text-align: center; }
+  .ask p { color: var(--muted); margin: 0 auto 14px; }
   .button { display: inline-block; padding: 10px 20px; border-radius: 999px; background: var(--accent); color: var(--bg); font-weight: 600; text-decoration: none; }
-  .ask .addr { display: block; margin-top: 10px; font-size: 14px; }
 
   footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--border); display: flex; gap: 16px; flex-wrap: wrap; font-size: 14px; color: var(--muted); }
   footer a { color: var(--muted); }
@@ -86,113 +66,87 @@
 </nav>
 
 <h1>Gear</h1>
-<p class="lede">The machines, grinders, scales and roaster sites Quarter Turn knows. Anything not listed can still be added by name in the app.</p>
+<p class="lede">What Quarter Turn works with. Anything else can still be added by name.</p>
 
-<div class="jump">
-  <a href="#machines">Espresso machines</a>
-  <a href="#grinders">Grinders</a>
-  <a href="#scales">Scales</a>
-  <a href="#roasters">Roaster imports</a>
+<div class="card">
+  <h2>Espresso machines</h2>
+  <p>Gaggiuino and GaggiMate machines connect over Wi-Fi, and every shot arrives on its own. 73 machines are in the catalog.</p>
+  <div class="chips"><span class="chip">Gaggiuino</span><span class="chip">GaggiMate</span></div>
+  <details>
+    <summary>See all machines</summary>
+    <dl>
+      <dt>Ascaso</dt><dd>Baby T Zero, Dream PID, Steel Duo PID, Steel Uno PID</dd>
+      <dt>Bezzera</dt><dd>BZ10, Duo MN, Matrix DE</dd>
+      <dt>Breville</dt><dd>Bambino, Bambino Plus, Barista Express, Barista Express Impress, Barista Pro, Barista Touch Impress, Dual Boiler, Duo Temp Pro, Infuser, Oracle Jet, Oracle Touch</dd>
+      <dt>Cafelat</dt><dd>Robot</dd>
+      <dt>De'Longhi</dt><dd>Dedica Arte, La Specialista Arte, La Specialista Maestro, Magnifica Evo, Rivelia</dd>
+      <dt>Decent</dt><dd>DE1 Pro, DE1XL</dd>
+      <dt>ECM</dt><dd>Classika PID, Mechanika Max, Puristika, Synchronika</dd>
+      <dt>Flair</dt><dd>Flair 58, Flair 58x, Classic, Pro 2</dd>
+      <dt>Gaggia</dt><dd>Classic Evo Pro, Classic Pro</dd>
+      <dt>Gaggiuino</dt><dd>Gaggia Classic Pro, Rancilio Silvia, Silver Knight</dd>
+      <dt>Jura</dt><dd>E8, S8, Z10</dd>
+      <dt>La Marzocco</dt><dd>GS3, Linea Micra, Linea Mini</dd>
+      <dt>La Pavoni</dt><dd>Europiccola, Professional</dd>
+      <dt>Lelit</dt><dd>Anna, Bianca, Elizabeth, MaraX, Victoria</dd>
+      <dt>Nuova Simonelli</dt><dd>Musica, Oscar II</dd>
+      <dt>Philips</dt><dd>5500 Series</dd>
+      <dt>Profitec</dt><dd>Go, Move, Pro 300, Pro 500, Pro 600, Pro 700</dd>
+      <dt>Quick Mill</dt><dd>Carola, Silvano Evo, Vetrano 2B</dd>
+      <dt>Rancilio</dt><dd>Silvia, Silvia E, Silvia Pro X</dd>
+      <dt>Rocket</dt><dd>Appartamento, Appartamento TCA, Giotto Cronometro R, Mozzafiato Cronometro R, R58 Cinquantotto</dd>
+      <dt>Smeg</dt><dd>ECF02</dd>
+    </dl>
+  </details>
 </div>
-<input class="filter" id="filter" type="search" placeholder="Search for your gear, like &quot;Niche&quot; or &quot;Silvia&quot;" aria-label="Search gear">
 
-<section id="machines">
-  <h2>Espresso machines <span class="count" data-count></span></h2>
-  <p class="note">Machines running Gaggiuino or GaggiMate connect over your home Wi-Fi, and every shot arrives on its own with pressure, flow and weight graphed. The rest are in the catalog so your brews know which machine made them.</p>
-  <div class="brands">
-    <div class="brand live"><h3>Gaggiuino <span class="tag">Connects</span></h3><ul>
-      <li>Gaggiuino (GCP)</li><li>Gaggiuino (Silvia)</li><li>Gaggiuino (Silver Knight)</li></ul></div>
-    <div class="brand live"><h3>GaggiMate <span class="tag">Connects</span></h3><ul>
-      <li>Gaggia Classic Pro with GaggiMate</li></ul></div>
-    <div class="brand"><h3>Ascaso</h3><ul>
-      <li>Baby T Zero</li><li>Dream PID</li><li>Steel Duo PID</li><li>Steel Uno PID</li></ul></div>
-    <div class="brand"><h3>Bezzera</h3><ul>
-      <li>BZ10</li><li>Duo MN</li><li>Matrix DE</li></ul></div>
-    <div class="brand"><h3>Breville</h3><ul>
-      <li>Bambino</li><li>Bambino Plus</li><li>Barista Express</li><li>Barista Express Impress</li><li>Barista Pro</li><li>Barista Touch Impress</li><li>Dual Boiler</li><li>Duo Temp Pro</li><li>Infuser</li><li>Oracle Jet</li><li>Oracle Touch</li></ul></div>
-    <div class="brand"><h3>Cafelat</h3><ul><li>Robot</li></ul></div>
-    <div class="brand"><h3>De'Longhi</h3><ul>
-      <li>Dedica Arte</li><li>La Specialista Arte</li><li>La Specialista Maestro</li><li>Magnifica Evo</li><li>Rivelia</li></ul></div>
-    <div class="brand"><h3>Decent</h3><ul><li>DE1 Pro</li><li>DE1XL</li></ul></div>
-    <div class="brand"><h3>ECM</h3><ul>
-      <li>Classika PID</li><li>Mechanika Max</li><li>Puristika</li><li>Synchronika</li></ul></div>
-    <div class="brand"><h3>Flair</h3><ul>
-      <li>Flair 58</li><li>Flair 58x</li><li>Classic</li><li>Pro 2</li></ul></div>
-    <div class="brand"><h3>Gaggia</h3><ul><li>Classic Evo Pro</li><li>Classic Pro</li></ul></div>
-    <div class="brand"><h3>Jura</h3><ul><li>E8</li><li>S8</li><li>Z10</li></ul></div>
-    <div class="brand"><h3>La Marzocco</h3><ul><li>GS3</li><li>Linea Micra</li><li>Linea Mini</li></ul></div>
-    <div class="brand"><h3>La Pavoni</h3><ul><li>Europiccola</li><li>Professional</li></ul></div>
-    <div class="brand"><h3>Lelit</h3><ul>
-      <li>Anna</li><li>Bianca</li><li>Elizabeth</li><li>MaraX</li><li>Victoria</li></ul></div>
-    <div class="brand"><h3>Nuova Simonelli</h3><ul><li>Musica</li><li>Oscar II</li></ul></div>
-    <div class="brand"><h3>Philips</h3><ul><li>5500 Series</li></ul></div>
-    <div class="brand"><h3>Profitec</h3><ul>
-      <li>Go</li><li>Move</li><li>Pro 300</li><li>Pro 500</li><li>Pro 600</li><li>Pro 700</li></ul></div>
-    <div class="brand"><h3>Quick Mill</h3><ul><li>Carola</li><li>Silvano Evo</li><li>Vetrano 2B</li></ul></div>
-    <div class="brand"><h3>Rancilio</h3><ul><li>Silvia</li><li>Silvia E</li><li>Silvia Pro X</li></ul></div>
-    <div class="brand"><h3>Rocket</h3><ul>
-      <li>Appartamento</li><li>Appartamento TCA</li><li>Giotto Cronometro R</li><li>Mozzafiato Cronometro R</li><li>R58 Cinquantotto</li></ul></div>
-    <div class="brand"><h3>Smeg</h3><ul><li>ECF02</li></ul></div>
+<div class="card">
+  <h2>Grinders</h2>
+  <p>62 grinders, each with its burrs and a dial drawn like its own, so a setting reads the way it does on the grinder.</p>
+  <details>
+    <summary>See all grinders</summary>
+    <dl>
+      <dt>1Zpresso</dt><dd>J-Ultra, JX-Pro, K-Plus, K-Ultra, Q2 Heptagonal, X-Ultra, ZP6</dd>
+      <dt>Baratza</dt><dd>Encore, Encore ESP, Forte BG, Sette 30, Sette 30 AP, Sette 270, Sette 270Wi, Vario+, Virtuoso+</dd>
+      <dt>Breville</dt><dd>Smart Grinder Pro</dd>
+      <dt>Comandante</dt><dd>C40 MK4</dd>
+      <dt>DF</dt><dd>DF54, DF64 Gen 2, DF64P, DF64V, DF83, DF83V</dd>
+      <dt>Eureka</dt><dd>Atom 75, Atom Specialty 65, Mignon Libra, Mignon Oro XL, Mignon Silenzio, Mignon Specialita, Mignon Zero</dd>
+      <dt>Fellow</dt><dd>Ode Gen 2, Opus</dd>
+      <dt>Fiorenzato</dt><dd>AllGround, F64 Evo</dd>
+      <dt>Kingrinder</dt><dd>K2, K4, K6</dd>
+      <dt>Kinu</dt><dd>M47 Phoenix</dd>
+      <dt>Mahlkönig</dt><dd>E65S GbW, EK43, X54</dd>
+      <dt>Mazzer</dt><dd>Mini, Omega, Philos, ZM</dd>
+      <dt>Niche</dt><dd>Duo, Zero</dd>
+      <dt>Option-O</dt><dd>Lagom Mini, Lagom P64, Lagom P100</dd>
+      <dt>Timemore</dt><dd>Chestnut C2, Chestnut C3, Chestnut C3S Pro, Sculptor 064S, Sculptor 078S</dd>
+      <dt>Varia</dt><dd>VS3, VS6</dd>
+      <dt>Weber Workshops</dt><dd>EG-1, HG-2, Key</dd>
+      <dt>Wilfa</dt><dd>Uniform+</dd>
+    </dl>
+  </details>
+</div>
+
+<div class="card">
+  <h2>Scales</h2>
+  <p>Bluetooth scales read live while you weigh.</p>
+  <div class="chips">
+    <span class="chip">BOOKOO</span>
+    <span class="chip">Acaia <span class="tag">Beta</span></span>
+    <span class="chip">Decent <span class="tag">Beta</span></span>
   </div>
-</section>
+</div>
 
-<section id="grinders">
-  <h2>Grinders <span class="count" data-count></span></h2>
-  <p class="note">Each grinder comes with its burrs and a dial drawn like its own collar, so a setting reads the way it does on the grinder. Generic hand, blade and stepless grinders are there for everything else.</p>
-  <div class="brands">
-    <div class="brand"><h3>1Zpresso</h3><ul>
-      <li>J-Ultra <small>48mm conical</small></li><li>JX-Pro <small>48mm conical</small></li><li>K-Plus <small>48mm conical</small></li><li>K-Ultra <small>48mm conical</small></li><li>Q2 Heptagonal <small>38mm conical</small></li><li>X-Ultra <small>48mm conical</small></li><li>ZP6 <small>48mm conical</small></li></ul></div>
-    <div class="brand"><h3>Baratza</h3><ul>
-      <li>Encore <small>40mm conical</small></li><li>Encore ESP <small>40mm conical</small></li><li>Forte BG <small>54mm flat</small></li><li>Sette 30 <small>40mm conical</small></li><li>Sette 30 AP <small>40mm conical</small></li><li>Sette 270 <small>40mm conical</small></li><li>Sette 270Wi <small>40mm conical</small></li><li>Vario+ <small>54mm flat</small></li><li>Virtuoso+ <small>40mm conical</small></li></ul></div>
-    <div class="brand"><h3>Breville</h3><ul><li>Smart Grinder Pro <small>40mm conical</small></li></ul></div>
-    <div class="brand"><h3>Comandante</h3><ul><li>C40 MK4 <small>39mm conical</small></li></ul></div>
-    <div class="brand"><h3>DF</h3><ul>
-      <li>DF54 <small>54mm flat</small></li><li>DF64 Gen 2 <small>64mm flat</small></li><li>DF64P <small>64mm flat</small></li><li>DF64V <small>64mm flat</small></li><li>DF83 <small>83mm flat</small></li><li>DF83V <small>83mm flat</small></li></ul></div>
-    <div class="brand"><h3>Eureka</h3><ul>
-      <li>Atom 75 <small>75mm flat</small></li><li>Atom Specialty 65 <small>65mm flat</small></li><li>Mignon Libra <small>55mm flat</small></li><li>Mignon Oro XL <small>65mm flat</small></li><li>Mignon Silenzio <small>50mm flat</small></li><li>Mignon Specialita <small>55mm flat</small></li><li>Mignon Zero <small>55mm flat</small></li></ul></div>
-    <div class="brand"><h3>Fellow</h3><ul><li>Ode Gen 2 <small>64mm flat</small></li><li>Opus <small>40mm conical</small></li></ul></div>
-    <div class="brand"><h3>Fiorenzato</h3><ul><li>AllGround <small>64mm flat</small></li><li>F64 Evo <small>64mm flat</small></li></ul></div>
-    <div class="brand"><h3>Kingrinder</h3><ul><li>K2 <small>48mm conical</small></li><li>K4 <small>48mm conical</small></li><li>K6 <small>48mm conical</small></li></ul></div>
-    <div class="brand"><h3>Kinu</h3><ul><li>M47 Phoenix <small>47mm conical</small></li></ul></div>
-    <div class="brand"><h3>Mahlkönig</h3><ul><li>E65S GbW <small>65mm flat</small></li><li>EK43 <small>98mm flat</small></li><li>X54 <small>54mm flat</small></li></ul></div>
-    <div class="brand"><h3>Mazzer</h3><ul><li>Mini <small>64mm flat</small></li><li>Omega <small>83mm flat</small></li><li>Philos <small>83mm flat</small></li><li>ZM <small>83mm flat</small></li></ul></div>
-    <div class="brand"><h3>Niche</h3><ul><li>Duo <small>83mm flat</small></li><li>Zero <small>63mm conical</small></li></ul></div>
-    <div class="brand"><h3>Option-O</h3><ul><li>Lagom Mini <small>38mm conical</small></li><li>Lagom P64 <small>64mm flat</small></li><li>Lagom P100 <small>98mm flat</small></li></ul></div>
-    <div class="brand"><h3>Timemore</h3><ul>
-      <li>Chestnut C2 <small>38mm conical</small></li><li>Chestnut C3 <small>38mm conical</small></li><li>Chestnut C3S Pro <small>38mm conical</small></li><li>Sculptor 064S <small>64mm flat</small></li><li>Sculptor 078S <small>78mm flat</small></li></ul></div>
-    <div class="brand"><h3>Varia</h3><ul><li>VS3 <small>58mm flat</small></li><li>VS6 <small>64mm flat</small></li></ul></div>
-    <div class="brand"><h3>Weber Workshops</h3><ul><li>EG-1 <small>80mm flat</small></li><li>HG-2 <small>83mm flat</small></li><li>Key <small>83mm flat</small></li></ul></div>
-    <div class="brand"><h3>Wilfa</h3><ul><li>Uniform+ <small>58mm conical</small></li></ul></div>
-  </div>
-</section>
-
-<section id="scales">
-  <h2>Scales <span class="count" data-count></span></h2>
-  <p class="note">Bluetooth brew scales read live in the app: dose and yield straight off the scale, with tare and the timer from your phone. BOOKOO is tested on a real scale. Acaia and Decent support is written from their published protocols and hasn't been tried on one yet - if you have one, we'd love to hear how it goes.</p>
-  <div class="brands">
-    <div class="brand"><h3>Acaia <span class="tag beta">Beta</span></h3><ul><li>Acaia scales</li></ul></div>
-    <div class="brand live"><h3>BOOKOO <span class="tag">Bluetooth</span></h3><ul><li>BOOKOO scales</li></ul></div>
-    <div class="brand"><h3>Decent <span class="tag beta">Beta</span></h3><ul><li>Decent Scale</li></ul></div>
-  </div>
-</section>
-
-<section id="roasters">
+<div class="card">
   <h2>Roaster imports</h2>
-  <p class="note">Paste a link to a coffee on a roaster's site, or scan the QR code on the bag, and the bag fills itself in: name, roaster, origin, process, varietal, elevation, tasting notes and photo.</p>
-  <div class="feature-row">
-    <div class="brand live"><h3>Shopify roasters <span class="tag">Most shops</span></h3><p>Most specialty roasters sell on Shopify, and any Shopify product page can be read. A collection link works too: pick the coffee from the list.</p></div>
-    <div class="brand"><h3>Tested with</h3><ul><li>Onyx Coffee Lab</li><li>Partners Coffee</li><li>Dark Matter Coffee</li><li>Nomad Coffee</li></ul></div>
-    <div class="brand"><h3>Sold out?</h3><p>If the roaster has taken a coffee's page down, the app looks for a saved copy in the Internet Archive instead.</p></div>
-  </div>
-</section>
-
-<p class="empty hidden" id="none">Nothing matches that. Send it to us below and we'll look at adding it.</p>
+  <p>Paste a coffee's link or scan the bag's QR code, and the bag fills itself in. Works with most roasters that sell on Shopify, including:</p>
+  <div class="chips"><span class="chip">Onyx</span><span class="chip">Partners</span><span class="chip">Dark Matter</span><span class="chip">Nomad</span></div>
+</div>
 
 <div class="ask">
-  <h2>Missing something?</h2>
-  <p>If your machine, grinder, scale or roaster isn't here, tell us what it is and we'll look at adding it. For a grinder, the dial's range and steps help.</p>
+  <p>Missing your machine, grinder, scale or roaster?</p>
   <a class="button" href="mailto:quarterturn.support@gmail.com?subject=Gear%20request%3A%20">Request gear</a>
-  <a class="addr" href="mailto:quarterturn.support@gmail.com">quarterturn.support@gmail.com</a>
 </div>
 
 <footer>
@@ -203,36 +157,5 @@
   <a href="mailto:quarterturn.support@gmail.com">quarterturn.support@gmail.com</a>
 </footer>
 </main>
-<script>
-  const sections = [...document.querySelectorAll("section")];
-  for (const s of sections) {
-    const c = s.querySelector("[data-count]");
-    if (c) c.textContent = s.querySelectorAll(".brand li").length;
-  }
-  const input = document.getElementById("filter");
-  const none = document.getElementById("none");
-  input.addEventListener("input", () => {
-    const q = input.value.trim().toLowerCase();
-    let any = false;
-    for (const s of sections) {
-      let shown = 0;
-      for (const b of s.querySelectorAll(".brand")) {
-        const brandHit = b.querySelector("h3").textContent.toLowerCase().includes(q);
-        let itemHits = 0;
-        for (const li of b.querySelectorAll("li")) {
-          const hit = !q || brandHit || li.textContent.toLowerCase().includes(q);
-          li.classList.toggle("hidden", !hit);
-          if (hit) itemHits++;
-        }
-        const show = !q || brandHit || itemHits > 0 || b.textContent.toLowerCase().includes(q);
-        b.classList.toggle("hidden", !show);
-        if (show) shown++;
-      }
-      s.classList.toggle("hidden", shown === 0);
-      if (shown) any = true;
-    }
-    none.classList.toggle("hidden", any);
-  });
-</script>
 </body>
 </html>
