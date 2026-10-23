@@ -33,8 +33,17 @@
   h1 { font-size: 36px; line-height: 1.15; letter-spacing: -0.02em; margin: 0 0 6px; }
   .lede { color: var(--muted); margin: 0; }
 
-  .card { margin-top: 16px; padding: 18px 20px; background: var(--card); border: 1px solid var(--border); border-radius: 16px; }
-  .card:first-of-type { margin-top: 28px; }
+  .tiles { display: grid; grid-template-columns: 1fr 1fr; grid-auto-rows: 1fr; gap: 12px; margin-top: 28px; }
+  @media (max-width: 560px) { .tiles { grid-template-columns: 1fr; grid-auto-rows: auto; } }
+  .card { display: flex; flex-direction: column; padding: 18px 18px 14px; background: var(--card); border: 1px solid var(--border); border-radius: 16px; }
+  .seeall { margin-top: auto; padding-top: 12px; font-size: 15px; font-weight: 600; text-decoration: none; }
+  .seeall:hover { text-decoration: underline; }
+  .seeall.open::after { content: " \2193"; }
+  .all { margin-top: 28px; padding: 18px 20px; background: var(--card); border: 1px solid var(--border); border-radius: 16px; scroll-margin-top: 16px; }
+  .all h2 { margin-bottom: 6px; }
+  .all .note { color: var(--muted); font-size: 15px; margin: 0 0 6px; }
+  .plain { margin: 6px 0 0; padding-left: 18px; font-size: 15px; line-height: 1.8; }
+  .back { display: inline-block; margin-top: 14px; font-size: 14px; }
   h2 { font-size: 19px; margin: 0 0 4px; }
   .card > p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.5; }
 
@@ -42,8 +51,6 @@
   .chip { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 999px; background: var(--chip); font-size: 14px; font-weight: 600; }
   .tag { font-size: 10px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--gold); border: 1px solid var(--gold); border-radius: 999px; padding: 0 6px; }
 
-  details { margin-top: 12px; }
-  summary { cursor: pointer; color: var(--accent); font-size: 15px; font-weight: 600; }
   dl { margin: 10px 0 0; font-size: 14px; line-height: 1.5; }
   dt { font-weight: 600; margin-top: 8px; }
   dd { margin: 0; color: var(--muted); }
@@ -87,7 +94,7 @@
 </style>
 </head>
 <body>
-<main>
+<main id="top">
 <nav>
   <a class="home" href="../"><img src="../icon.png" alt="">Quarter Turn</a>
   <a class="here" href="./">Gear</a>
@@ -99,7 +106,8 @@
 <h1>Gear</h1>
 <p class="lede">What Quarter Turn works with. Anything else can still be added by name.</p>
 
-<div class="card">
+<div class="tiles">
+<div class="card" data-list="all-machines">
   <h2>Espresso machines</h2>
   <p>Gaggiuino and GaggiMate machines connect over Wi-Fi, and every shot arrives on its own. <span data-count></span> machines are in the catalog.</p>
   <div class="chips"><span class="chip">Gaggiuino</span><span class="chip" data-also="Gaggia Classic Pro with GaggiMate">GaggiMate</span></div>
@@ -108,9 +116,52 @@
     <ul class="suggest" role="listbox" hidden></ul>
     <p class="result" aria-live="polite" hidden></p>
   </div>
-  <details>
-    <summary>See all machines</summary>
-    <dl>
+  <a class="seeall" href="#all-machines">See all machines</a>
+</div>
+
+<div class="card" data-list="all-grinders">
+  <h2>Grinders</h2>
+  <p><span data-count></span> grinders, each with its burrs and a dial drawn like its own, so a setting reads the way it does on the grinder.</p>
+  <div class="search" data-kind="grinders" data-noun="a grinder">
+    <input type="search" placeholder="Search for your grinder, like "Niche"" autocomplete="off" aria-label="Search grinders" role="combobox" aria-expanded="false">
+    <ul class="suggest" role="listbox" hidden></ul>
+    <p class="result" aria-live="polite" hidden></p>
+  </div>
+  <a class="seeall" href="#all-grinders">See all grinders</a>
+</div>
+
+<div class="card" data-list="all-scales">
+  <h2>Scales</h2>
+  <p>Bluetooth scales read live while you weigh.</p>
+  <div class="chips">
+    <span class="chip" data-also="Themis">BOOKOO</span>
+    <span class="chip" data-also="Lunar, Pearl, Pyxis">Acaia <span class="tag">Beta</span></span>
+    <span class="chip" data-also="Decent Scale">Decent <span class="tag">Beta</span></span>
+  </div>
+  <div class="search" data-kind="scales" data-noun="a scale">
+    <input type="search" placeholder="Search for your scale, like "Lunar"" autocomplete="off" aria-label="Search scales" role="combobox" aria-expanded="false">
+    <ul class="suggest" role="listbox" hidden></ul>
+    <p class="result" aria-live="polite" hidden></p>
+  </div>
+  <a class="seeall" href="#all-scales">See all scales</a>
+</div>
+
+<div class="card" data-list="all-roasters">
+  <h2>Roaster imports</h2>
+  <p>Paste a coffee's link or scan the bag's QR code, and the bag fills itself in. Works with most roasters that sell on Shopify, including:</p>
+  <div class="chips"><span class="chip" data-also="Onyx Coffee Lab">Onyx</span><span class="chip" data-also="Partners Coffee">Partners</span><span class="chip" data-also="Dark Matter Coffee">Dark Matter</span><span class="chip" data-also="Nomad Coffee">Nomad</span></div>
+  <div class="search" data-kind="roasters" data-noun="a roaster">
+    <input type="search" placeholder="Search for your roaster" autocomplete="off" aria-label="Search roasters" role="combobox" aria-expanded="false">
+    <ul class="suggest" role="listbox" hidden></ul>
+    <p class="result" aria-live="polite" hidden></p>
+  </div>
+  <a class="seeall" href="#all-roasters">See all roasters</a>
+</div>
+</div>
+
+<section class="all" id="all-machines" hidden>
+  <h2>All espresso machines</h2>
+  <dl>
       <dt>Ascaso</dt><dd>Baby T Zero, Dream PID, Steel Duo PID, Steel Uno PID</dd>
       <dt>Bezzera</dt><dd>BZ10, Duo MN, Matrix DE</dd>
       <dt>Breville</dt><dd>Bambino, Bambino Plus, Barista Express, Barista Express Impress, Barista Pro, Barista Touch Impress, Dual Boiler, Duo Temp Pro, Infuser, Oracle Jet, Oracle Touch</dd>
@@ -133,20 +184,11 @@
       <dt>Rocket</dt><dd>Appartamento, Appartamento TCA, Giotto Cronometro R, Mozzafiato Cronometro R, R58 Cinquantotto</dd>
       <dt>Smeg</dt><dd>ECF02</dd>
     </dl>
-  </details>
-</div>
-
-<div class="card">
-  <h2>Grinders</h2>
-  <p><span data-count></span> grinders, each with its burrs and a dial drawn like its own, so a setting reads the way it does on the grinder.</p>
-  <div class="search" data-kind="grinders" data-noun="a grinder">
-    <input type="search" placeholder="Search for your grinder, like "Niche"" autocomplete="off" aria-label="Search grinders" role="combobox" aria-expanded="false">
-    <ul class="suggest" role="listbox" hidden></ul>
-    <p class="result" aria-live="polite" hidden></p>
-  </div>
-  <details>
-    <summary>See all grinders</summary>
-    <dl>
+  <a class="back" href="#top">Back to the top</a>
+</section>
+<section class="all" id="all-grinders" hidden>
+  <h2>All grinders</h2>
+  <dl>
       <dt>1Zpresso</dt><dd>J-Ultra, JX-Pro, K-Plus, K-Ultra, Q2 Heptagonal, X-Ultra, ZP6</dd>
       <dt>Baratza</dt><dd>Encore, Encore ESP, Forte BG, Sette 30, Sette 30 AP, Sette 270, Sette 270Wi, Vario+, Virtuoso+</dd>
       <dt>Breville</dt><dd>Smart Grinder Pro</dd>
@@ -166,34 +208,18 @@
       <dt>Weber Workshops</dt><dd>EG-1, HG-2, Key</dd>
       <dt>Wilfa</dt><dd>Uniform+</dd>
     </dl>
-  </details>
-</div>
-
-<div class="card">
-  <h2>Scales</h2>
-  <p>Bluetooth scales read live while you weigh.</p>
-  <div class="chips">
-    <span class="chip" data-also="Themis">BOOKOO</span>
-    <span class="chip" data-also="Lunar, Pearl, Pyxis">Acaia <span class="tag">Beta</span></span>
-    <span class="chip" data-also="Decent Scale">Decent <span class="tag">Beta</span></span>
-  </div>
-  <div class="search" data-kind="scales" data-noun="a scale">
-    <input type="search" placeholder="Search for your scale, like "Lunar"" autocomplete="off" aria-label="Search scales" role="combobox" aria-expanded="false">
-    <ul class="suggest" role="listbox" hidden></ul>
-    <p class="result" aria-live="polite" hidden></p>
-  </div>
-</div>
-
-<div class="card">
+  <a class="back" href="#top">Back to the top</a>
+</section>
+<section class="all" id="all-scales" hidden>
+  <h2>All scales</h2>
+  <ul class="plain"><li>BOOKOO</li><li>Acaia (Lunar, Pearl, Pyxis) <span class="tag">Beta</span></li><li>Decent Scale <span class="tag">Beta</span></li></ul>
+  <a class="back" href="#top">Back to the top</a>
+</section>
+<section class="all" id="all-roasters" hidden>
   <h2>Roaster imports</h2>
-  <p>Paste a coffee's link or scan the bag's QR code, and the bag fills itself in. Works with most roasters that sell on Shopify, including:</p>
-  <div class="chips"><span class="chip" data-also="Onyx Coffee Lab">Onyx</span><span class="chip" data-also="Partners Coffee">Partners</span><span class="chip" data-also="Dark Matter Coffee">Dark Matter</span><span class="chip" data-also="Nomad Coffee">Nomad</span></div>
-  <div class="search" data-kind="roasters" data-noun="a roaster">
-    <input type="search" placeholder="Search for your roaster" autocomplete="off" aria-label="Search roasters" role="combobox" aria-expanded="false">
-    <ul class="suggest" role="listbox" hidden></ul>
-    <p class="result" aria-live="polite" hidden></p>
-  </div>
-</div>
+  <p class="note">Any roaster that sells on Shopify should work. These have been tested:</p><ul class="plain"><li>Onyx Coffee Lab</li><li>Partners Coffee</li><li>Dark Matter Coffee</li><li>Nomad Coffee</li></ul>
+  <a class="back" href="#top">Back to the top</a>
+</section>
 
 <div class="ask">
   <p>Missing your machine, grinder, scale or roaster?</p>
@@ -214,7 +240,18 @@
   // list if it has one, its chips otherwise, so the two can't disagree.
   for (const c of document.querySelectorAll("[data-count]")) {
     const card = c.closest(".card");
-    c.textContent = [...card.querySelectorAll("dd")].reduce((n, dd) => n + dd.textContent.split(",").length, 0);
+    c.textContent = [...document.getElementById(card.dataset.list).querySelectorAll("dd")].reduce((n, dd) => n + dd.textContent.split(",").length, 0);
+  }
+
+  // "See all" shows that list under the grid, one at a time, and goes to it.
+  for (const link of document.querySelectorAll(".seeall")) {
+    link.addEventListener("click", e => {
+      e.preventDefault();
+      const target = document.querySelector(link.getAttribute("href"));
+      for (const panel of document.querySelectorAll(".all")) panel.hidden = panel !== target;
+      for (const l of document.querySelectorAll(".seeall")) l.classList.toggle("open", l === link);
+      target.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+    });
   }
 
   const EMAIL = "quarterturn.support@gmail.com";
@@ -222,7 +259,7 @@
 
   function itemsFor(card) {
     const items = [];
-    for (const dt of card.querySelectorAll("dt")) {
+    for (const dt of document.getElementById(card.dataset.list).querySelectorAll("dt")) {
       const brand = dt.textContent.trim();
       for (const model of dt.nextElementSibling.textContent.split(",").map(m => m.trim())) {
         const name = norm(model).startsWith(norm(brand)) ? model : `${brand} ${model}`;
