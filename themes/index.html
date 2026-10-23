@@ -33,9 +33,10 @@
   h1 { font-size: 36px; line-height: 1.15; letter-spacing: -0.02em; margin: 0 0 6px; }
   .lede { color: var(--muted); margin: 0; }
 
-  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 28px; }
-  @media (max-width: 680px) { .grid { grid-template-columns: 1fr 1fr; } }
-  @media (max-width: 400px) { .grid { grid-template-columns: 1fr; } }
+  .row-label { margin: 28px 0 8px; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .row-label.special { color: var(--gold); }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
   .theme { display: flex; flex-direction: column; background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 10px 10px 12px; }
   .theme h3 { margin: 10px 4px 0; font-size: 16px; }
   .theme .group { margin: 0 4px; font-size: 11px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
@@ -67,6 +68,30 @@
     text-shadow: 0 0 4px #FF7A1A, 0 0 12px #FF7A1A, 0 0 24px rgba(255, 90, 0, .6); }
   .nixie .card { background: rgba(26, 19, 14, .82); border-color: #3B2819; }
 
+  /* Yosemite, both ways: the light screen beside the dark one. */
+  .both .screen { display: flex; gap: 8px; background: linear-gradient(90deg, #F3F6F1 50%, #131714 50%); }
+  .both .card { flex: 1; align-items: flex-start; color: var(--t-text); }
+  .both .big { font-size: 26px; }
+
+  /* Split-Flap: black flaps split across the middle, each flipping letter by letter. */
+  .flaps { display: flex; gap: 3px; }
+  .flap { position: relative; overflow: hidden; width: 21px; height: 32px; border-radius: 3px; background: #1F1F1F; color: #F2F0E8;
+    font: 700 21px/32px "Helvetica Neue", Arial, sans-serif; text-align: center; }
+  .flap::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: #0A0A0A; }
+  .flap::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 50%; background: #2A2A2A; transform-origin: bottom; transform: scaleY(0); }
+  .flap.flip::before { animation: flapdown 70ms ease-in; }
+  @keyframes flapdown { from { transform: scaleY(1); } to { transform: scaleY(0); } }
+  .splitflap .card { font-family: "Helvetica Neue", Arial, sans-serif; }
+
+  /* Nixie: a digit per tube, cycling through its cathodes before it settles. */
+  .tubes { display: flex; gap: 4px; align-items: flex-end; }
+  .tube { width: 26px; height: 40px; border-radius: 12px 12px 5px 5px; border: 1px solid #3B2819;
+    background: radial-gradient(ellipse at 50% 30%, rgba(255,122,26,.10), transparent 70%), #120C08;
+    font: 400 30px/40px "Courier New", ui-monospace, monospace; text-align: center; color: #FFB070;
+    text-shadow: 0 0 4px #FF7A1A, 0 0 12px #FF7A1A, 0 0 22px rgba(255, 90, 0, .6); }
+  .tube.dot { width: 10px; border: 0; background: none; }
+  .tube.cycling { color: #FFC896; text-shadow: 0 0 6px #FF7A1A, 0 0 16px #FF7A1A; }
+
   /* Cyberpunk: neon on indigo black, a grid on the ground, a split at the edges. */
   .cyberpunk .screen { background: repeating-linear-gradient(0deg, rgba(255,255,255,.04) 0 1px, transparent 1px 3px), var(--t-bg); }
   .cyberpunk .screen::before { content: ""; position: absolute; left: -50%; right: -50%; bottom: -10px; height: 70px;
@@ -78,6 +103,7 @@
   @keyframes glitch { 0%, 92%, 100% { transform: none; } 93% { transform: translateX(2px) skewX(-8deg); } 95% { transform: translateX(-2px); } }
   .cyberpunk .pill { background: #FF2BD6; color: #0A0714; box-shadow: 0 0 10px #FF2BD6; }
   @media (prefers-reduced-motion: reduce) { .cyberpunk .big { animation: none; } }
+  @media (max-width: 400px) { .row-label { margin-top: 22px; } }
 
   .links { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 18px; }
   .more { font-size: 15px; font-weight: 600; text-decoration: none; }
@@ -126,40 +152,58 @@
 <h1>Themes</h1>
 <p class="lede">Eighteen looks, from national parks to nixie tubes.</p>
 
+<p class="row-label">Classic</p>
 <div class="grid">
+  <div class="theme" data-p="#E9F1F5 #F8FBFC #2878A5 #3FA7A0 light" data-n="Kenya Kii" data-v="12.5">
+    <h3>Glacier</h3><span class="group">Light</span>
+    <p>Arctic blue, meltwater and huckleberry.</p>
+  </div>
+  <div class="theme" data-p="#000000 #070A12 #2F7BFF #9AA3AD dark" data-n="Colombia Huila" data-v="9.0">
+    <h3>Crater Lake</h3><span class="group">Dark</span>
+    <p>Black water, cobalt and rim lichen.</p>
+  </div>
+  <div class="theme both">
+    <div class="screen">
+      <div class="card" style="--t-card:#FFFFFF; --t-text:#1F2621; --t-accent:#3E5B4A; --t-on:#FFFFFF; --t-line:#7D8B9366; background:#F3F6F1">
+        <span class="label">Light</span><span class="big">14.0</span><span class="pill">Brew</span>
+      </div>
+      <div class="card" style="--t-card:#1C211D; --t-text:#E8EDE7; --t-accent:#8FA896; --t-on:#101512; --t-line:#7D8B9355; background:#1C211D">
+        <span class="label">Dark</span><span class="big">14.0</span><span class="pill">Brew</span>
+      </div>
+    </div>
+    <h3>Yosemite</h3><span class="group">Light and dark</span>
+    <p>Sage, granite and meadow gold. The default.</p>
+  </div>
+</div>
+
+<p class="row-label special">Experimental</p>
+<div class="grid">
+  <div class="theme splitflap" style="--t-bg:#0E0E0E; --t-card:#161616; --t-text:#F2F0E8; --t-accent:#F5C45A; --t-on:#111; --t-line:#303030;">
+    <div class="screen"><div class="card">
+      <span class="label">Now brewing</span>
+      <div class="flaps" id="flaps" aria-label="Departure board"></div>
+      <div class="row"><span class="label">Platform 3</span><span class="pill">On time</span></div>
+    </div></div>
+    <h3>Split-Flap</h3><span class="group special">Light or dark</span>
+    <p>A departure board, clattering over.</p>
+  </div>
   <div class="theme nixie" style="--t-bg:#0B0706; --t-card:#1A130E; --t-text:#FFB070; --t-accent:#FF7A1A; --t-on:#140A04;">
     <div class="screen"><div class="card">
-      <span class="label">Dose</span>
-      <span class="big">18.5</span>
+      <span class="label" id="nixie-label">Dose - g</span>
+      <div class="tubes" id="tubes"></div>
       <div class="row"><span class="label">Ethiopia Guji</span><span class="pill">Brew</span></div>
     </div></div>
-    <h3>Nixie</h3><span class="group special">Experimental</span>
+    <h3>Nixie</h3><span class="group special">Light or dark</span>
     <p>Glowing tubes behind smoked glass.</p>
   </div>
   <div class="theme cyberpunk" style="--t-bg:#0A0714; --t-card:#11112A; --t-text:#E6F6FF; --t-accent:#FF2BD6; --t-on:#0A0714;">
     <div class="screen"><div class="card">
       <span class="label" style="color:#6F8FC8">// yield_out</span>
       <span class="big">36.0<small>g</small></span>
-      <div class="row"><span class="label" style="color:#2BE6FF">NIGHT_CITY</span><span class="pill">Jack in</span></div>
+      <div class="row"><span class="label" style="color:#2BE6FF">CYBERSPACE</span><span class="pill">Jack in</span></div>
     </div></div>
-    <h3>Cyberpunk</h3><span class="group special">Experimental</span>
+    <h3>Cyberpunk</h3><span class="group special">Cyberspace</span>
     <p>Neon, glitch and a grid in the rain.</p>
-  </div>
-  <div class="theme" data-p="#F3F6F1 #FFFFFF #3E5B4A #7D8B93 light" data-n="Kenya Kii" data-v="12.5">
-    <h3>Yosemite</h3><span class="group">Nature</span>
-    <p>Sage, granite and meadow gold.</p>
-  </div>
-  <div class="theme" data-p="#000000 #070A12 #2F7BFF #9AA3AD dark" data-n="Colombia Huila" data-v="9.0">
-    <h3>Crater Lake</h3><span class="group">Nature</span>
-    <p>Black water, cobalt and rim lichen.</p>
-  </div>
-  <div class="theme" data-p="#140B12 #21131D #F58FB0 #D4A63A dark" data-n="Rwanda Huye" data-v="14.5">
-    <h3>Kyoto</h3><span class="group">City</span>
-    <p>Cherry blossom, temple gold and matcha.</p>
-  </div>
-  <div class="theme" data-p="#11161C #1A222B #91A7C1 #C8102E dark" data-n="Peru Cajamarca" data-v="11.0">
-    <h3>London</h3><span class="group">City</span>
-    <p>Slate, pillar-box red and Tube yellow.</p>
   </div>
 </div>
 
@@ -252,6 +296,61 @@
         <div class="row"><span class="label">${el.dataset.n}</span><span class="pill">Brew</span></div>
       </div></div>`);
   }
+
+  // Split-Flap: each flap steps through the drum to its next letter, the way
+  // a real board does, so a word arrives a letter at a time.
+  const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const DRUM = " ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  const words = ["V60", "CHEMEX", "KALITA", "ESPRSO", "AERO", "COLD"];
+  const flapBox = document.getElementById("flaps");
+  const flaps = Array.from({ length: 6 }, () => {
+    const f = document.createElement("span");
+    f.className = "flap"; f.textContent = " ";
+    flapBox.appendChild(f);
+    return f;
+  });
+  function showWord(word) {
+    const target = word.padEnd(6, " ");
+    flaps.forEach((f, i) => {
+      if (still) { f.textContent = target[i]; return; }
+      const step = () => {
+        if (f.textContent === target[i]) return;
+        const next = DRUM[(DRUM.indexOf(f.textContent) + 1) % DRUM.length];
+        f.textContent = next;
+        f.classList.remove("flip"); void f.offsetWidth; f.classList.add("flip");
+        setTimeout(step, 55);
+      };
+      setTimeout(step, i * 40);
+    });
+  }
+  let w = 0;
+  showWord(words[0]);
+  if (!still) setInterval(() => showWord(words[++w % words.length]), 3600);
+
+  // Nixie: the tubes run through their cathodes, then settle on the reading.
+  const readings = [["Dose - g", "18.5"], ["Yield - g", "36.2"], ["Time - s", "28"], ["Ratio", "1:2"]];
+  const tubeBox = document.getElementById("tubes");
+  const nixieLabel = document.getElementById("nixie-label");
+  function showReading([label, value]) {
+    nixieLabel.textContent = label;
+    tubeBox.innerHTML = "";
+    for (const ch of value) {
+      const t = document.createElement("span");
+      t.className = "tube" + (/[0-9]/.test(ch) ? "" : " dot");
+      t.textContent = ch;
+      tubeBox.appendChild(t);
+      if (still || !/[0-9]/.test(ch)) continue;
+      t.classList.add("cycling");
+      let n = 0;
+      const spin = setInterval(() => {
+        t.textContent = String((Number(t.textContent) + 1) % 10);
+        if (++n > 8 + Math.random() * 8) { clearInterval(spin); t.textContent = ch; t.classList.remove("cycling"); }
+      }, 45);
+    }
+  }
+  let r = 0;
+  showReading(readings[0]);
+  if (!still) setInterval(() => showReading(readings[++r % readings.length]), 3600);
 
   // "See all" and "Request" open their panel under the tiles, one at a time.
   for (const link of document.querySelectorAll(".more")) {

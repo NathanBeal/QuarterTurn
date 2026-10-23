@@ -36,7 +36,14 @@
   nav a:hover { text-decoration: underline; }
 
   .hero { text-align: center; padding: 40px 0 8px; }
-  .dial { position: relative; width: 200px; height: 200px; margin: 0 auto; }
+  .dial { position: relative; width: 200px; height: 200px; margin: 0 auto; cursor: grab; touch-action: none; user-select: none; -webkit-user-select: none; outline: none; }
+  .dial.turning { cursor: grabbing; }
+  .dial:focus-visible { border-radius: 50%; box-shadow: 0 0 0 3px var(--glow), 0 0 0 1px var(--accent); }
+  .dial .index { fill: var(--gold); }
+  .dial img { pointer-events: none; -webkit-user-drag: none; }
+  .readout { position: absolute; left: 50%; top: calc(100% + 2px); transform: translateX(-50%); white-space: nowrap;
+    font: 500 12px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .06em; color: var(--muted); transition: color .2s; }
+  .readout.live { color: var(--gold); font-size: 14px; font-weight: 700; }
   .dial svg { position: absolute; inset: 0; width: 100%; height: 100%; color: var(--muted); }
   .dial .ring { transform-origin: 50% 50%; animation: turn 1.6s cubic-bezier(.2, .8, .2, 1) .2s both; }
   .dial .mark { color: var(--gold); }
@@ -47,7 +54,7 @@
   @keyframes turn { from { transform: rotate(-90deg); } to { transform: rotate(0deg); } }
   @media (prefers-reduced-motion: reduce) { .dial .ring { animation: none; } }
 
-  h1 { font-size: 44px; line-height: 1.1; letter-spacing: -0.02em; margin: 24px 0 10px; }
+  h1 { font-size: 44px; line-height: 1.1; letter-spacing: -0.02em; margin: 34px 0 10px; }
   .lede { font-size: 20px; color: var(--muted); margin: 0 auto; max-width: 28em; }
   .badge {
     display: inline-flex; align-items: center; gap: 8px; margin-top: 24px; padding: 10px 20px;
@@ -91,11 +98,13 @@
 </nav>
 
 <section class="hero">
-  <div class="dial">
+  <div class="dial" id="dial" tabindex="0" role="slider" aria-label="Grind dial - drag or use the arrow keys to turn it" aria-valuemin="0" aria-valuemax="29.5" aria-valuenow="0">
     <svg viewBox="0 0 200 200" aria-hidden="true">
-      <g class="ring" id="ring"></g>
+      <g class="ring"><g id="ring"></g></g>
+      <path class="index" d="M100 23 l-4 7 h8 z"/>
     </svg>
     <img src="icon.png" alt="Quarter Turn app icon">
+    <span class="readout" id="readout">give it a quarter turn</span>
   </div>
   <h1>Quarter Turn</h1>
   <p class="lede">A coffee log that remembers your grind for every bean.</p>
@@ -149,6 +158,81 @@
     if (i === 0) line.setAttribute("class", "mark");
     ring.appendChild(line);
   }
+
+  // The collar turns: drag it round, let go and it coasts, then it settles
+  // on the nearest tick - one tick is half a step of grind.
+  const dial = document.getElementById("dial");
+  const readout = document.getElementById("readout");
+  const TICK = 6;
+  let angle = 0, velocity = 0, dragging = false, last = null, lastTime = 0, coasting = null, lastTick = 0;
+
+  const pointerAngle = e => {
+    const r = dial.getBoundingClientRect();
+    return Math.atan2(e.clientY - (r.top + r.height / 2), e.clientX - (r.left + r.width / 2)) * 180 / Math.PI;
+  };
+  function draw() {
+    ring.setAttribute("transform", `rotate(${angle} 100 100)`);
+    const tick = Math.round(angle / TICK);
+    if (tick !== lastTick) {
+      lastTick = tick;
+      if (navigator.vibrate) navigator.vibrate(3);
+      // Turning the collar clockwise grinds finer, as on most grinders.
+      const setting = (((-tick % 60) + 60) % 60) / 2;
+      readout.textContent = setting.toFixed(1);
+      readout.classList.add("live");
+      dial.setAttribute("aria-valuenow", setting);
+    }
+  }
+  function settle() {
+    cancelAnimationFrame(coasting);
+    const step = () => {
+      if (Math.abs(velocity) > 0.02) {
+        angle += velocity * 16;
+        velocity *= 0.94;
+      } else {
+        const target = Math.round(angle / TICK) * TICK;
+        angle += (target - angle) * 0.25;
+        if (Math.abs(target - angle) < 0.05) { angle = target; draw(); return; }
+      }
+      draw();
+      coasting = requestAnimationFrame(step);
+    };
+    coasting = requestAnimationFrame(step);
+  }
+  dial.addEventListener("pointerdown", e => {
+    dragging = true; dial.setPointerCapture(e.pointerId); dial.classList.add("turning");
+    cancelAnimationFrame(coasting);
+    // Take over from the opening quarter turn if it is still running.
+    ring.parentNode.style.animation = "none";
+    last = pointerAngle(e); lastTime = performance.now(); velocity = 0;
+  });
+  dial.addEventListener("pointermove", e => {
+    if (!dragging) return;
+    const now = performance.now(), a = pointerAngle(e);
+    let d = a - last;
+    if (d > 180) d -= 360; else if (d < -180) d += 360;
+    angle += d;
+    velocity = d / Math.max(now - lastTime, 1);
+    last = a; lastTime = now;
+    draw();
+  });
+  const release = () => {
+    if (!dragging) return;
+    dragging = false; dial.classList.remove("turning");
+    if (performance.now() - lastTime > 80) velocity = 0;
+    velocity = Math.max(-2, Math.min(2, velocity));
+    settle();
+  };
+  dial.addEventListener("pointerup", release);
+  dial.addEventListener("pointercancel", release);
+  dial.addEventListener("keydown", e => {
+    const by = { ArrowRight: TICK, ArrowUp: TICK, ArrowLeft: -TICK, ArrowDown: -TICK }[e.key];
+    if (!by) return;
+    e.preventDefault();
+    velocity = 0; angle = Math.round(angle / TICK) * TICK + by;
+    ring.parentNode.style.animation = "none";
+    draw();
+  });
 </script>
 </body>
 </html>
