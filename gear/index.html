@@ -59,6 +59,7 @@
   .feature-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; }
   .feature-row .brand p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.5; }
 
+  .tag.beta { background: transparent; color: var(--gold); border: 1px solid var(--gold); }
   .hidden { display: none !important; }
   .empty { color: var(--muted); font-style: italic; }
 
@@ -167,11 +168,11 @@
 
 <section id="scales">
   <h2>Scales <span class="count" data-count></span></h2>
-  <p class="note">Bluetooth brew scales read live in the app: dose and yield straight off the scale, with tare and the timer from your phone.</p>
+  <p class="note">Bluetooth brew scales read live in the app: dose and yield straight off the scale, with tare and the timer from your phone. BOOKOO is tested on a real scale. Acaia and Decent support is written from their published protocols and hasn't been tried on one yet - if you have one, we'd love to hear how it goes.</p>
   <div class="brands">
-    <div class="brand live"><h3>Acaia <span class="tag">Bluetooth</span></h3><ul><li>Acaia scales</li></ul></div>
+    <div class="brand"><h3>Acaia <span class="tag beta">Beta</span></h3><ul><li>Acaia scales</li></ul></div>
     <div class="brand live"><h3>BOOKOO <span class="tag">Bluetooth</span></h3><ul><li>BOOKOO scales</li></ul></div>
-    <div class="brand live"><h3>Decent <span class="tag">Bluetooth</span></h3><ul><li>Decent Scale</li></ul></div>
+    <div class="brand"><h3>Decent <span class="tag beta">Beta</span></h3><ul><li>Decent Scale</li></ul></div>
   </div>
 </section>
 
