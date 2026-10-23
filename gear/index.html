@@ -51,6 +51,8 @@
   .seeall.open::after { content: " \2193"; }
   .all { margin-top: 28px; padding: 18px 20px; background: var(--card); border: 1px solid var(--border); border-radius: 16px; scroll-margin-top: 16px; }
   .all h2 { margin-bottom: 6px; }
+  .all h3 { margin: 22px 0 0; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .all .muted { color: var(--muted); }
   .all .note { color: var(--muted); font-size: 15px; margin: 0 0 6px; }
   .plain { margin: 6px 0 0; padding-left: 18px; font-size: 15px; line-height: 1.8; }
   .back { display: inline-block; margin-top: 14px; font-size: 14px; }
@@ -154,7 +156,7 @@
     <ul class="suggest" role="listbox" hidden></ul>
     <p class="result" aria-live="polite" hidden></p>
   </div>
-  <a class="seeall" href="#all-scales">See all scales</a>
+  <a class="seeall" href="#all-scales">See all <span data-count></span> scales</a>
 </div>
 
 <div class="card" data-list="all-roasters">
@@ -171,59 +173,137 @@
 </div>
 
 <section class="all" id="all-machines" hidden>
-  <h2>All espresso machines</h2>
-  <dl>
-      <dt>Ascaso</dt><dd>Baby T Zero, Dream PID, Steel Duo PID, Steel Uno PID</dd>
-      <dt>Bezzera</dt><dd>BZ10, Duo MN, Matrix DE</dd>
-      <dt>Breville</dt><dd>Bambino, Bambino Plus, Barista Express, Barista Express Impress, Barista Pro, Barista Touch Impress, Dual Boiler, Duo Temp Pro, Infuser, Oracle Jet, Oracle Touch</dd>
-      <dt>Cafelat</dt><dd>Robot</dd>
-      <dt>De'Longhi</dt><dd>Dedica Arte, La Specialista Arte, La Specialista Maestro, Magnifica Evo, Rivelia</dd>
-      <dt>Decent</dt><dd>DE1 Pro, DE1XL</dd>
-      <dt>ECM</dt><dd>Classika PID, Mechanika Max, Puristika, Synchronika</dd>
-      <dt>Flair</dt><dd>Flair 58, Flair 58x, Classic, Pro 2</dd>
-      <dt>Gaggia</dt><dd>Classic Evo Pro, Classic Pro</dd>
-      <dt>Gaggiuino</dt><dd>Gaggia Classic Pro, Rancilio Silvia, Silver Knight</dd>
-      <dt>Jura</dt><dd>E8, S8, Z10</dd>
-      <dt>La Marzocco</dt><dd>GS3, Linea Micra, Linea Mini</dd>
-      <dt>La Pavoni</dt><dd>Europiccola, Professional</dd>
-      <dt>Lelit</dt><dd>Anna, Bianca, Elizabeth, MaraX, Victoria</dd>
+  <h2>All machines</h2>
+  <h3>Espresso machines</h3>
+    <dl>
+      <dt>Ascaso</dt><dd>Baby T Plus, Baby T Zero, Dream One, Dream PID, Steel Duo PID, Steel Uno PID</dd>
+      <dt>Bellezza</dt><dd>Bellona, Chiara</dd>
+      <dt>Bezzera</dt><dd>BZ10, BZ13, Duo DE, Duo MN, Magica PID, Matrix DE, Unica PID</dd>
+      <dt>Breville</dt><dd>Bambino, Bambino Plus, Barista Express, Barista Express Impress, Barista Pro, Barista Touch, Barista Touch Impress, Dual Boiler, Duo Temp Pro, Infuser, Oracle, Oracle Jet, Oracle Touch</dd>
+      <dt>Casabrews</dt><dd>CM5418</dd>
+      <dt>Cuisinart</dt><dd>EM-100</dd>
+      <dt>Dalla Corte</dt><dd>Mina</dd>
+      <dt>De'Longhi</dt><dd>Dedica Arte, Dedica EC685, La Specialista Arte, La Specialista Arte Evo, La Specialista Maestro, La Specialista Opera, La Specialista Prestigio, Stilosa</dd>
+      <dt>Decent</dt><dd>Bengle, DE1 Pro, DE1XL</dd>
+      <dt>Diletta</dt><dd>Bello+, Mio</dd>
+      <dt>ECM</dt><dd>Classika PID, Mechanika Max, Mechanika V Slim, Puristika, Synchronika, Synchronika II, Technika V Profi PID</dd>
+      <dt>Expobar</dt><dd>Brewtus IV</dd>
+      <dt>Fracino</dt><dd>Cherub</dd>
+      <dt>Gaggia</dt><dd>Classic E24, Classic Evo Pro, Classic Pro, Gaggiuino (GCP), GaggiMate (GCP)</dd>
+      <dt>Gaggiuino</dt><dd>(Silver Knight)</dd>
+      <dt>Izzo</dt><dd>Alex Duetto IV</dd>
+      <dt>Kees van der Westen</dt><dd>Speedster</dd>
+      <dt>La Marzocco</dt><dd>GS3, GS3 MP, Linea Micra, Linea Mini, Linea Mini R</dd>
+      <dt>La Spaziale</dt><dd>S1 Dream, S1 Mini Vivaldi II</dd>
+      <dt>Lelit</dt><dd>Anna, Bianca, Elizabeth, Kate, Mara, MaraX, Victoria</dd>
+      <dt>Lucca</dt><dd>A53 Mini, M58</dd>
+      <dt>Meticulous</dt><dd>Espresso</dd>
+      <dt>Ninja</dt><dd>Luxe Café</dd>
       <dt>Nuova Simonelli</dt><dd>Musica, Oscar II</dd>
-      <dt>Philips</dt><dd>5500 Series</dd>
-      <dt>Profitec</dt><dd>Go, Move, Pro 300, Pro 500, Pro 600, Pro 700</dd>
-      <dt>Quick Mill</dt><dd>Carola, Silvano Evo, Vetrano 2B</dd>
-      <dt>Rancilio</dt><dd>Silvia, Silvia E, Silvia Pro X</dd>
-      <dt>Rocket</dt><dd>Appartamento, Appartamento TCA, Giotto Cronometro R, Mozzafiato Cronometro R, R58 Cinquantotto</dd>
-      <dt>Smeg</dt><dd>ECF02</dd>
+      <dt>Profitec</dt><dd>Drive, Go, Move, Pro 300, Pro 400, Pro 500, Pro 600, Pro 700</dd>
+      <dt>Quick Mill</dt><dd>Andreja Premium Evo, Carola, QM67, Rubino, Silvano Evo, Vetrano 2B</dd>
+      <dt>Rancilio</dt><dd>Silvia, Silvia E, Silvia Pro, Silvia Pro X, Gaggiuino (Silvia)</dd>
+      <dt>Rocket</dt><dd>Appartamento, Appartamento Serie Nera, Appartamento TCA, Giotto Cronometro R, Giotto Cronometro V, Mozzafiato Cronometro R, Mozzafiato Cronometro V, R Nine One, R58 Cinquantotto</dd>
+      <dt>Sanremo</dt><dd>Cube, YOU</dd>
+      <dt>Slayer</dt><dd>Single Group</dd>
+      <dt>Smeg</dt><dd>ECF01, ECF02</dd>
+      <dt>Synesso</dt><dd>ES1</dd>
+      <dt>Turin</dt><dd>Legato</dd>
+      <dt>Vibiemme</dt><dd>Domobar Super</dd>
+      <dt>Victoria Arduino</dt><dd>Eagle One Prima</dd>
+    </dl>
+  <h3>Levers and manual</h3>
+    <dl>
+      <dt>Bezzera</dt><dd>Strega</dd>
+      <dt>Cafelat</dt><dd>Robot</dd>
+      <dt>Elektra</dt><dd>Microcasa a Leva</dd>
+      <dt>Flair</dt><dd>58, 58x, Classic, Neo Flex, Pro 2, Pro 3</dd>
+      <dt>Gaggia</dt><dd>Factory</dd>
+      <dt>La Pavoni</dt><dd>Europiccola, Professional</dd>
+      <dt>Londinium</dt><dd>Compressa, R24</dd>
+      <dt>Odyssey</dt><dd>Argos</dd>
+      <dt>Olympia Express</dt><dd>Cremina</dd>
+      <dt>Ponte Vecchio</dt><dd>Lusso</dd>
+      <dt>Profitec</dt><dd>Pro 800</dd>
+      <dt>ROK</dt><dd>Espresso GC</dd>
+      <dt>Strietman</dt><dd>CT2</dd>
+      <dt>Wacaco</dt><dd>Nanopresso, Picopresso</dd>
+    </dl>
+  <h3>Bean-to-cup</h3>
+    <dl>
+      <dt>De'Longhi</dt><dd>Dinamica, Dinamica Plus, Eletta Explore, Magnifica Evo, Magnifica S, Magnifica Start, PrimaDonna Soul, Rivelia</dd>
+      <dt>Gaggia</dt><dd>Brera, Cadorna Prestige, Magenta Prestige, Velasca</dd>
+      <dt>Jura</dt><dd>E6, E8, ENA 8, J8, S8, Z10</dd>
+      <dt>Melitta</dt><dd>Barista T Smart, Barista TS Smart, Caffeo Solo</dd>
+      <dt>Miele</dt><dd>CM 5310, CM 6350</dd>
+      <dt>Philips</dt><dd>2200 Series, 3200 Series, 5500 Series, Baristina</dd>
+      <dt>Saeco</dt><dd>PicoBaristo, Xelsis, Xelsis Suprema</dd>
+      <dt>Siemens</dt><dd>EQ.6, EQ.9</dd>
     </dl>
   <a class="back" href="#top">Back to the top</a>
 </section>
 <section class="all" id="all-grinders" hidden>
   <h2>All grinders</h2>
-  <dl>
-      <dt>1Zpresso</dt><dd>J-Ultra, JX-Pro, K-Plus, K-Ultra, Q2 Heptagonal, X-Ultra, ZP6</dd>
-      <dt>Baratza</dt><dd>Encore, Encore ESP, Forte BG, Sette 30, Sette 30 AP, Sette 270, Sette 270Wi, Vario+, Virtuoso+</dd>
-      <dt>Breville</dt><dd>Smart Grinder Pro</dd>
-      <dt>Comandante</dt><dd>C40 MK4</dd>
-      <dt>DF</dt><dd>DF54, DF64 Gen 2, DF64P, DF64V, DF83, DF83V</dd>
-      <dt>Eureka</dt><dd>Atom 75, Atom Specialty 65, Mignon Libra, Mignon Oro XL, Mignon Silenzio, Mignon Specialita, Mignon Zero</dd>
-      <dt>Fellow</dt><dd>Ode Gen 2, Opus</dd>
-      <dt>Fiorenzato</dt><dd>AllGround, F64 Evo</dd>
-      <dt>Kingrinder</dt><dd>K2, K4, K6</dd>
-      <dt>Kinu</dt><dd>M47 Phoenix</dd>
-      <dt>Mahlkönig</dt><dd>E65S GbW, EK43, X54</dd>
-      <dt>Mazzer</dt><dd>Mini, Omega, Philos, ZM</dd>
+    <dl>
+      <dt>1Zpresso</dt><dd>J-Max, J-Ultra, JE-Plus, JX, JX-Pro, K-Max, K-Plus, K-Pro, K-Ultra, Q Air, Q2 Heptagonal, X-Pro, X-Ultra, ZP6</dd>
+      <dt>Acaia</dt><dd>Orbit</dd>
+      <dt>Baratza</dt><dd>Encore, Encore ESP, Encore ESP Pro, Forte AP, Forte BG, Sette 30, Sette 30 AP, Sette 270, Sette 270Wi, Vario, Vario+, Vario-W+, Virtuoso+</dd>
+      <dt>Bodum</dt><dd>Bistro</dd>
+      <dt>Breville</dt><dd>Dose Control Pro, Smart Grinder Pro</dd>
+      <dt>Capresso</dt><dd>Infinity</dd>
+      <dt>Ceado</dt><dd>E37S, E37SD</dd>
+      <dt>Comandante</dt><dd>C40 MK3, C40 MK4</dd>
+      <dt>Compak</dt><dd>K3 Touch</dd>
+      <dt>Cuisinart</dt><dd>DBM-8</dd>
+      <dt>De'Longhi</dt><dd>Dedica KG521</dd>
+      <dt>DF</dt><dd>DF54, DF64, DF64 Gen 2, DF64P, DF64V, DF83, DF83V</dd>
+      <dt>Ditting</dt><dd>807</dd>
+      <dt>ECM</dt><dd>C-Manuale 54, S-Automatik 64, V-Titan 64</dd>
+      <dt>Eureka</dt><dd>Atom 75, Atom Specialty 65, Mignon Crono, Mignon Facile, Mignon Filtro, Mignon Libra, Mignon Manuale, Mignon Notte, Mignon Oro XL, Mignon Perfetto, Mignon Silenzio, Mignon Specialita, Mignon Turbo, Mignon Zero, Oro Mignon Single Dose</dd>
+      <dt>Fellow</dt><dd>Ode, Ode Gen 2, Opus</dd>
+      <dt>Fiorenzato</dt><dd>AllGround, AllGround Sense, F4 Evo, F64 Evo, F83 E, Pietro</dd>
+      <dt>Graef</dt><dd>CM 800</dd>
+      <dt>Hario</dt><dd>Mini Mill Slim Plus, Skerton Pro</dd>
+      <dt>Kingrinder</dt><dd>K1, K2, K4, K6, P2</dd>
+      <dt>Kinu</dt><dd>M47 Classic, M47 Phoenix, M47 Simplicity, M68</dd>
+      <dt>KitchenAid</dt><dd>Burr Grinder</dd>
+      <dt>Knock</dt><dd>Aergrind, Feld47</dd>
+      <dt>Mahlkönig</dt><dd>E65S, E65S GbW, E80 Supreme, EK43, EK43 S, K30 Twin, Peak, X54, X64 SD</dd>
+      <dt>Mazzer</dt><dd>Kony, Major V, Mini, Mini Electronic, Omega, Philos, Robur, Super Jolly, Super Jolly V Up, ZM</dd>
       <dt>Niche</dt><dd>Duo, Zero</dd>
       <dt>Option-O</dt><dd>Lagom Mini, Lagom P64, Lagom P100</dd>
-      <dt>Timemore</dt><dd>Chestnut C2, Chestnut C3, Chestnut C3S Pro, Sculptor 064S, Sculptor 078S</dd>
+      <dt>Orphan Espresso</dt><dd>Lido 3, Lido E-T, Pharos 2.0</dd>
+      <dt>OXO</dt><dd>Brew Conical Burr</dd>
+      <dt>Porlex</dt><dd>Mini II, Tall II</dd>
+      <dt>Profitec</dt><dd>Pro M54, Pro T64</dd>
+      <dt>Rancilio</dt><dd>Rocky</dd>
+      <dt>Rocket</dt><dd>Faustino 3.1</dd>
+      <dt>ROK</dt><dd>Grinder GC</dd>
+      <dt>Smeg</dt><dd>CGF01</dd>
+      <dt>Timemore</dt><dd>Chestnut C2, Chestnut C3, Chestnut C3 ESP, Chestnut C3S Pro, Chestnut X, Slim Plus, Sculptor 064, Sculptor 064S, Sculptor 078, Sculptor 078S</dd>
       <dt>Varia</dt><dd>VS3, VS6</dd>
-      <dt>Weber Workshops</dt><dd>EG-1, HG-2, Key</dd>
-      <dt>Wilfa</dt><dd>Uniform+</dd>
+      <dt>Victoria Arduino</dt><dd>Mythos 2, Mythos One</dd>
+      <dt>Weber Workshops</dt><dd>Weber EG-1, Weber HG-2, Weber Key</dd>
+      <dt>Wilfa</dt><dd>Uniform, Uniform+</dd>
+      <dt>Zerno</dt><dd>Z1</dd>
     </dl>
   <a class="back" href="#top">Back to the top</a>
 </section>
 <section class="all" id="all-scales" hidden>
   <h2>All scales</h2>
-  <ul class="plain"><li>BOOKOO</li><li>Acaia (Lunar, Pearl, Pyxis) <span class="tag">Beta</span></li><li>Decent Scale <span class="tag">Beta</span></li></ul>
+  <p class="note">BOOKOO is tested on a real scale. The rest are written from their published protocols and haven't been tried on one yet - if you have one, we'd love to hear how it goes.</p>
+  <ul class="plain">
+    <li data-name="BOOKOO" data-also="">BOOKOO</li>
+    <li data-name="Acaia" data-also="Lunar, Pearl, Pyxis, Cinco, Umbra" data-beta>Acaia <span class="muted">Lunar, Pearl, Pyxis, Cinco, Umbra</span> <span class="tag">Beta</span></li>
+    <li data-name="Decent Scale" data-also="Espressi" data-beta>Decent Scale <span class="muted">Espressi</span> <span class="tag">Beta</span></li>
+    <li data-name="DiFluid" data-also="Microbalance, Microbalance Ti" data-beta>DiFluid <span class="muted">Microbalance, Microbalance Ti</span> <span class="tag">Beta</span></li>
+    <li data-name="Eureka Precisa" data-also="Solo Barista" data-beta>Eureka Precisa <span class="muted">Solo Barista</span> <span class="tag">Beta</span></li>
+    <li data-name="Felicita" data-also="" data-beta>Felicita <span class="tag">Beta</span></li>
+    <li data-name="Hiroia" data-also="" data-beta>Hiroia <span class="tag">Beta</span></li>
+    <li data-name="Skale" data-also="" data-beta>Skale <span class="tag">Beta</span></li>
+    <li data-name="Timemore" data-also="" data-beta>Timemore <span class="tag">Beta</span></li>
+    <li data-name="Varia" data-also="AKU, AKU Mini" data-beta>Varia <span class="muted">AKU, AKU Mini</span> <span class="tag">Beta</span></li>
+  </ul>
   <a class="back" href="#top">Back to the top</a>
 </section>
 <section class="all" id="all-roasters" hidden>
@@ -252,7 +332,9 @@
   // list if it has one, its chips otherwise, so the two can't disagree.
   for (const c of document.querySelectorAll("[data-count]")) {
     const card = c.closest(".card");
-    c.textContent = [...document.getElementById(card.dataset.list).querySelectorAll("dd")].reduce((n, dd) => n + dd.textContent.split(",").length, 0);
+    const list = document.getElementById(card.dataset.list);
+    c.textContent = [...list.querySelectorAll("dd")].reduce((n, dd) => n + dd.textContent.split(",").length, 0)
+      + list.querySelectorAll("li[data-name]").length;
   }
 
   // "See all" shows that list under the grid, one at a time, and goes to it.
@@ -277,6 +359,9 @@
         const name = norm(model).startsWith(norm(brand)) ? model : `${brand} ${model}`;
         items.push({ name, beta: false, keys: norm(name) });
       }
+    }
+    for (const li of document.getElementById(card.dataset.list).querySelectorAll("li[data-name]")) {
+      items.push({ name: li.dataset.name, beta: li.hasAttribute("data-beta"), keys: norm(li.dataset.name + " " + li.dataset.also) });
     }
     for (const chip of card.querySelectorAll(".chips .chip")) {
       const name = chip.firstChild.textContent.trim();
