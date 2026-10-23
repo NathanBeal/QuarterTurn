@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quarter Turn - Features</title>
+<meta name="description" content="What Quarter Turn does: your bags, your grind, your recipes and your shots.">
+<link rel="icon" href="../icon.png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<style>
+  :root {
+    --bg: #f4f5f2; --card: #ffffff; --border: #dfe4df; --chip: #eef1ec;
+    --text: #1f2a24; --muted: #5d6b63; --accent: #3f5e4c; --gold: #b47a32;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #121614; --card: #1a201d; --border: #2b3530; --chip: #222a26;
+      --text: #e6ebe7; --muted: #9aa8a0; --accent: #8fbf9f; --gold: #d9a05f;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 17px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+  main { max-width: 760px; margin: 0 auto; padding: 32px 16px 48px; }
+  a { color: var(--accent); }
+
+  nav { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; margin-bottom: 32px; }
+  nav .home { display: flex; align-items: center; gap: 10px; margin-right: auto; font-weight: 600; color: var(--text); text-decoration: none; }
+  nav .home img { width: 30px; height: 30px; border-radius: 7px; }
+  nav a { text-decoration: none; }
+  nav a:hover { text-decoration: underline; }
+  nav a.here { color: var(--text); font-weight: 600; }
+
+  h1 { font-size: 36px; line-height: 1.15; letter-spacing: -0.02em; margin: 0 0 6px; }
+  .lede { color: var(--muted); margin: 0; }
+
+  .tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 28px; }
+  @media (max-width: 680px) { .tiles { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 400px) { .tiles { grid-template-columns: 1fr; } }
+  .tile { display: flex; flex-direction: column; padding: 18px; background: var(--card); border: 1px solid var(--border); border-radius: 16px; }
+  .tile svg { width: 28px; height: 28px; color: var(--gold); }
+  .tile h2 { font-size: 17px; margin: 12px 0 2px; }
+  .tile p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.45; }
+  .more { margin-top: auto; padding-top: 12px; font-size: 15px; font-weight: 600; text-decoration: none; }
+  .more:hover { text-decoration: underline; }
+  .more.open::after { content: " \2193"; }
+
+  .detail { margin-top: 28px; padding: 22px 24px; background: var(--card); border: 1px solid var(--border); border-radius: 16px; scroll-margin-top: 16px; }
+  .detail h2 { font-size: 22px; margin: 0 0 4px; }
+  .detail > p { color: var(--muted); margin: 0 0 8px; }
+  .detail ul { margin: 8px 0 0; padding-left: 20px; }
+  .detail li { margin: 6px 0; }
+  .detail li strong { font-weight: 600; }
+  .back { display: inline-block; margin-top: 14px; font-size: 14px; }
+
+  footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--border); display: flex; gap: 16px; flex-wrap: wrap; font-size: 14px; color: var(--muted); }
+  footer a { color: var(--muted); }
+</style>
+</head>
+<body>
+<main id="top">
+<nav>
+  <a class="home" href="../"><img src="../icon.png" alt="">Quarter Turn</a>
+  <a class="here" href="./">Features</a>
+  <a href="../gear/">Gear</a>
+  <a href="../themes/">Themes</a>
+  <a href="../support/">Support</a>
+</nav>
+
+<h1>Features</h1>
+<p class="lede">Your bags, your grind and your shots, in one place.</p>
+
+<div class="tiles">
+  <div class="tile">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h10l1 4v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7z"/><path d="M6 7h12"/><path d="M10 12.5c0-1.4 1-2.5 2-2.5s2 1.1 2 2.5-1 3.5-2 3.5-2-2.1-2-3.5z"/></svg>
+    <h2>The bean shelf</h2>
+    <p>Every bag, from roast day to the last scoop.</p>
+    <a class="more" href="#shelf">More</a>
+  </div>
+  <div class="tile">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 4v3M20 12h-3M12 20v-3M4 12h3"/><path d="M12 12l3-3"/></svg>
+    <h2>Grind that follows the bean</h2>
+    <p>A dial like your grinder's, set where it worked.</p>
+    <a class="more" href="#grind">More</a>
+  </div>
+  <div class="tile">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="13" r="7"/><path d="M12 13V9M10 3h4M18 7l1-1"/></svg>
+    <h2>Recipes, timed</h2>
+    <p>Scaled to your dose and walked through step by step.</p>
+    <a class="more" href="#recipes">More</a>
+  </div>
+  <div class="tile">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18"/><path d="M3 17c3 0 3-10 6-10s3 6 6 6 3-3 6-3"/></svg>
+    <h2>Shots, graphed</h2>
+    <p>Pressure, flow and weight, straight from your machine.</p>
+    <a class="more" href="#shots">More</a>
+  </div>
+  <div class="tile">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><path d="M14 14h2v2M20 14v6h-6v-2M17 17h0"/></svg>
+    <h2>Import a coffee</h2>
+    <p>Paste the roaster's link or scan the bag's QR code.</p>
+    <a class="more" href="#import">More</a>
+  </div>
+  <div class="tile">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 18a4 4 0 0 1-.5-8A6 6 0 0 1 18 9a4.5 4.5 0 0 1-.5 9z"/><path d="M10 14l2 2 3-4"/></svg>
+    <h2>Private, and synced</h2>
+    <p>No account. iCloud keeps your devices in step.</p>
+    <a class="more" href="#private">More</a>
+  </div>
+</div>
+
+<section class="detail" id="shelf" hidden>
+  <h2>The bean shelf</h2>
+  <p>Know what you have, and what is ready to brew.</p>
+  <ul>
+    <li><strong>Rest, counted for you.</strong> Each bag shows the days since roast, and the days of rest it has left before it is at its best.</li>
+    <li><strong>Open, resting, frozen, finished.</strong> Bags move along the shelf as you use them, and a freezer shelf keeps the ones you've put away, including whether you split them into doses.</li>
+    <li><strong>Photos of the bag.</strong> Take or pick one, then trim and crop it to the label.</li>
+    <li><strong>Tasting notes.</strong> Rate each brew and pick flavours from a tasting wheel laid out like the SCA's.</li>
+    <li><strong>Search everything.</strong> One search across every bag and every brew.</li>
+  </ul>
+  <a class="back" href="#top">Back to the top</a>
+</section>
+
+<section class="detail" id="grind" hidden>
+  <h2>Grind that follows the bean</h2>
+  <p>Dialling in is the part worth remembering.</p>
+  <ul>
+    <li><strong>Your grinder's own dial.</strong> 62 grinders are drawn with their real collar and steps, including stepped, stepless and lettered dials. See them all on the <a href="../gear/">Gear page</a>.</li>
+    <li><strong>A collar you can feel.</strong> Flick it and it coasts and settles; detents click with haptics that scale with speed.</li>
+    <li><strong>Where it worked before.</strong> Marks on the dial show every setting already brewed on that bean, and the app starts from the last good one.</li>
+    <li><strong>Per set of burrs.</strong> Swap burrs and each set keeps its own history.</li>
+    <li><strong>The dial-in, drawn.</strong> A chart of where the collar has been across a bag's life, and how each brew was rated.</li>
+  </ul>
+  <a class="back" href="#top">Back to the top</a>
+</section>
+
+<section class="detail" id="recipes" hidden>
+  <h2>Recipes, timed</h2>
+  <p>From pour-over to cold brew to milk drinks.</p>
+  <ul>
+    <li><strong>Scaled to your dose.</strong> Change the coffee and every pour and the water follow.</li>
+    <li><strong>Step by step.</strong> Prep first, then a running clock walks you through each pour, with the pour curve drawn.</li>
+    <li><strong>Your scale, live.</strong> With a Bluetooth scale connected, the weight shows right in the recipe.</li>
+    <li><strong>Your own recipes.</strong> Write them, copy one and tweak it, and keep them by method.</li>
+  </ul>
+  <a class="back" href="#top">Back to the top</a>
+</section>
+
+<section class="detail" id="shots" hidden>
+  <h2>Shots, graphed</h2>
+  <p>For Gaggiuino and GaggiMate machines on your home Wi-Fi.</p>
+  <ul>
+    <li><strong>Shots arrive on their own.</strong> Pull a shot and it lands in the app with pressure, flow and weight graphed.</li>
+    <li><strong>Read each phase.</strong> Preinfusion and extraction are labelled, with what ended each phase and what that says about the grind.</li>
+    <li><strong>Compare two shots.</strong> One above the other, to see what changed.</li>
+    <li><strong>Consistency.</strong> A score for how alike a shot is to the ones you pulled the same way.</li>
+    <li><strong>Profiles.</strong> Keep your Gaggiuino profiles, and the community's, in one library.</li>
+    <li><strong>Share a shot.</strong> Send its graph as a picture.</li>
+  </ul>
+  <a class="back" href="#top">Back to the top</a>
+</section>
+
+<section class="detail" id="import" hidden>
+  <h2>Import a coffee</h2>
+  <p>Skip the typing.</p>
+  <ul>
+    <li><strong>From a link.</strong> Paste a roaster's product page and the bag fills in: name, roaster, origin, producer, process, varietal, elevation, notes and photo.</li>
+    <li><strong>From the bag.</strong> Scan the QR code printed on it.</li>
+    <li><strong>From a collection.</strong> Paste a roaster's "new arrivals" page and pick the coffee you bought.</li>
+    <li><strong>Even after it sells out.</strong> If the page is gone, the app looks for a saved copy in the Internet Archive.</li>
+    <li>Works with most roasters that sell on Shopify. See the tested ones on the <a href="../gear/">Gear page</a>.</li>
+  </ul>
+  <a class="back" href="#top">Back to the top</a>
+</section>
+
+<section class="detail" id="private" hidden>
+  <h2>Private, and synced</h2>
+  <p>Your library is yours.</p>
+  <ul>
+    <li><strong>No account, no tracking.</strong> The developer never sees your data. See the <a href="../privacy/">privacy policy</a>.</li>
+    <li><strong>iCloud sync.</strong> Your iPhone and iPad stay in step through your own iCloud.</li>
+    <li><strong>Back up anytime.</strong> Export the whole library to Files, and restore it from there.</li>
+    <li><strong>Make it yours.</strong> Eighteen <a href="../themes/">themes</a>, from national parks to nixie tubes.</li>
+  </ul>
+  <a class="back" href="#top">Back to the top</a>
+</section>
+
+<footer>
+  <span>Quarter Turn</span>
+  <a href="./">Features</a>
+  <a href="../gear/">Gear</a>
+  <a href="../themes/">Themes</a>
+  <a href="../support/">Support</a>
+  <a href="../privacy/">Privacy</a>
+  <a href="mailto:quarterturn.support@gmail.com">quarterturn.support@gmail.com</a>
+</footer>
+</main>
+<script>
+  // "More" shows that feature's detail under the tiles, one at a time.
+  for (const link of document.querySelectorAll(".more")) {
+    link.addEventListener("click", e => {
+      e.preventDefault();
+      const target = document.querySelector(link.getAttribute("href"));
+      for (const d of document.querySelectorAll(".detail")) d.hidden = d !== target;
+      for (const l of document.querySelectorAll(".more")) l.classList.toggle("open", l === link);
+      target.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+    });
+  }
+</script>
+</body>
+</html>

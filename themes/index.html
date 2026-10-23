@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Quarter Turn - Themes</title>
-<meta name="description" content="The looks Quarter Turn comes in, from national parks and cities to nixie tubes and a departure board.">
+<meta name="description" content="The looks Quarter Turn comes in, from national parks and cities to nixie tubes and neon.">
 <link rel="icon" href="../icon.png">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
 <style>
@@ -32,27 +32,21 @@
 
   h1 { font-size: 36px; line-height: 1.15; letter-spacing: -0.02em; margin: 0 0 6px; }
   .lede { color: var(--muted); margin: 0; }
-  section { margin-top: 44px; }
-  h2 { font-size: 22px; margin: 0 0 2px; }
-  .note { color: var(--muted); font-size: 15px; margin: 0 0 14px; }
-  .tag { font-size: 10px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--gold); border: 1px solid var(--gold); border-radius: 999px; padding: 1px 7px; vertical-align: 3px; margin-left: 6px; }
 
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
-  .grid.special { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
-  @media (max-width: 380px) { .grid.special { grid-template-columns: 1fr; } }
-  .theme { background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 10px; }
-  .special .theme { border-color: var(--gold); }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 28px; }
+  @media (max-width: 680px) { .grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 400px) { .grid { grid-template-columns: 1fr; } }
+  .theme { display: flex; flex-direction: column; background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 10px 10px 12px; }
   .theme h3 { margin: 10px 4px 0; font-size: 16px; }
-  .theme p { margin: 2px 4px 4px; color: var(--muted); font-size: 14px; line-height: 1.45; }
-  .swatches { display: flex; gap: 5px; margin: 8px 4px 2px; }
-  .swatches i { width: 18px; height: 18px; border-radius: 50%; border: 1px solid rgba(128, 128, 128, .35); }
+  .theme .group { margin: 0 4px; font-size: 11px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
+  .theme .group.special { color: var(--gold); }
+  .theme p { margin: 2px 4px 0; color: var(--muted); font-size: 14px; line-height: 1.45; }
 
   /* The preview: a little screen in the theme's own colours. */
   .screen {
-    position: relative; overflow: hidden; height: 132px; border-radius: 12px; padding: 12px;
+    position: relative; overflow: hidden; height: 140px; border-radius: 12px; padding: 12px;
     background: var(--t-bg); color: var(--t-text); font-size: 12px;
   }
-  .special .screen { height: 170px; }
   .screen .card {
     position: relative; z-index: 1; height: 100%; border-radius: 10px; padding: 10px 12px;
     background: var(--t-card); border: 1px solid var(--t-line, rgba(255, 255, 255, .08));
@@ -61,9 +55,8 @@
   .screen .label { font-size: 10px; letter-spacing: .08em; text-transform: uppercase; opacity: .65; }
   .screen .big { font-size: 34px; font-weight: 700; line-height: 1; letter-spacing: -0.02em; }
   .screen .big small { font-size: 14px; font-weight: 600; opacity: .7; margin-left: 2px; }
-  .screen .row { display: flex; align-items: center; justify-content: space-between; }
-  .screen .pill { padding: 3px 10px; border-radius: 999px; background: var(--t-accent); color: var(--t-on); font-weight: 700; font-size: 11px; }
-  .screen .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--t-tint); }
+  .screen .row { display: flex; align-items: center; justify-content: space-between; gap: 6px; }
+  .screen .pill { padding: 3px 10px; border-radius: 999px; background: var(--t-accent); color: var(--t-on); font-weight: 700; font-size: 11px; white-space: nowrap; }
 
   /* Nixie: smoked glass, copper honeycomb, glowing orange digits. */
   .nixie .screen { background:
@@ -74,42 +67,8 @@
     text-shadow: 0 0 4px #FF7A1A, 0 0 12px #FF7A1A, 0 0 24px rgba(255, 90, 0, .6); }
   .nixie .card { background: rgba(26, 19, 14, .82); border-color: #3B2819; }
 
-  /* Split-Flap: black flaps split across the middle, off-white print. */
-  .flaps { display: flex; gap: 4px; }
-  .flap { position: relative; width: 26px; height: 38px; border-radius: 4px; background: #1A1A1A; color: #F2F0E8;
-    font: 700 26px/38px "Helvetica Neue", Arial, sans-serif; text-align: center; box-shadow: inset 0 -1px 0 rgba(255,255,255,.05); }
-  .flap::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: #0E0E0E; }
-  .flap.yellow { background: #F5C45A; color: #111; }
-  .flap.yellow::after { background: rgba(0,0,0,.25); }
-  .splitflap .card { font-family: "Helvetica Neue", Arial, sans-serif; }
-  .splitflap .flip { animation: flip 3s steps(1) infinite; }
-  @keyframes flip { 0%, 60% { transform: none; } 62% { transform: scaleY(.1); } 64% { transform: none; } }
-
-  /* Oscilloscope: phosphor on black glass, graticule ruled across it. */
-  .scope .screen { background:
-    linear-gradient(rgba(57,255,122,.10) 1px, transparent 1px) 0 0 / 100% 20%,
-    linear-gradient(90deg, rgba(57,255,122,.10) 1px, transparent 1px) 0 0 / 10% 100%,
-    var(--t-bg); }
-  .scope .card { background: transparent; border-color: rgba(57,255,122,.25); }
-  .scope .big, .scope .label { text-shadow: 0 0 6px rgba(57,255,122,.8); color: #A8FFC4; font-family: ui-monospace, Menlo, monospace; }
-  .scope svg { position: absolute; left: 0; right: 0; bottom: 18px; width: 100%; height: 70px; }
-  .scope svg path { fill: none; stroke: #39FF7A; stroke-width: 2; filter: drop-shadow(0 0 3px #39FF7A); }
-
-  /* Deep Space: starfield, violet for what is lit, gold foil for what matters. */
-  .space .screen { background:
-    radial-gradient(1px 1px at 12% 22%, #fff, transparent), radial-gradient(1px 1px at 78% 14%, #fff, transparent),
-    radial-gradient(1.5px 1.5px at 40% 70%, #cfd6ff, transparent), radial-gradient(1px 1px at 88% 62%, #fff, transparent),
-    radial-gradient(1px 1px at 22% 86%, #fff, transparent), radial-gradient(1px 1px at 62% 34%, #b6bde6, transparent),
-    radial-gradient(1.5px 1.5px at 6% 52%, #fff, transparent), radial-gradient(1px 1px at 52% 8%, #fff, transparent),
-    radial-gradient(ellipse at 85% 110%, rgba(157,140,255,.35), transparent 55%), var(--t-bg); }
-  .space .card { background: rgba(13,16,36,.7); border-color: #252B52; }
-  .space .big { color: #EEF1FF; text-shadow: 0 0 10px rgba(157,140,255,.7); font-family: ui-monospace, Menlo, monospace; }
-  .space .gold { color: #D4AF37; font-weight: 700; letter-spacing: .1em; font-size: 10px; }
-
   /* Cyberpunk: neon on indigo black, a grid on the ground, a split at the edges. */
-  .cyberpunk .screen { background:
-    linear-gradient(transparent 55%, rgba(10,7,20,.0) 55%),
-    repeating-linear-gradient(0deg, rgba(255,255,255,.04) 0 1px, transparent 1px 3px), var(--t-bg); }
+  .cyberpunk .screen { background: repeating-linear-gradient(0deg, rgba(255,255,255,.04) 0 1px, transparent 1px 3px), var(--t-bg); }
   .cyberpunk .screen::before { content: ""; position: absolute; left: -50%; right: -50%; bottom: -10px; height: 70px;
     background: linear-gradient(rgba(255,43,214,.55) 1px, transparent 1px) 0 0 / 100% 14px,
                 linear-gradient(90deg, rgba(43,230,255,.45) 1px, transparent 1px) 0 0 / 22px 100%;
@@ -118,160 +77,159 @@
   .cyberpunk .big { color: #E6F6FF; text-shadow: -2px 0 #FF2BD6, 2px 0 #2BE6FF; font-family: ui-monospace, Menlo, monospace; animation: glitch 4s infinite; }
   @keyframes glitch { 0%, 92%, 100% { transform: none; } 93% { transform: translateX(2px) skewX(-8deg); } 95% { transform: translateX(-2px); } }
   .cyberpunk .pill { background: #FF2BD6; color: #0A0714; box-shadow: 0 0 10px #FF2BD6; }
+  @media (prefers-reduced-motion: reduce) { .cyberpunk .big { animation: none; } }
 
-  @media (prefers-reduced-motion: reduce) { .flip, .cyberpunk .big { animation: none !important; } }
+  .links { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 18px; }
+  .more { font-size: 15px; font-weight: 600; text-decoration: none; }
+  .more:hover { text-decoration: underline; }
+  .more.open::after { content: " \2193"; }
 
-  .modes { display: flex; gap: 5px; flex-wrap: wrap; margin: 6px 4px 2px; }
-  .modes span { font-size: 11px; padding: 1px 8px; border-radius: 999px; background: var(--chip); color: var(--muted); }
+  .panel { margin-top: 28px; padding: 22px 24px; background: var(--card); border: 1px solid var(--border); border-radius: 16px; scroll-margin-top: 16px; }
+  .panel h2 { font-size: 22px; margin: 0 0 4px; }
+  .panel h3 { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 22px 0 4px; }
+  .panel > p { color: var(--muted); margin: 0 0 8px; font-size: 15px; }
+  .themes { list-style: none; margin: 0; padding: 0; }
+  .themes li { display: flex; gap: 14px; align-items: flex-start; padding: 9px 0; border-top: 1px solid var(--border); font-size: 15px; line-height: 1.45; }
+  .themes li:first-child { border-top: 0; }
+  .themes .what { color: var(--muted); }
+  .themes small { display: block; color: var(--muted); font-size: 12px; }
+  .sw { display: flex; flex: none; margin-top: 2px; }
+  .sw i { width: 16px; height: 16px; border-radius: 50%; border: 1px solid rgba(128, 128, 128, .35); margin-right: -4px; }
+  .back { display: inline-block; margin-top: 16px; font-size: 14px; }
 
-  /* Request a theme. */
-  .ask { margin-top: 56px; padding: 22px; border-radius: 18px; background: var(--card); border: 1px solid var(--border); }
-  .ask h2 { margin-bottom: 2px; }
-  .ask p { color: var(--muted); margin: 0 0 16px; font-size: 15px; }
-  .ask label { display: block; font-size: 14px; font-weight: 600; margin: 12px 0 4px; }
-  .ask input[type=text], .ask textarea {
+  #ask label { display: block; font-size: 14px; font-weight: 600; margin: 12px 0 4px; }
+  #ask input[type=text], #ask textarea {
     width: 100%; padding: 10px 12px; font: inherit; font-size: 16px; color: var(--text); background: var(--bg);
     border: 1px solid var(--border); border-radius: 10px; outline: none;
   }
-  .ask input:focus, .ask textarea:focus { border-color: var(--accent); }
-  .ask textarea { min-height: 84px; resize: vertical; }
+  #ask input:focus, #ask textarea:focus { border-color: var(--accent); }
+  #ask textarea { min-height: 84px; resize: vertical; }
   .picks { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
-  .picks label { display: flex; align-items: center; gap: 6px; margin: 0; font-weight: 500; }
+  .picks label { display: flex !important; align-items: center; gap: 6px; margin: 0 !important; font-weight: 500 !important; }
   .picks input[type=color] { width: 36px; height: 30px; padding: 0; border: 1px solid var(--border); border-radius: 8px; background: none; cursor: pointer; }
-  .button { display: inline-block; margin-top: 18px; padding: 10px 20px; border: 0; border-radius: 999px; background: var(--accent); color: var(--bg); font: 600 16px/1.4 inherit; font-family: inherit; cursor: pointer; text-decoration: none; }
+  .button { display: inline-block; margin-top: 18px; padding: 10px 20px; border: 0; border-radius: 999px; background: var(--accent); color: var(--bg); font: 600 16px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; cursor: pointer; }
 
   footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--border); display: flex; gap: 16px; flex-wrap: wrap; font-size: 14px; color: var(--muted); }
   footer a { color: var(--muted); }
 </style>
 </head>
 <body>
-<main>
+<main id="top">
 <nav>
   <a class="home" href="../"><img src="../icon.png" alt="">Quarter Turn</a>
+  <a href="../features/">Features</a>
   <a href="../gear/">Gear</a>
   <a class="here" href="./">Themes</a>
   <a href="../support/">Support</a>
-  <a href="../privacy/">Privacy</a>
 </nav>
 
 <h1>Themes</h1>
-<p class="lede">Quarter Turn comes in eighteen looks. Pick one in Settings, or make your own.</p>
+<p class="lede">Eighteen looks, from national parks to nixie tubes.</p>
 
-<section>
-  <h2>Experimental <span class="tag">Special</span></h2>
-  <p class="note">More than a change of colour: each one redraws the numbers, the dials and the screen to fit an instrument.</p>
-  <div class="grid special">
-
-    <div class="theme nixie" style="--t-bg:#0B0706; --t-card:#1A130E; --t-text:#FFB070; --t-accent:#FF7A1A; --t-on:#140A04;">
-      <div class="screen"><div class="card">
-        <span class="label">Dose</span>
-        <span class="big">18.5</span>
-        <div class="row"><span class="label">Ethiopia Guji</span><span class="pill">Brew</span></div>
-      </div></div>
-      <h3>Nixie</h3>
-      <p>Tubes, honeycomb and cracked glass. Every number glows like neon behind a cathode.</p>
-      <div class="modes"><span>Light</span><span>Dark</span></div>
-    </div>
-
-    <div class="theme splitflap" style="--t-bg:#0E0E0E; --t-card:#161616; --t-text:#F2F0E8; --t-accent:#F5C45A; --t-on:#111; --t-line:#303030;">
-      <div class="screen"><div class="card">
-        <span class="label">Next brew</span>
-        <div class="flaps"><span class="flap">V</span><span class="flap flip">6</span><span class="flap">0</span><span class="flap yellow">2</span><span class="flap">0</span></div>
-        <div class="row"><span class="label">Platform 3 - Kenya Kii</span><span class="pill">On time</span></div>
-      </div></div>
-      <h3>Split-Flap</h3>
-      <p>A railway departure board, clattering over every time a number changes.</p>
-      <div class="modes"><span>Light</span><span>Dark</span></div>
-    </div>
-
-    <div class="theme scope" style="--t-bg:#020805; --t-card:#07130C; --t-text:#A8FFC4; --t-accent:#39FF7A; --t-on:#02110A;">
-      <div class="screen">
-        <svg viewBox="0 0 300 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 62 C30 62 40 60 55 50 S80 12 110 12 S150 14 175 18 S220 26 245 40 S280 58 300 60"/></svg>
-        <div class="card">
-          <span class="label">Pressure - 9.0 bar</span>
-          <span class="big">28<small>s</small></span>
-          <span></span>
-        </div>
-      </div>
-      <h3>Oscilloscope</h3>
-      <p>Phosphor traces on a graticule. Shots draw themselves like a signal on the screen.</p>
-      <div class="modes"><span>Dark</span></div>
-    </div>
-
-    <div class="theme space" style="--t-bg:#04050D; --t-card:#0D1024; --t-text:#EEF1FF; --t-accent:#9D8CFF; --t-on:#04050D;">
-      <div class="screen"><div class="card">
-        <span class="gold">MISSION ELAPSED</span>
-        <span class="big">00:28</span>
-        <div class="row"><span class="label">Burn complete</span><span class="pill">Go</span></div>
-      </div></div>
-      <h3>Deep Space</h3>
-      <p>Mission control past the Moon: starlight, cold violet and Apollo's gold foil.</p>
-      <div class="modes"><span>Dark</span></div>
-    </div>
-
-    <div class="theme cyberpunk" style="--t-bg:#0A0714; --t-card:#11112A; --t-text:#E6F6FF; --t-accent:#FF2BD6; --t-on:#0A0714;">
-      <div class="screen"><div class="card">
-        <span class="label" style="color:#6F8FC8">// yield_out</span>
-        <span class="big">36.0<small>g</small></span>
-        <div class="row"><span class="label" style="color:#2BE6FF">NIGHT_CITY</span><span class="pill">Jack in</span></div>
-      </div></div>
-      <h3>Cyberpunk</h3>
-      <p>Neon, glitch and a grid in the rain. Three places to be: the city by day, the street at night, or cyberspace.</p>
-      <div class="modes"><span>City Light</span><span>City Dark</span><span>Cyberspace</span></div>
-    </div>
-
+<div class="grid">
+  <div class="theme nixie" style="--t-bg:#0B0706; --t-card:#1A130E; --t-text:#FFB070; --t-accent:#FF7A1A; --t-on:#140A04;">
+    <div class="screen"><div class="card">
+      <span class="label">Dose</span>
+      <span class="big">18.5</span>
+      <div class="row"><span class="label">Ethiopia Guji</span><span class="pill">Brew</span></div>
+    </div></div>
+    <h3>Nixie</h3><span class="group special">Experimental</span>
+    <p>Glowing tubes behind smoked glass.</p>
   </div>
-</section>
-
-<section>
-  <h2>Nature</h2>
-  <p class="note">Named for national parks and wild places, each with three colours of its own.</p>
-  <div class="grid" data-palettes>
-    <div class="theme" data-p="#F3F6F1 #FFFFFF #3E5B4A #7D8B93 light"><h3>Yosemite <span class="tag">Default</span></h3><p>Sage, granite and meadow gold - light or dark</p></div>
-    <div class="theme" data-p="#EEE5D5 #F9F2E7 #B85F32 #6E7FA0 light"><h3>Great Sand Dunes</h3><p>Dune sand, ridge shadow and cottonwood gold</p></div>
-    <div class="theme" data-p="#E9F1F5 #F8FBFC #2878A5 #3FA7A0 light"><h3>Glacier</h3><p>Arctic blue, meltwater and huckleberry</p></div>
-    <div class="theme" data-p="#07131D #0D202D #35D0BA #5E8C5A dark"><h3>Biscayne</h3><p>Night sea, shallow aqua and morning sun</p></div>
-    <div class="theme" data-p="#08120D #101F17 #73C991 #8AA6B8 dark"><h3>Olympic</h3><p>Evergreen, coastal fog and chanterelle</p></div>
-    <div class="theme" data-p="#1A0D17 #281321 #FF8A5B #A884D6 dark"><h3>Joshua Tree</h3><p>Plum dusk, warm orange and yucca bloom</p></div>
-    <div class="theme" data-p="#000000 #070A12 #2F7BFF #9AA3AD dark"><h3>Crater Lake</h3><p>Black water, cobalt and rim lichen</p></div>
+  <div class="theme cyberpunk" style="--t-bg:#0A0714; --t-card:#11112A; --t-text:#E6F6FF; --t-accent:#FF2BD6; --t-on:#0A0714;">
+    <div class="screen"><div class="card">
+      <span class="label" style="color:#6F8FC8">// yield_out</span>
+      <span class="big">36.0<small>g</small></span>
+      <div class="row"><span class="label" style="color:#2BE6FF">NIGHT_CITY</span><span class="pill">Jack in</span></div>
+    </div></div>
+    <h3>Cyberpunk</h3><span class="group special">Experimental</span>
+    <p>Neon, glitch and a grid in the rain.</p>
   </div>
-</section>
-
-<section>
-  <h2>Cities</h2>
-  <p class="note">The colours of a place: its stone, its signs and its sky.</p>
-  <div class="grid" data-palettes>
-    <div class="theme" data-p="#120E0B #1D1611 #D99552 #D8CCB8 dark"><h3>Vienna</h3><p>Caramel, marble and the Danube</p></div>
-    <div class="theme" data-p="#140B12 #21131D #F58FB0 #D4A63A dark"><h3>Kyoto</h3><p>Cherry blossom, temple gold and matcha</p></div>
-    <div class="theme" data-p="#111214 #1B1D21 #FFB81C #2BB3C0 dark"><h3>Dubai</h3><p>Gold, Gulf turquoise and violet dusk</p></div>
-    <div class="theme" data-p="#11161C #1A222B #91A7C1 #C8102E dark"><h3>London</h3><p>Slate, pillar-box red and Tube yellow</p></div>
-    <div class="theme" data-p="#0E1320 #172033 #8CCBF2 #5BE3A0 dark"><h3>Reykjavik</h3><p>Ice blue and the aurora</p></div>
+  <div class="theme" data-p="#F3F6F1 #FFFFFF #3E5B4A #7D8B93 light" data-n="Kenya Kii" data-v="12.5">
+    <h3>Yosemite</h3><span class="group">Nature</span>
+    <p>Sage, granite and meadow gold.</p>
   </div>
+  <div class="theme" data-p="#000000 #070A12 #2F7BFF #9AA3AD dark" data-n="Colombia Huila" data-v="9.0">
+    <h3>Crater Lake</h3><span class="group">Nature</span>
+    <p>Black water, cobalt and rim lichen.</p>
+  </div>
+  <div class="theme" data-p="#140B12 #21131D #F58FB0 #D4A63A dark" data-n="Rwanda Huye" data-v="14.5">
+    <h3>Kyoto</h3><span class="group">City</span>
+    <p>Cherry blossom, temple gold and matcha.</p>
+  </div>
+  <div class="theme" data-p="#11161C #1A222B #91A7C1 #C8102E dark" data-n="Peru Cajamarca" data-v="11.0">
+    <h3>London</h3><span class="group">City</span>
+    <p>Slate, pillar-box red and Tube yellow.</p>
+  </div>
+</div>
+
+<div class="links">
+  <a class="more" href="#all">See all 18 themes</a>
+  <a class="more" href="#request">Request a theme</a>
+</div>
+
+<section class="panel" id="all" hidden>
+  <h2>All themes</h2>
+  <p>Pick one in Settings. Experimental themes redraw the numbers, dials and screens, not just the colours.</p>
+
+  <h3>Experimental</h3>
+  <ul class="themes">
+    <li><span class="sw"><i style="background:#0B0706"></i><i style="background:#FF7A1A"></i><i style="background:#3B2819"></i></span><span><strong>Nixie</strong> <span class="what">Tubes, honeycomb and cracked glass</span><small>Light or dark</small></span></li>
+    <li><span class="sw"><i style="background:#0E0E0E"></i><i style="background:#F5C45A"></i><i style="background:#F2F0E8"></i></span><span><strong>Split-Flap</strong> <span class="what">A departure board, clattering over</span><small>Light or dark</small></span></li>
+    <li><span class="sw"><i style="background:#020805"></i><i style="background:#39FF7A"></i><i style="background:#18402A"></i></span><span><strong>Oscilloscope</strong> <span class="what">Phosphor traces on a graticule</span><small>Dark</small></span></li>
+    <li><span class="sw"><i style="background:#04050D"></i><i style="background:#9D8CFF"></i><i style="background:#D4AF37"></i></span><span><strong>Deep Space</strong> <span class="what">Mission control past the Moon</span><small>Dark</small></span></li>
+    <li><span class="sw"><i style="background:#0A0714"></i><i style="background:#FF2BD6"></i><i style="background:#2BE6FF"></i></span><span><strong>Cyberpunk</strong> <span class="what">Neon, glitch and a grid in the rain</span><small>City Light, City Dark or Cyberspace</small></span></li>
+  </ul>
+
+  <h3>Nature</h3>
+  <ul class="themes">
+    <li><span class="sw"><i style="background:#F3F6F1"></i><i style="background:#3E5B4A"></i><i style="background:#7D8B93"></i></span><span><strong>Yosemite</strong> <span class="what">Sage, granite and meadow gold</span><small>The default - light or dark</small></span></li>
+    <li><span class="sw"><i style="background:#EEE5D5"></i><i style="background:#B85F32"></i><i style="background:#6E7FA0"></i></span><span><strong>Great Sand Dunes</strong> <span class="what">Dune sand, ridge shadow and cottonwood gold</span><small>Light</small></span></li>
+    <li><span class="sw"><i style="background:#E9F1F5"></i><i style="background:#2878A5"></i><i style="background:#3FA7A0"></i></span><span><strong>Glacier</strong> <span class="what">Arctic blue, meltwater and huckleberry</span><small>Light</small></span></li>
+    <li><span class="sw"><i style="background:#07131D"></i><i style="background:#35D0BA"></i><i style="background:#5E8C5A"></i></span><span><strong>Biscayne</strong> <span class="what">Night sea, shallow aqua and morning sun</span><small>Dark</small></span></li>
+    <li><span class="sw"><i style="background:#08120D"></i><i style="background:#73C991"></i><i style="background:#8AA6B8"></i></span><span><strong>Olympic</strong> <span class="what">Evergreen, coastal fog and chanterelle</span><small>Dark</small></span></li>
+    <li><span class="sw"><i style="background:#1A0D17"></i><i style="background:#FF8A5B"></i><i style="background:#A884D6"></i></span><span><strong>Joshua Tree</strong> <span class="what">Plum dusk, warm orange and yucca bloom</span><small>Dark</small></span></li>
+    <li><span class="sw"><i style="background:#000000"></i><i style="background:#2F7BFF"></i><i style="background:#9AA3AD"></i></span><span><strong>Crater Lake</strong> <span class="what">Black water, cobalt and rim lichen</span><small>Dark</small></span></li>
+  </ul>
+
+  <h3>Cities</h3>
+  <ul class="themes">
+    <li><span class="sw"><i style="background:#120E0B"></i><i style="background:#D99552"></i><i style="background:#D8CCB8"></i></span><span><strong>Vienna</strong> <span class="what">Caramel, marble and the Danube</span><small>Dark</small></span></li>
+    <li><span class="sw"><i style="background:#140B12"></i><i style="background:#F58FB0"></i><i style="background:#D4A63A"></i></span><span><strong>Kyoto</strong> <span class="what">Cherry blossom, temple gold and matcha</span><small>Dark</small></span></li>
+    <li><span class="sw"><i style="background:#111214"></i><i style="background:#FFB81C"></i><i style="background:#2BB3C0"></i></span><span><strong>Dubai</strong> <span class="what">Gold, Gulf turquoise and violet dusk</span><small>Dark</small></span></li>
+    <li><span class="sw"><i style="background:#11161C"></i><i style="background:#91A7C1"></i><i style="background:#C8102E"></i></span><span><strong>London</strong> <span class="what">Slate, pillar-box red and Tube yellow</span><small>Dark</small></span></li>
+    <li><span class="sw"><i style="background:#0E1320"></i><i style="background:#8CCBF2"></i><i style="background:#5BE3A0"></i></span><span><strong>Reykjavik</strong> <span class="what">Ice blue and the aurora</span><small>Dark</small></span></li>
+  </ul>
+
+  <h3>Your own</h3>
+  <ul class="themes">
+    <li><span class="sw"><i style="background:conic-gradient(#e66, #ec6, #6c8, #69e, #c6e, #e66)"></i></span><span><strong>Custom</strong> <span class="what">Pick a background, cards, an accent and a tint. The app works out the text so it stays readable.</span><small>Light or dark</small></span></li>
+  </ul>
+  <a class="back" href="#top">Back to the top</a>
 </section>
 
-<section>
-  <h2>Custom</h2>
-  <p class="note">Pick a background, a card colour, an accent and a tint, and the app works out the text and borders so everything stays readable.</p>
-</section>
-
-<form class="ask" id="ask">
+<section class="panel" id="request" hidden>
   <h2>Request a theme</h2>
-  <p>Have a place, an instrument or a look you'd like to brew by? Tell us about it.</p>
-  <label for="t-name">Theme idea</label>
-  <input type="text" id="t-name" placeholder="Like &quot;Lisbon&quot; or &quot;Vinyl record&quot;" required>
-  <label for="t-why">What should it look like?</label>
-  <textarea id="t-why" placeholder="Colours, textures, how the numbers might look..."></textarea>
-  <label>Colours (optional)</label>
-  <div class="picks">
-    <label><input type="color" id="c1" value="#1d1611"> Background</label>
-    <label><input type="color" id="c2" value="#d99552"> Accent</label>
-    <label><input type="color" id="c3" value="#d8ccb8"> Tint</label>
-  </div>
-  <button class="button" type="submit">Send request</button>
-</form>
+  <p>A place, an instrument or a look you'd like to brew by? Tell us about it.</p>
+  <form id="ask">
+    <label for="t-name">Theme idea</label>
+    <input type="text" id="t-name" placeholder="Like &quot;Lisbon&quot; or &quot;Vinyl record&quot;" required>
+    <label for="t-why">What should it look like?</label>
+    <textarea id="t-why" placeholder="Colours, textures, how the numbers might look..."></textarea>
+    <label>Colours (optional)</label>
+    <div class="picks">
+      <label><input type="color" id="c1" value="#1d1611"> Background</label>
+      <label><input type="color" id="c2" value="#d99552"> Accent</label>
+      <label><input type="color" id="c3" value="#d8ccb8"> Tint</label>
+    </div>
+    <button class="button" type="submit">Send request</button>
+  </form>
+  <a class="back" href="#top">Back to the top</a>
+</section>
 
 <footer>
   <span>Quarter Turn</span>
+  <a href="../features/">Features</a>
   <a href="../gear/">Gear</a>
   <a href="./">Themes</a>
   <a href="../support/">Support</a>
@@ -280,24 +238,31 @@
 </footer>
 </main>
 <script>
-  // The classic themes all share one preview, filled in from each one's
+  // The classic themes share one preview, filled in from each one's
   // background, card, accent and tint.
-  const samples = ["Kenya Kii", "Ethiopia Guji", "Colombia Huila", "Brazil Mogiana", "Peru Cajamarca", "Rwanda Huye", "Guatemala Acatenango"];
-  document.querySelectorAll("[data-p]").forEach((el, n) => {
+  for (const el of document.querySelectorAll("[data-p]")) {
     const [bg, card, accent, tint, mode] = el.dataset.p.split(" ");
     const dark = mode === "dark";
-    el.style.cssText = `--t-bg:${bg};--t-card:${card};--t-accent:${accent};--t-tint:${tint};` +
-      `--t-text:${dark ? "#F1F1EE" : "#1D211E"};--t-on:${dark ? "#0D0D0D" : "#FFFFFF"};` +
-      `--t-line:${tint}${dark ? "55" : "66"};`;
+    el.style.cssText = `--t-bg:${bg};--t-card:${card};--t-accent:${accent};` +
+      `--t-text:${dark ? "#F1F1EE" : "#1D211E"};--t-on:${dark ? "#0D0D0D" : "#FFFFFF"};--t-line:${tint}${dark ? "55" : "66"};`;
     el.insertAdjacentHTML("afterbegin", `
       <div class="screen"><div class="card">
         <span class="label">Grind</span>
-        <span class="big">${(8 + (n * 3.7) % 12).toFixed(1)}</span>
-        <div class="row"><span class="label">${samples[n % samples.length]}</span><span class="pill">Brew</span></div>
+        <span class="big">${el.dataset.v}</span>
+        <div class="row"><span class="label">${el.dataset.n}</span><span class="pill">Brew</span></div>
       </div></div>`);
-    el.insertAdjacentHTML("beforeend",
-      `<div class="swatches">${[bg, accent, tint].map(c => `<i style="background:${c}"></i>`).join("")}</div>`);
-  });
+  }
+
+  // "See all" and "Request" open their panel under the tiles, one at a time.
+  for (const link of document.querySelectorAll(".more")) {
+    link.addEventListener("click", e => {
+      e.preventDefault();
+      const target = document.querySelector(link.getAttribute("href"));
+      for (const p of document.querySelectorAll(".panel")) p.hidden = p !== target;
+      for (const l of document.querySelectorAll(".more")) l.classList.toggle("open", l === link);
+      target.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+    });
+  }
 
   document.getElementById("ask").addEventListener("submit", e => {
     e.preventDefault();

@@ -56,7 +56,10 @@
   .badge::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--gold); }
   .platforms { margin-top: 12px; font-size: 14px; color: var(--muted); }
 
-  .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-top: 56px; }
+  .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 56px; }
+  @media (max-width: 560px) { .features { grid-template-columns: 1fr; } }
+  .all { text-align: center; margin: 18px 0 0; font-weight: 600; }
+  .all a { text-decoration: none; }
   .feature {
     background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 18px 18px 16px;
     transition: transform .2s, border-color .2s;
@@ -81,10 +84,10 @@
 <main>
 <nav>
   <a class="home" href="./"><img src="icon.png" alt="">Quarter Turn</a>
+  <a href="features/">Features</a>
   <a href="gear/">Gear</a>
   <a href="themes/">Themes</a>
   <a href="support/">Support</a>
-  <a href="privacy/">Privacy</a>
 </nav>
 
 <section class="hero">
@@ -95,7 +98,7 @@
     <img src="icon.png" alt="Quarter Turn app icon">
   </div>
   <h1>Quarter Turn</h1>
-  <p class="lede">A coffee log for the bags you buy and the brews you make, with your grind remembered for every bean.</p>
+  <p class="lede">A coffee log that remembers your grind for every bean.</p>
   <span class="badge">Coming soon to the App Store</span>
   <p class="platforms">For iPhone and iPad</p>
 </section>
@@ -104,39 +107,24 @@
   <div class="feature">
     <span class="num">01</span>
     <h3>Every bag on the shelf</h3>
-    <p>Track what is open, resting, frozen and finished, with each bag's rest counted from its roast date.</p>
+    <p>Rest counted from roast day.</p>
   </div>
   <div class="feature">
     <span class="num">02</span>
     <h3>Grind that follows the bean</h3>
-    <p>Dial in on a collar drawn like your grinder's, and start from the setting that worked last time.</p>
+    <p>Start where it worked last time.</p>
   </div>
   <div class="feature">
     <span class="num">03</span>
-    <h3>Recipes that scale</h3>
-    <p>Pour-over, iced, cold brew and espresso drinks, scaled to your dose and walked through against a timer.</p>
-  </div>
-  <div class="feature">
-    <span class="num">04</span>
-    <h3>Your scale, live</h3>
-    <p>Read dose and yield straight off a BOOKOO scale while you weigh. Acaia and Decent are in beta.</p>
-  </div>
-  <div class="feature">
-    <span class="num">05</span>
-    <h3>Shots from your machine</h3>
-    <p>On a Gaggiuino or GaggiMate, every shot arrives on its own, with pressure, flow and weight graphed. <a href="gear/">See all supported gear</a>.</p>
-  </div>
-  <div class="feature">
-    <span class="num">06</span>
-    <h3>Yours, and only yours</h3>
-    <p>No account and no tracking. Your library stays on your devices and in your own iCloud.</p>
+    <h3>Shots, graphed</h3>
+    <p>Straight from your machine.</p>
   </div>
 </section>
-
-<p class="quote">Paste a roaster's link or scan the bag's QR code, and the coffee <strong>fills itself in</strong>.</p>
+<p class="all"><a href="features/">See all features</a></p>
 
 <footer>
   <span>Quarter Turn</span>
+  <a href="features/">Features</a>
   <a href="gear/">Gear</a>
   <a href="themes/">Themes</a>
   <a href="support/">Support</a>
