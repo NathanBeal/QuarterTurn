@@ -161,14 +161,14 @@
 
 <div class="card" data-list="all-roasters">
   <h2>Roaster imports</h2>
-  <p>Paste a coffee's link or scan the bag's QR code, and the bag fills itself in.</p>
-  <div class="chips"><span class="chip" data-also="Onyx Coffee Lab">Onyx</span><span class="chip" data-also="Partners Coffee">Partners</span><span class="chip" data-also="Dark Matter Coffee">Dark Matter</span><span class="chip" data-also="Nomad Coffee">Nomad</span></div>
+  <p>Paste a coffee's link or scan the bag's QR code, and the bag fills itself in, from roasters' own shops in a dozen languages.</p>
+  <div class="chips"><span class="chip" data-also="Onyx Coffee Lab">Onyx</span><span class="chip" data-also="Tim Wendelboe Coffee">Tim Wendelboe</span><span class="chip" data-also="Counter Culture Coffee">Counter Culture</span><span class="chip" data-also="Nomad Coffee">Nomad</span><span class="chip">Starbucks</span><span class="chip">Lavazza</span></div>
   <div class="search" data-kind="roasters" data-noun="a roaster">
     <input type="search" placeholder="Search for your roaster" autocomplete="off" aria-label="Search roasters" role="combobox" aria-expanded="false">
     <ul class="suggest" role="listbox" hidden></ul>
     <p class="result" aria-live="polite" hidden></p>
   </div>
-  <a class="seeall" href="#all-roasters">See all roasters</a>
+  <a class="seeall" href="#all-roasters">See all <span data-count></span> roasters</a>
 </div>
 </div>
 
@@ -308,7 +308,204 @@
 </section>
 <section class="all" id="all-roasters" hidden>
   <h2>Roaster imports</h2>
-  <p class="note">Any roaster that sells on Shopify should work. These have been tested:</p><ul class="plain"><li>Onyx Coffee Lab</li><li>Partners Coffee</li><li>Dark Matter Coffee</li><li>Nomad Coffee</li></ul>
+  <p class="note">Most roasters' shops work, whatever they are built on: the bag gets its name, roaster, photo and price, and the origin, process, variety, altitude and tasting notes wherever the page gives them. These have been tested:</p>
+  <h3>Specialty roasters</h3>
+  <ul class="plain">
+    <li data-name="19grams" data-also="19grams Specialty Coffee Roasters">19grams</li>
+    <li data-name="3FE" data-also="">3FE</li>
+    <li data-name="Allpress" data-also="Allpress Espresso">Allpress</li>
+    <li data-name="Amor Perfecto" data-also="Café Amor Perfecto">Amor Perfecto</li>
+    <li data-name="Andytown" data-also="Andytown Coffee Roasters">Andytown</li>
+    <li data-name="April" data-also="april coffee roasters">April</li>
+    <li data-name="Assembly" data-also="Assembly Coffee London">Assembly</li>
+    <li data-name="Belleville" data-also="Belleville Brûlerie - Paris">Belleville</li>
+    <li data-name="Black &amp; White" data-also="Black &amp; White Coffee Roasters">Black &amp; White</li>
+    <li data-name="Blueprint" data-also="Blueprint Coffee">Blueprint</li>
+    <li data-name="Bocca" data-also="boccacoffeeroasters">Bocca</li>
+    <li data-name="Bonanza" data-also="">Bonanza</li>
+    <li data-name="Brandywine" data-also="Brandywine Coffee Roasters">Brandywine</li>
+    <li data-name="Cat &amp; Cloud" data-also="">Cat &amp; Cloud</li>
+    <li data-name="Ceremony" data-also="ceremony coffee">Ceremony</li>
+    <li data-name="Cloud Picker" data-also="Cloud Picker Coffee">Cloud Picker</li>
+    <li data-name="Coava" data-also="Coava Coffee Roasters">Coava</li>
+    <li data-name="Coffee Collective" data-also="">Coffee Collective</li>
+    <li data-name="Coffee Supreme" data-also="">Coffee Supreme</li>
+    <li data-name="Colonna" data-also="">Colonna</li>
+    <li data-name="Common Man" data-also="Common Man Coffee Roasters">Common Man</li>
+    <li data-name="Corvus" data-also="Corvus Coffee">Corvus</li>
+    <li data-name="Counter Culture" data-also="Counter Culture Coffee">Counter Culture</li>
+    <li data-name="Dak" data-also="Dak Coffee Roasters">Dak</li>
+    <li data-name="Dark Arts" data-also="Dark Arts Coffee">Dark Arts</li>
+    <li data-name="Dark Matter" data-also="Dark Matter Coffee">Dark Matter</li>
+    <li data-name="Devoción" data-also="">Devoción</li>
+    <li data-name="Ditta Artigianale" data-also="">Ditta Artigianale</li>
+    <li data-name="Doubleshot" data-also="">Doubleshot</li>
+    <li data-name="Drop" data-also="Drop Coffee">Drop</li>
+    <li data-name="Equator" data-also="Equator Coffees">Equator</li>
+    <li data-name="Five Elephant" data-also="Five Elephant Roastery">Five Elephant</li>
+    <li data-name="Four Barrel" data-also="Four Barrel Coffee">Four Barrel</li>
+    <li data-name="Friedhats" data-also="Friedhats Coffee">Friedhats</li>
+    <li data-name="Fritz" data-also="프릳츠커피컴퍼니">Fritz</li>
+    <li data-name="Fuglen" data-also="Fuglen Coffee Roasters Oslo">Fuglen</li>
+    <li data-name="Gardelli" data-also="Gardelli Specialty Coffees">Gardelli</li>
+    <li data-name="George Howell" data-also="George Howell Coffee">George Howell</li>
+    <li data-name="Glitch" data-also="Glitch Coffee &amp; Roasters">Glitch</li>
+    <li data-name="Go Get Em Tiger" data-also="">Go Get Em Tiger</li>
+    <li data-name="Gracenote" data-also="Gracenote Coffee">Gracenote</li>
+    <li data-name="Halfwit" data-also="Halfwit Coffee Roasters">Halfwit</li>
+    <li data-name="Hard Beans" data-also="">Hard Beans</li>
+    <li data-name="Has Bean" data-also="Ozone Coffee">Has Bean</li>
+    <li data-name="Heart" data-also="Heart Coffee Roasters">Heart</li>
+    <li data-name="Hola Coffee" data-also="Hola Coffee Roasters">Hola Coffee</li>
+    <li data-name="Huckleberry" data-also="Huckleberry Roasters">Huckleberry</li>
+    <li data-name="Industry Beans" data-also="">Industry Beans</li>
+    <li data-name="Intelligentsia" data-also="Intelligentsia Coffee">Intelligentsia</li>
+    <li data-name="Irving Farm" data-also="Irving Farm New York">Irving Farm</li>
+    <li data-name="Joe Coffee" data-also="Joe Coffee Company">Joe Coffee</li>
+    <li data-name="Johan &amp; Nyström" data-also="">Johan &amp; Nyström</li>
+    <li data-name="Kaffa" data-also="Kaffa Roastery">Kaffa</li>
+    <li data-name="Kafferäven" data-also="">Kafferäven</li>
+    <li data-name="Kickapoo" data-also="Wonderstate Coffee">Kickapoo</li>
+    <li data-name="Kiss the Hippo" data-also="Kiss the Hippo Coffee">Kiss the Hippo</li>
+    <li data-name="Klatch" data-also="Klatch Coffee">Klatch</li>
+    <li data-name="Koppi" data-also="Koppi Roasters">Koppi</li>
+    <li data-name="Kuma" data-also="Kuma Coffee">Kuma</li>
+    <li data-name="Kurasu" data-also="">Kurasu</li>
+    <li data-name="La Cabra" data-also="">La Cabra</li>
+    <li data-name="Linea" data-also="Linea Caffe">Linea</li>
+    <li data-name="Little Wolf" data-also="Little Wolf Coffee">Little Wolf</li>
+    <li data-name="Madcap" data-also="Madcap Coffee Company">Madcap</li>
+    <li data-name="Manhattan" data-also="Manhattan Coffee Roasters">Manhattan</li>
+    <li data-name="Market Lane" data-also="Market Lane Coffee">Market Lane</li>
+    <li data-name="Messenger" data-also="Messenger Coffee">Messenger</li>
+    <li data-name="Methodical" data-also="Methodical Coffee">Methodical</li>
+    <li data-name="Metric" data-also="Modicum">Metric</li>
+    <li data-name="Monmouth" data-also="Monmouth Coffee Company">Monmouth</li>
+    <li data-name="Monogram" data-also="Monogram Coffee">Monogram</li>
+    <li data-name="Morgon" data-also="morgoncoffeeroasters">Morgon</li>
+    <li data-name="Nomad" data-also="">Nomad</li>
+    <li data-name="Nylon" data-also="Nylon Coffee">Nylon</li>
+    <li data-name="Olympia" data-also="Olympia Coffee Roasting Co.">Olympia</li>
+    <li data-name="ONA" data-also="ONA Coffee">ONA</li>
+    <li data-name="Onibus" data-also="Onibus Coffee">Onibus</li>
+    <li data-name="Onyx Coffee Lab" data-also="">Onyx Coffee Lab</li>
+    <li data-name="OR Coffee" data-also="OR Coffee Roasters">OR Coffee</li>
+    <li data-name="Origin" data-also="Origin Coffee">Origin</li>
+    <li data-name="Ozone" data-also="Ozone Coffee">Ozone</li>
+    <li data-name="Partners" data-also="Partners Coffee">Partners</li>
+    <li data-name="Passenger" data-also="Passenger Coffee">Passenger</li>
+    <li data-name="Phil &amp; Sebastian" data-also="">Phil &amp; Sebastian</li>
+    <li data-name="Pilot" data-also="Pilot Coffee Roasters">Pilot</li>
+    <li data-name="Prolog" data-also="Prolog Coffee">Prolog</li>
+    <li data-name="Proud Mary" data-also="Proud Mary Coffee">Proud Mary</li>
+    <li data-name="PT&#x27;s" data-also="PT&#x27;s Coffee">PT&#x27;s</li>
+    <li data-name="Right Side" data-also="Right Side Coffee">Right Side</li>
+    <li data-name="Ritual" data-also="Ritual Coffee Roasters">Ritual</li>
+    <li data-name="Rogue Wave" data-also="Rogue Wave Coffee">Rogue Wave</li>
+    <li data-name="Round Hill" data-also="Round Hill Roastery">Round Hill</li>
+    <li data-name="Ruby" data-also="Ruby Coffee Roasters">Ruby</li>
+    <li data-name="Saint Frank" data-also="">Saint Frank</li>
+    <li data-name="Seven Seeds" data-also="">Seven Seeds</li>
+    <li data-name="Sey" data-also="Sey Coffee">Sey</li>
+    <li data-name="Sightglass" data-also="Sightglass Coffee">Sightglass</li>
+    <li data-name="Single O" data-also="">Single O</li>
+    <li data-name="Square Mile" data-also="Square Mile Coffee Roasters">Square Mile</li>
+    <li data-name="St Ali" data-also="ST.ALi">St Ali</li>
+    <li data-name="Stumptown" data-also="Stumptown Coffee">Stumptown</li>
+    <li data-name="Subtext" data-also="Subtext Coffee Roasters">Subtext</li>
+    <li data-name="Sump" data-also="Sump Coffee">Sump</li>
+    <li data-name="Sweet Bloom" data-also="Sweet Bloom Coffee">Sweet Bloom</li>
+    <li data-name="Syra" data-also="Syra Coffee">Syra</li>
+    <li data-name="Tandem" data-also="Tandem Coffee Roasters">Tandem</li>
+    <li data-name="Temple" data-also="Temple Coffee Roasters">Temple</li>
+    <li data-name="The Barn" data-also="The Barn Berlin Coffee Roasters">The Barn</li>
+    <li data-name="Tim Wendelboe" data-also="Tim Wendelboe Coffee">Tim Wendelboe</li>
+    <li data-name="Truth" data-also="Truth Coffee Roasting">Truth</li>
+    <li data-name="Variety" data-also="Variety Coffee">Variety</li>
+    <li data-name="Verve" data-also="Verve Coffee">Verve</li>
+    <li data-name="Vigilante" data-also="Vigilante Coffee Company">Vigilante</li>
+    <li data-name="Workshop" data-also="Workshop Coffee">Workshop</li>
+    <li data-name="Wrecking Ball" data-also="Wrecking Ball Coffee Roasters">Wrecking Ball</li>
+  </ul>
+  <h3>Big brands</h3>
+  <ul class="plain">
+    <li data-name="Atlas Coffee Club" data-also="">Atlas Coffee Club</li>
+    <li data-name="Bewley&#x27;s" data-also="Bewley&#x27;s Tea &amp; Coffee">Bewley&#x27;s</li>
+    <li data-name="Black Rifle" data-also="Black Rifle Coffee Company">Black Rifle</li>
+    <li data-name="Borbone" data-also="Caffè Borbone">Borbone</li>
+    <li data-name="Brooklyn Roasting" data-also="Brooklyn Roasting Company">Brooklyn Roasting</li>
+    <li data-name="Bulletproof" data-also="">Bulletproof</li>
+    <li data-name="Cafe Don Pablo" data-also="Don Pablo Coffee">Cafe Don Pablo</li>
+    <li data-name="Café Britt" data-also="CafeBritt">Café Britt</li>
+    <li data-name="Café Bustelo" data-also="">Café Bustelo</li>
+    <li data-name="Café du Monde" data-also="Cafe du Monde New Orleans">Café du Monde</li>
+    <li data-name="Cafédirect" data-also="">Cafédirect</li>
+    <li data-name="Cameron&#x27;s" data-also="Cameron&#x27;s Coffee">Cameron&#x27;s</li>
+    <li data-name="Caribou" data-also="Caribou Coffee">Caribou</li>
+    <li data-name="Carte Noire" data-also="Cartenoire">Carte Noire</li>
+    <li data-name="Chock full o&#x27;Nuts" data-also="">Chock full o&#x27;Nuts</li>
+    <li data-name="Coffee Bean &amp; Tea Leaf" data-also="The Coffee Bean &amp; Tea Leaf">Coffee Bean &amp; Tea Leaf</li>
+    <li data-name="Coffee Bros" data-also="Coffee Bros.">Coffee Bros</li>
+    <li data-name="Cometeer" data-also="Onyx">Cometeer</li>
+    <li data-name="Community Coffee" data-also="">Community Coffee</li>
+    <li data-name="Copper Moon" data-also="Copper Moon Coffee">Copper Moon</li>
+    <li data-name="Dallmayr" data-also="">Dallmayr</li>
+    <li data-name="Dean&#x27;s Beans" data-also="Dean&#x27;s Beans Organic Coffee Company">Dean&#x27;s Beans</li>
+    <li data-name="Death Wish" data-also="Death Wish Coffee Company">Death Wish</li>
+    <li data-name="Don Francisco&#x27;s" data-also="Don Francisco&#x27;s Coffee">Don Francisco&#x27;s</li>
+    <li data-name="Douwe Egberts" data-also="">Douwe Egberts</li>
+    <li data-name="Dunkin&#x27;" data-also="Dunkin&#x27; At Home">Dunkin&#x27;</li>
+    <li data-name="Dutch Bros" data-also="Dutch Bros. Coffee">Dutch Bros</li>
+    <li data-name="Eight O&#x27;Clock" data-also="Eight O&#x27;clock Coffee">Eight O&#x27;Clock</li>
+    <li data-name="Equal Exchange" data-also="">Equal Exchange</li>
+    <li data-name="Fresh Roasted Coffee" data-also="">Fresh Roasted Coffee</li>
+    <li data-name="Gevalia" data-also="">Gevalia</li>
+    <li data-name="Green Mountain" data-also="Keurig">Green Mountain</li>
+    <li data-name="Grinders" data-also="Grinders Coffee">Grinders</li>
+    <li data-name="Groundwork" data-also="Groundwork Coffee">Groundwork</li>
+    <li data-name="Grumpy Mule" data-also="">Grumpy Mule</li>
+    <li data-name="Hills Bros" data-also="Hills Bros. Coffee">Hills Bros</li>
+    <li data-name="Jim&#x27;s Organic" data-also="Jim&#x27;s Organic Coffee">Jim&#x27;s Organic</li>
+    <li data-name="Julius Meinl" data-also="">Julius Meinl</li>
+    <li data-name="Kauai Coffee" data-also="">Kauai Coffee</li>
+    <li data-name="Kenco" data-also="">Kenco</li>
+    <li data-name="Kicking Horse" data-also="Kicking Horse Coffee">Kicking Horse</li>
+    <li data-name="Kimbo" data-also="">Kimbo</li>
+    <li data-name="Koffee Kult" data-also="">Koffee Kult</li>
+    <li data-name="L&#x27;OR" data-also="L&#x27;OR Espresso">L&#x27;OR</li>
+    <li data-name="La Colombe" data-also="La Colombe Frogtown">La Colombe</li>
+    <li data-name="Larry&#x27;s" data-also="Larry&#x27;s Coffee">Larry&#x27;s</li>
+    <li data-name="Lavazza" data-also="">Lavazza</li>
+    <li data-name="Lifeboost" data-also="">Lifeboost</li>
+    <li data-name="Lion Coffee" data-also="">Lion Coffee</li>
+    <li data-name="Löfbergs" data-also="">Löfbergs</li>
+    <li data-name="Marcilla" data-also="">Marcilla</li>
+    <li data-name="Mauro" data-also="Caffè Mauro">Mauro</li>
+    <li data-name="Maxwell House" data-also="">Maxwell House</li>
+    <li data-name="Mayorga" data-also="Mayorga Coffee">Mayorga</li>
+    <li data-name="Melitta" data-also="">Melitta</li>
+    <li data-name="Muskoka" data-also="Muskoka Roastery">Muskoka</li>
+    <li data-name="Nescafé" data-also="Nescafe">Nescafé</li>
+    <li data-name="New England Coffee" data-also="">New England Coffee</li>
+    <li data-name="Pact" data-also="Pact Coffee">Pact</li>
+    <li data-name="Peet&#x27;s" data-also="Peet&#x27;s Coffee">Peet&#x27;s</li>
+    <li data-name="Pellini" data-also="Pellini Caffè">Pellini</li>
+    <li data-name="Rombouts" data-also="Rombouts Koffie">Rombouts</li>
+    <li data-name="San Francisco Bay" data-also="San Francisco Bay Coffee">San Francisco Bay</li>
+    <li data-name="Segafredo" data-also="">Segafredo</li>
+    <li data-name="Starbucks" data-also="">Starbucks</li>
+    <li data-name="Taylors" data-also="Taylors of Harrogate">Taylors</li>
+    <li data-name="Tchibo" data-also="">Tchibo</li>
+    <li data-name="Tim Hortons" data-also="">Tim Hortons</li>
+    <li data-name="Toby&#x27;s Estate" data-also="Toby&#x27;s Estate Coffee">Toby&#x27;s Estate</li>
+    <li data-name="Trade" data-also="Sparrows">Trade</li>
+    <li data-name="UCC" data-also="Ucc上島珈琲">UCC</li>
+    <li data-name="Union" data-also="unionroasted">Union</li>
+    <li data-name="Victor Allen&#x27;s" data-also="Victor Allen&#x27;s Coffee">Victor Allen&#x27;s</li>
+    <li data-name="Vittoria" data-also="Vittoria Coffee">Vittoria</li>
+    <li data-name="Volcanica" data-also="Volcanica Coffee">Volcanica</li>
+    <li data-name="Zoégas" data-also="Zoegas">Zoégas</li>
+  </ul>
   <a class="back" href="#top">Back to the top</a>
 </section>
 
@@ -408,7 +605,12 @@
       result.innerHTML = html && html + '<button class="x" type="button" aria-label="Close">&times;</button>';
       result.hidden = !html;
     };
-    result.addEventListener("click", e => { if (e.target.closest(".x")) { say("", ""); input.focus(); } });
+    // The x closes the note and leaves it closed. It used to hand focus back
+    // to the box, whose focus handler searched again and reopened the note.
+    result.addEventListener("click", e => {
+      if (!e.target.closest(".x")) return;
+      say("", ""); close();
+    });
     // Tapping anywhere else puts it away.
     document.addEventListener("pointerdown", e => { if (!box.contains(e.target)) { say("", ""); close(); } });
 
@@ -426,7 +628,7 @@
       const subject = encodeURIComponent(`Please add ${box.dataset.noun}: ${q}`);
       const body = encodeURIComponent(`Brand and model: ${q}\n\nAnything that would help (a link, the dial's range and steps):\n`);
       let html = `<span class="mark">?</span>We don't have <strong>${esc(q)}</strong> yet.`;
-      if (kind === "roasters") html += " If they sell on Shopify it will probably work anyway - try pasting a link in the app.";
+      if (kind === "roasters") html += " If they sell online it will probably work anyway - try pasting a link to one of their coffees in the app.";
       html += ` Would you like to ask us to add it? <a href="mailto:${EMAIL}?subject=${subject}&body=${body}">Contact support</a>`;
       say("no", html);
     }
