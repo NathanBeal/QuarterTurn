@@ -48,6 +48,27 @@
   dt { font-weight: 600; margin-top: 8px; }
   dd { margin: 0; color: var(--muted); }
 
+  .search { position: relative; margin-top: 14px; }
+  .search input {
+    width: 100%; padding: 11px 14px; font: inherit; font-size: 16px; color: var(--text);
+    background: var(--bg); border: 1px solid var(--border); border-radius: 12px; outline: none;
+  }
+  .search input:focus { border-color: var(--accent); }
+  .suggest {
+    position: absolute; left: 0; right: 0; top: calc(100% + 4px); z-index: 5; margin: 0; padding: 4px; list-style: none;
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 10px 28px rgba(0, 0, 0, .14);
+  }
+  .suggest li { padding: 8px 10px; border-radius: 8px; cursor: pointer; font-size: 15px; }
+  .suggest li[aria-selected="true"], .suggest li:hover { background: var(--chip); }
+  .suggest li b { font-weight: 700; color: var(--accent); }
+  .suggest .tag { margin-left: 6px; }
+  .result { margin: 10px 0 0; padding: 10px 14px; border-radius: 12px; font-size: 15px; line-height: 1.5; }
+  .result.yes { background: var(--chip); }
+  .result.no { border: 1px dashed var(--gold); }
+  .result .mark { font-weight: 700; margin-right: 6px; }
+  .result.yes .mark { color: var(--accent); }
+  .result.no .mark { color: var(--gold); }
+
   .ask { margin-top: 40px; text-align: center; }
   .ask p { color: var(--muted); margin: 0 auto 14px; }
   .button { display: inline-block; padding: 10px 20px; border-radius: 999px; background: var(--accent); color: var(--bg); font-weight: 600; text-decoration: none; }
@@ -70,8 +91,13 @@
 
 <div class="card">
   <h2>Espresso machines</h2>
-  <p>Gaggiuino and GaggiMate machines connect over Wi-Fi, and every shot arrives on its own. 73 machines are in the catalog.</p>
-  <div class="chips"><span class="chip">Gaggiuino</span><span class="chip">GaggiMate</span></div>
+  <p>Gaggiuino and GaggiMate machines connect over Wi-Fi, and every shot arrives on its own. <span data-count></span> machines are in the catalog.</p>
+  <div class="chips"><span class="chip">Gaggiuino</span><span class="chip" data-also="Gaggia Classic Pro with GaggiMate">GaggiMate</span></div>
+  <div class="search" data-kind="machines" data-noun="an espresso machine">
+    <input type="search" placeholder="Search for your machine, like "Silvia"" autocomplete="off" aria-label="Search machines" role="combobox" aria-expanded="false">
+    <ul class="suggest" role="listbox" hidden></ul>
+    <p class="result" aria-live="polite" hidden></p>
+  </div>
   <details>
     <summary>See all machines</summary>
     <dl>
@@ -102,7 +128,12 @@
 
 <div class="card">
   <h2>Grinders</h2>
-  <p>62 grinders, each with its burrs and a dial drawn like its own, so a setting reads the way it does on the grinder.</p>
+  <p><span data-count></span> grinders, each with its burrs and a dial drawn like its own, so a setting reads the way it does on the grinder.</p>
+  <div class="search" data-kind="grinders" data-noun="a grinder">
+    <input type="search" placeholder="Search for your grinder, like "Niche"" autocomplete="off" aria-label="Search grinders" role="combobox" aria-expanded="false">
+    <ul class="suggest" role="listbox" hidden></ul>
+    <p class="result" aria-live="polite" hidden></p>
+  </div>
   <details>
     <summary>See all grinders</summary>
     <dl>
@@ -132,16 +163,26 @@
   <h2>Scales</h2>
   <p>Bluetooth scales read live while you weigh.</p>
   <div class="chips">
-    <span class="chip">BOOKOO</span>
-    <span class="chip">Acaia <span class="tag">Beta</span></span>
-    <span class="chip">Decent <span class="tag">Beta</span></span>
+    <span class="chip" data-also="Themis">BOOKOO</span>
+    <span class="chip" data-also="Lunar, Pearl, Pyxis">Acaia <span class="tag">Beta</span></span>
+    <span class="chip" data-also="Decent Scale">Decent <span class="tag">Beta</span></span>
+  </div>
+  <div class="search" data-kind="scales" data-noun="a scale">
+    <input type="search" placeholder="Search for your scale, like "Lunar"" autocomplete="off" aria-label="Search scales" role="combobox" aria-expanded="false">
+    <ul class="suggest" role="listbox" hidden></ul>
+    <p class="result" aria-live="polite" hidden></p>
   </div>
 </div>
 
 <div class="card">
   <h2>Roaster imports</h2>
   <p>Paste a coffee's link or scan the bag's QR code, and the bag fills itself in. Works with most roasters that sell on Shopify, including:</p>
-  <div class="chips"><span class="chip">Onyx</span><span class="chip">Partners</span><span class="chip">Dark Matter</span><span class="chip">Nomad</span></div>
+  <div class="chips"><span class="chip" data-also="Onyx Coffee Lab">Onyx</span><span class="chip" data-also="Partners Coffee">Partners</span><span class="chip" data-also="Dark Matter Coffee">Dark Matter</span><span class="chip" data-also="Nomad Coffee">Nomad</span></div>
+  <div class="search" data-kind="roasters" data-noun="a roaster">
+    <input type="search" placeholder="Search for your roaster" autocomplete="off" aria-label="Search roasters" role="combobox" aria-expanded="false">
+    <ul class="suggest" role="listbox" hidden></ul>
+    <p class="result" aria-live="polite" hidden></p>
+  </div>
 </div>
 
 <div class="ask">
@@ -157,5 +198,132 @@
   <a href="mailto:quarterturn.support@gmail.com">quarterturn.support@gmail.com</a>
 </footer>
 </main>
+<script>
+  // Each card's search reads the names already on the page: its "See all"
+  // list if it has one, its chips otherwise, so the two can't disagree.
+  for (const c of document.querySelectorAll("[data-count]")) {
+    const card = c.closest(".card");
+    c.textContent = [...card.querySelectorAll("dd")].reduce((n, dd) => n + dd.textContent.split(",").length, 0);
+  }
+
+  const EMAIL = "quarterturn.support@gmail.com";
+  const norm = t => t.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/['\u2019]/g, "").replace(/[^a-z0-9]+/g, " ").trim();
+
+  function itemsFor(card) {
+    const items = [];
+    for (const dt of card.querySelectorAll("dt")) {
+      const brand = dt.textContent.trim();
+      for (const model of dt.nextElementSibling.textContent.split(",").map(m => m.trim())) {
+        const name = norm(model).startsWith(norm(brand)) ? model : `${brand} ${model}`;
+        items.push({ name, beta: false, keys: norm(name) });
+      }
+    }
+    for (const chip of card.querySelectorAll(".chips .chip")) {
+      const name = chip.firstChild.textContent.trim();
+      if (items.some(i => norm(i.name).startsWith(norm(name)))) continue;
+      items.push({ name, beta: !!chip.querySelector(".tag"), keys: norm(name + " " + (chip.dataset.also || "")) });
+    }
+    return items;
+  }
+
+  // Every word typed has to start a word of the name (or sit inside one, once
+  // it is three letters long). Names whose model, not just brand, starts with
+  // what was typed come first, then shorter names.
+  function matches(items, q) {
+    const words = norm(q).split(" ").filter(Boolean);
+    if (!words.length) return [];
+    const hits = (keys, w) => keys.some(k => k.startsWith(w)) || (w.length >= 3 && keys.some(k => k.includes(w)));
+    const modelHit = i => i.keys.split(" ").slice(1).some(k => words.some(w => k.startsWith(w))) ? 0 : 1;
+    return items
+      .filter(i => words.every(w => hits(i.keys.split(" "), w)))
+      .sort((a, b) => modelHit(a) - modelHit(b) || a.name.length - b.name.length || a.name.localeCompare(b.name));
+  }
+
+  const esc = t => t.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+  function highlight(name, q) {
+    let out = esc(name);
+    for (const w of norm(q).split(" ").filter(Boolean)) {
+      out = out.replace(new RegExp(`(^|[^a-z0-9])(${w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`, "i"), "$1<b>$2</b>");
+    }
+    return out;
+  }
+
+  for (const box of document.querySelectorAll(".search")) {
+    const card = box.closest(".card");
+    const items = itemsFor(card);
+    const input = box.querySelector("input");
+    const list = box.querySelector(".suggest");
+    const result = box.querySelector(".result");
+    const kind = box.dataset.kind;
+    let shown = [], active = -1;
+
+    const close = () => { list.hidden = true; input.setAttribute("aria-expanded", "false"); active = -1; };
+    const say = (cls, html) => { result.className = "result " + cls; result.innerHTML = html; result.hidden = !html; };
+
+    function found(item) {
+      input.value = item.name;
+      close();
+      let html = `<span class="mark">&#10003;</span><strong>${esc(item.name)}</strong> is supported.`;
+      if (item.beta) html += " Support for it is in beta: written from its published protocol and not yet tried on one. If you have one, we'd love to hear how it goes.";
+      if (kind === "roasters") html += " Paste a link to one of their coffees in the app.";
+      say("yes", html);
+    }
+
+    function missing(q) {
+      close();
+      const subject = encodeURIComponent(`Please add ${box.dataset.noun}: ${q}`);
+      const body = encodeURIComponent(`Brand and model: ${q}\n\nAnything that would help (a link, the dial's range and steps):\n`);
+      let html = `<span class="mark">?</span>We don't have <strong>${esc(q)}</strong> yet.`;
+      if (kind === "roasters") html += " If they sell on Shopify it will probably work anyway - try pasting a link in the app.";
+      html += ` Would you like to ask us to add it? <a href="mailto:${EMAIL}?subject=${subject}&body=${body}">Contact support</a>`;
+      say("no", html);
+    }
+
+    function render() {
+      const q = input.value.trim();
+      shown = matches(items, q).slice(0, 6);
+      active = -1;
+      if (!q) { close(); say("", ""); return; }
+      if (!shown.length) { missing(q); return; }
+      say("", "");
+      list.innerHTML = shown.map((i, n) =>
+        `<li role="option" id="${kind}-${n}" aria-selected="false">${highlight(i.name, q)}${i.beta ? '<span class="tag">Beta</span>' : ""}</li>`).join("");
+      list.hidden = false;
+      input.setAttribute("aria-expanded", "true");
+      if (shown.length === 1 && norm(shown[0].name) === norm(q)) found(shown[0]);
+    }
+
+    function move(by) {
+      if (list.hidden || !shown.length) return;
+      active = (active + by + shown.length) % shown.length;
+      list.querySelectorAll("li").forEach((li, n) => li.setAttribute("aria-selected", n === active));
+      input.setAttribute("aria-activedescendant", `${kind}-${active}`);
+    }
+
+    input.addEventListener("input", render);
+    input.addEventListener("focus", () => { if (input.value.trim() && result.hidden) render(); });
+    input.addEventListener("keydown", e => {
+      if (e.key === "ArrowDown") { e.preventDefault(); move(1); }
+      else if (e.key === "ArrowUp") { e.preventDefault(); move(-1); }
+      else if (e.key === "Escape") close();
+      else if (e.key === "Enter") {
+        e.preventDefault();
+        const q = input.value.trim();
+        if (!q) return;
+        if (active >= 0) found(shown[active]);
+        else if (shown.length) found(shown[0]);
+        else missing(q);
+      }
+    });
+    // mousedown, not click, so it lands before the input's blur closes the list.
+    list.addEventListener("mousedown", e => {
+      const li = e.target.closest("li");
+      if (!li) return;
+      e.preventDefault();
+      found(shown[[...list.children].indexOf(li)]);
+    });
+    input.addEventListener("blur", () => setTimeout(close, 100));
+  }
+</script>
 </body>
 </html>
