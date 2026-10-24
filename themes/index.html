@@ -7,16 +7,28 @@
 <meta name="description" content="The looks Quarter Turn comes in, from national parks and cities to nixie tubes and neon.">
 <link rel="icon" href="../icon.png">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<script>
+  // The page starts in the visitor's light or dark; the switch by the title
+  // can turn it, and every preview with it, to the other.
+  document.documentElement.dataset.mode = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+</script>
 <style>
   :root {
+    color-scheme: light;
     --bg: #f4f5f2; --card: #ffffff; --border: #dfe4df; --chip: #eef1ec;
     --text: #1f2a24; --muted: #5d6b63; --accent: #3f5e4c; --gold: #b47a32;
   }
   @media (prefers-color-scheme: dark) {
-    :root {
+    :root:not([data-mode="light"]) {
+      color-scheme: dark;
       --bg: #121614; --card: #1a201d; --border: #2b3530; --chip: #222a26;
       --text: #e6ebe7; --muted: #9aa8a0; --accent: #8fbf9f; --gold: #d9a05f;
     }
+  }
+  :root[data-mode="dark"] {
+    color-scheme: dark;
+    --bg: #121614; --card: #1a201d; --border: #2b3530; --chip: #222a26;
+    --text: #e6ebe7; --muted: #9aa8a0; --accent: #8fbf9f; --gold: #d9a05f;
   }
   * { box-sizing: border-box; }
   html { scrollbar-gutter: stable; }
@@ -31,8 +43,17 @@
   nav a:hover { text-decoration: underline; }
   nav a.here { color: var(--text); font-weight: 600; }
 
-  h1 { font-size: 36px; line-height: 1.15; letter-spacing: -0.02em; margin: 0 0 6px; }
+  .head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin: 0 0 6px; }
+  h1 { font-size: 36px; line-height: 1.15; letter-spacing: -0.02em; margin: 0; }
   .lede { color: var(--muted); margin: 0; }
+
+  .mode { display: inline-flex; padding: 3px; border-radius: 999px; background: var(--chip); border: 1px solid var(--border); }
+  .mode button { padding: 5px 16px; border: 0; border-radius: 999px; background: none; color: var(--muted); font: 600 14px/1.3 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; cursor: pointer; }
+  .mode button[aria-pressed="true"] { background: var(--card); color: var(--text); box-shadow: 0 1px 3px rgba(0, 0, 0, .14); }
+
+  /* Turning the switch fades the page and the previews across. */
+  body, .theme, .panel, .screen, .screen .card, .pill, .flap, .mode button { transition: background-color .3s, border-color .3s, color .3s; }
+  @media (prefers-reduced-motion: reduce) { body, .theme, .panel, .screen, .screen .card, .pill, .flap, .mode button { transition: none; } }
 
   .row-label { margin: 28px 0 8px; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
   .row-label.special { color: var(--gold); }
@@ -60,26 +81,31 @@
   .screen .row { display: flex; align-items: center; justify-content: space-between; gap: 6px; }
   .screen .pill { padding: 3px 10px; border-radius: 999px; background: var(--t-accent); color: var(--t-on); font-weight: 700; font-size: 11px; white-space: nowrap; }
 
-  /* Nixie: smoked glass, copper honeycomb, glowing orange digits. */
+  /* Nixie: smoked glass, copper honeycomb, glowing orange digits. Light, the
+     clock sits in a cream case on a lit shelf, and the tubes stay lit. */
+  .nixie { --t-bg: #0B0706; --t-card: #1A130E; --t-text: #FFB070; --t-accent: #FF7A1A; --t-on: #140A04; }
+  :root[data-mode="light"] .nixie { --t-bg: #F4ECE0; --t-card: #FFFAF2; --t-text: #2B1A0F; --t-accent: #D4560A; --t-on: #FFF7EE; }
   .nixie .screen { background:
     radial-gradient(circle at 50% 50%, transparent 55%, rgba(0,0,0,.35)),
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='24' viewBox='0 0 14 24'%3E%3Cpath d='M7 0l7 4v8l-7 4-7-4V4z M7 16l7 4v8 M7 16l-7 4v8' fill='none' stroke='%233B2819' stroke-width='1'/%3E%3C/svg%3E"),
     var(--t-bg); }
-  .nixie .big { font-family: "Courier New", ui-monospace, monospace; font-weight: 400; color: #FFB070;
-    text-shadow: 0 0 4px #FF7A1A, 0 0 12px #FF7A1A, 0 0 24px rgba(255, 90, 0, .6); }
+  :root[data-mode="light"] .nixie .screen { background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='24' viewBox='0 0 14 24'%3E%3Cpath d='M7 0l7 4v8l-7 4-7-4V4z M7 16l7 4v8 M7 16l-7 4v8' fill='none' stroke='%23DCC3A4' stroke-width='1'/%3E%3C/svg%3E"),
+    var(--t-bg); }
   .nixie .card { background: rgba(26, 19, 14, .82); border-color: #3B2819; }
+  :root[data-mode="light"] .nixie .card { background: rgba(255, 250, 242, .86); border-color: #E2CBB0; }
 
-  /* Yosemite, both ways: the light screen beside the dark one. */
-  .both .screen { display: flex; gap: 8px; background: linear-gradient(90deg, #F3F6F1 50%, #131714 50%); }
-  .both .card { flex: 1; align-items: flex-start; color: var(--t-text); }
-  .both .big { font-size: 26px; }
-
-  /* Split-Flap: black flaps split across the middle, each flipping letter by letter. */
+  /* Split-Flap: black flaps split across the middle, each flipping letter by
+     letter. Light, it is a daylight board: white flaps, black print. */
+  .splitflap { --t-bg: #0E0E0E; --t-card: #161616; --t-text: #F2F0E8; --t-accent: #F5C45A; --t-on: #111; --t-line: #303030;
+    --flap: #1F1F1F; --flap-top: #2A2A2A; --flap-ink: #F2F0E8; --flap-hinge: #0A0A0A; }
+  :root[data-mode="light"] .splitflap { --t-bg: #EDEBE6; --t-card: #FFFFFF; --t-text: #161616; --t-line: #D5D2CA;
+    --flap: #EFEDE8; --flap-top: #F8F7F3; --flap-ink: #161616; --flap-hinge: #8C897F; }
   .flaps { display: flex; gap: 3px; }
-  .flap { position: relative; overflow: hidden; width: 21px; height: 32px; border-radius: 3px; background: #1F1F1F; color: #F2F0E8;
+  .flap { position: relative; overflow: hidden; width: 21px; height: 32px; border-radius: 3px; background: var(--flap); color: var(--flap-ink);
     font: 700 21px/32px "Helvetica Neue", Arial, sans-serif; text-align: center; }
-  .flap::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: #0A0A0A; }
-  .flap::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 50%; background: #2A2A2A; transform-origin: bottom; transform: scaleY(0); }
+  .flap::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: var(--flap-hinge); }
+  .flap::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 50%; background: var(--flap-top); transform-origin: bottom; transform: scaleY(0); }
   .flap.flip::before { animation: flapdown 70ms ease-in; }
   @keyframes flapdown { from { transform: scaleY(1); } to { transform: scaleY(0); } }
   .splitflap .card { font-family: "Helvetica Neue", Arial, sans-serif; }
@@ -93,7 +119,13 @@
   .tube.dot { width: 10px; border: 0; background: none; }
   .tube.cycling { color: #FFC896; text-shadow: 0 0 6px #FF7A1A, 0 0 16px #FF7A1A; }
 
-  /* Cyberpunk: neon on indigo black, a grid on the ground, a split at the edges. */
+  /* Cyberpunk: neon on indigo black, a grid on the ground, a split at the
+     edges. Light, it is City Light: the same street with the signs off,
+     smog-yellowed concrete, towers through the haze and Futura on the posters. */
+  .cyberpunk { --t-bg: #0A0714; --t-card: #11112A; --t-text: #E6F6FF; --t-accent: #FF2BD6; --t-on: #0A0714; --t-quiet: #6F8FC8; --t-reach: #2BE6FF; }
+  :root[data-mode="light"] .cyberpunk { --t-bg: #CFCAB9; --t-card: #E4E0D3; --t-text: #0E0C12; --t-accent: #A8102A; --t-on: #F6F2E8; --t-quiet: #45414D; --t-reach: #00596A; }
+  .cyberpunk .quiet { color: var(--t-quiet); }
+  .cyberpunk .reach { color: var(--t-reach); }
   .cyberpunk .screen { background: repeating-linear-gradient(0deg, rgba(255,255,255,.04) 0 1px, transparent 1px 3px), var(--t-bg); }
   .cyberpunk .screen::before { content: ""; position: absolute; left: -50%; right: -50%; bottom: -10px; height: 70px;
     background: linear-gradient(rgba(255,43,214,.55) 1px, transparent 1px) 0 0 / 100% 14px,
@@ -102,8 +134,15 @@
   .cyberpunk .card { background: rgba(17,17,42,.72); border-color: #1F3A70; }
   .cyberpunk .big { color: #E6F6FF; text-shadow: -2px 0 #FF2BD6, 2px 0 #2BE6FF; font-family: ui-monospace, Menlo, monospace; animation: glitch 4s infinite; }
   @keyframes glitch { 0%, 92%, 100% { transform: none; } 93% { transform: translateX(2px) skewX(-8deg); } 95% { transform: translateX(-2px); } }
-  .cyberpunk .pill { background: #FF2BD6; color: #0A0714; box-shadow: 0 0 10px #FF2BD6; }
+  .cyberpunk .pill { box-shadow: 0 0 10px #FF2BD6; }
   @media (prefers-reduced-motion: reduce) { .cyberpunk .big { animation: none; } }
+  :root[data-mode="light"] .cyberpunk .screen { background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='60' viewBox='0 0 120 60'%3E%3Cpath d='M0 60V34h10v-8h8v8h6V18h12v42zM40 60V28h9V12h7v16h10v32zM70 60V38h14V22h10v38zM98 60V30h8V8h6v22h8v30z' fill='%23B3AC97'/%3E%3C/svg%3E") left bottom / 120px 60px repeat-x,
+    var(--t-bg); }
+  :root[data-mode="light"] .cyberpunk .screen::before { display: none; }
+  :root[data-mode="light"] .cyberpunk .card { background: rgba(228, 224, 211, .86); border-color: #7C7768; font-family: Futura, "Century Gothic", "Avenir Next", sans-serif; }
+  :root[data-mode="light"] .cyberpunk .big { color: var(--t-text); text-shadow: none; animation: none; font-family: inherit; }
+  :root[data-mode="light"] .cyberpunk .pill { box-shadow: none; }
   @media (max-width: 400px) { .row-label { margin-top: 22px; } }
 
   .links { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 18px; }
@@ -121,7 +160,9 @@
   .themes .what { color: var(--muted); }
   .themes small { display: block; color: var(--muted); font-size: 12px; }
   .sw { display: flex; flex: none; margin-top: 2px; }
-  .sw i { width: 16px; height: 16px; border-radius: 50%; border: 1px solid rgba(128, 128, 128, .35); margin-right: -4px; }
+  .sw i { width: 16px; height: 16px; border-radius: 50%; border: 1px solid rgba(128, 128, 128, .35); margin-right: -4px; background: var(--l); }
+  /* A theme with both modes carries both sets of swatches; the switch picks. */
+  :root[data-mode="dark"] .sw i { background: var(--d, var(--l)); }
   .back { display: inline-block; margin-top: 16px; font-size: 14px; }
 
   #ask label { display: block; font-size: 14px; font-weight: 600; margin: 12px 0 4px; }
@@ -150,36 +191,18 @@
   <a href="../support/">Support</a>
 </nav>
 
-<h1>Themes</h1>
-<p class="lede">Eighteen looks, from national parks to nixie tubes.</p>
-
-<p class="row-label">Classic</p>
-<div class="grid">
-  <div class="theme" data-p="#E9F1F5 #F8FBFC #2878A5 #3FA7A0 light" data-n="Kenya Kii" data-v="12.5">
-    <h3>Glacier</h3><span class="group">Light</span>
-    <p>Arctic blue, meltwater and huckleberry.</p>
-  </div>
-  <div class="theme" data-p="#000000 #070A12 #2F7BFF #9AA3AD dark" data-n="Colombia Huila" data-v="9.0">
-    <h3>Crater Lake</h3><span class="group">Dark</span>
-    <p>Black water, cobalt and rim lichen.</p>
-  </div>
-  <div class="theme both">
-    <div class="screen">
-      <div class="card" style="--t-card:#FFFFFF; --t-text:#1F2621; --t-accent:#3E5B4A; --t-on:#FFFFFF; --t-line:#7D8B9366; background:#F3F6F1">
-        <span class="label">Light</span><span class="big">14.0</span><span class="pill">Brew</span>
-      </div>
-      <div class="card" style="--t-card:#1C211D; --t-text:#E8EDE7; --t-accent:#8FA896; --t-on:#101512; --t-line:#7D8B9355; background:#1C211D">
-        <span class="label">Dark</span><span class="big">14.0</span><span class="pill">Brew</span>
-      </div>
-    </div>
-    <h3>Yosemite</h3><span class="group">Light and dark</span>
-    <p>Sage, granite and meadow gold. The default.</p>
+<div class="head">
+  <h1>Themes</h1>
+  <div class="mode" role="group" aria-label="Show the themes in">
+    <button type="button" data-set="light" aria-pressed="false">Light</button>
+    <button type="button" data-set="dark" aria-pressed="false">Dark</button>
   </div>
 </div>
+<p class="lede">Eighteen looks, from national parks to nixie tubes.</p>
 
 <p class="row-label special">Experimental</p>
 <div class="grid">
-  <div class="theme splitflap" style="--t-bg:#0E0E0E; --t-card:#161616; --t-text:#F2F0E8; --t-accent:#F5C45A; --t-on:#111; --t-line:#303030;">
+  <div class="theme splitflap">
     <div class="screen"><div class="card">
       <span class="label">Now brewing</span>
       <div class="flaps" id="flaps" aria-label="Departure board"></div>
@@ -188,7 +211,7 @@
     <h3>Split-Flap</h3><span class="group special">Light or dark</span>
     <p>A departure board, clattering over.</p>
   </div>
-  <div class="theme nixie" style="--t-bg:#0B0706; --t-card:#1A130E; --t-text:#FFB070; --t-accent:#FF7A1A; --t-on:#140A04;">
+  <div class="theme nixie">
     <div class="screen"><div class="card">
       <span class="label" id="nixie-label">Dose - g</span>
       <div class="tubes" id="tubes"></div>
@@ -197,14 +220,30 @@
     <h3>Nixie</h3><span class="group special">Light or dark</span>
     <p>Glowing tubes behind smoked glass.</p>
   </div>
-  <div class="theme cyberpunk" style="--t-bg:#0A0714; --t-card:#11112A; --t-text:#E6F6FF; --t-accent:#FF2BD6; --t-on:#0A0714;">
+  <div class="theme cyberpunk">
     <div class="screen"><div class="card">
-      <span class="label" style="color:#6F8FC8">// yield_out</span>
+      <span class="label quiet" data-day="Yield out" data-night="// yield_out">// yield_out</span>
       <span class="big">36.0<small>g</small></span>
-      <div class="row"><span class="label" style="color:#2BE6FF">CYBERSPACE</span><span class="pill">Jack in</span></div>
+      <div class="row"><span class="label reach" data-day="Night City" data-night="Cyberspace">Cyberspace</span><span class="pill">Jack in</span></div>
     </div></div>
-    <h3>Cyberpunk</h3><span class="group special">Cyberspace</span>
+    <h3>Cyberpunk</h3><span class="group special" data-day="City Light" data-night="Cyberspace">Cyberspace</span>
     <p>Neon, glitch and a grid in the rain.</p>
+  </div>
+</div>
+
+<p class="row-label">Classic</p>
+<div class="grid">
+  <div class="theme" data-light="#E9F1F5 #F8FBFC #2878A5 #3FA7A0" data-n="Kenya Kii" data-v="12.5">
+    <h3>Glacier</h3><span class="group">Light</span>
+    <p>Arctic blue, meltwater and huckleberry.</p>
+  </div>
+  <div class="theme" data-dark="#000000 #070A12 #2F7BFF #9AA3AD" data-n="Colombia Huila" data-v="9.0">
+    <h3>Crater Lake</h3><span class="group">Dark</span>
+    <p>Black water, cobalt and rim lichen.</p>
+  </div>
+  <div class="theme" data-light="#F3F6F1 #FFFFFF #3E5B4A #7D8B93" data-dark="#131714 #1C211D #8FA896 #7D8B93" data-n="Brazil Cerrado" data-v="14.0">
+    <h3>Yosemite</h3><span class="group">Light and dark</span>
+    <p>Sage, granite and meadow gold. The default.</p>
   </div>
 </div>
 
@@ -219,16 +258,16 @@
 
   <h3>Experimental</h3>
   <ul class="themes">
-    <li><span class="sw"><i style="background:#0B0706"></i><i style="background:#FF7A1A"></i><i style="background:#3B2819"></i></span><span><strong>Nixie</strong> <span class="what">Tubes, honeycomb and cracked glass</span><small>Light or dark</small></span></li>
-    <li><span class="sw"><i style="background:#0E0E0E"></i><i style="background:#F5C45A"></i><i style="background:#F2F0E8"></i></span><span><strong>Split-Flap</strong> <span class="what">A departure board, clattering over</span><small>Light or dark</small></span></li>
+    <li><span class="sw"><i style="--l:#F4ECE0; --d:#0B0706"></i><i style="--l:#D4560A; --d:#FF7A1A"></i><i style="--l:#E2CBB0; --d:#3B2819"></i></span><span><strong>Nixie</strong> <span class="what">Tubes, honeycomb and cracked glass</span><small>Light or dark</small></span></li>
+    <li><span class="sw"><i style="--l:#EDEBE6; --d:#0E0E0E"></i><i style="--l:#F5C45A"></i><i style="--l:#161616; --d:#F2F0E8"></i></span><span><strong>Split-Flap</strong> <span class="what">A departure board, clattering over</span><small>Light or dark</small></span></li>
     <li><span class="sw"><i style="background:#020805"></i><i style="background:#39FF7A"></i><i style="background:#18402A"></i></span><span><strong>Oscilloscope</strong> <span class="what">Phosphor traces on a graticule</span><small>Dark</small></span></li>
     <li><span class="sw"><i style="background:#04050D"></i><i style="background:#9D8CFF"></i><i style="background:#D4AF37"></i></span><span><strong>Deep Space</strong> <span class="what">Mission control past the Moon</span><small>Dark</small></span></li>
-    <li><span class="sw"><i style="background:#0A0714"></i><i style="background:#FF2BD6"></i><i style="background:#2BE6FF"></i></span><span><strong>Cyberpunk</strong> <span class="what">Neon, glitch and a grid in the rain</span><small>City Light, City Dark or Cyberspace</small></span></li>
+    <li><span class="sw"><i style="--l:#CFCAB9; --d:#0A0714"></i><i style="--l:#A8102A; --d:#FF2BD6"></i><i style="--l:#00596A; --d:#2BE6FF"></i></span><span><strong>Cyberpunk</strong> <span class="what">Neon, glitch and a grid in the rain</span><small>City Light, City Dark or Cyberspace</small></span></li>
   </ul>
 
   <h3>Nature</h3>
   <ul class="themes">
-    <li><span class="sw"><i style="background:#F3F6F1"></i><i style="background:#3E5B4A"></i><i style="background:#7D8B93"></i></span><span><strong>Yosemite</strong> <span class="what">Sage, granite and meadow gold</span><small>The default - light or dark</small></span></li>
+    <li><span class="sw"><i style="--l:#F3F6F1; --d:#131714"></i><i style="--l:#3E5B4A; --d:#8FA896"></i><i style="--l:#7D8B93"></i></span><span><strong>Yosemite</strong> <span class="what">Sage, granite and meadow gold</span><small>The default - light or dark</small></span></li>
     <li><span class="sw"><i style="background:#EEE5D5"></i><i style="background:#B85F32"></i><i style="background:#6E7FA0"></i></span><span><strong>Great Sand Dunes</strong> <span class="what">Dune sand, ridge shadow and cottonwood gold</span><small>Light</small></span></li>
     <li><span class="sw"><i style="background:#E9F1F5"></i><i style="background:#2878A5"></i><i style="background:#3FA7A0"></i></span><span><strong>Glacier</strong> <span class="what">Arctic blue, meltwater and huckleberry</span><small>Light</small></span></li>
     <li><span class="sw"><i style="background:#07131D"></i><i style="background:#35D0BA"></i><i style="background:#5E8C5A"></i></span><span><strong>Biscayne</strong> <span class="what">Night sea, shallow aqua and morning sun</span><small>Dark</small></span></li>
@@ -284,12 +323,10 @@
 </main>
 <script>
   // The classic themes share one preview, filled in from each one's
-  // background, card, accent and tint.
-  for (const el of document.querySelectorAll("[data-p]")) {
-    const [bg, card, accent, tint, mode] = el.dataset.p.split(" ");
-    const dark = mode === "dark";
-    el.style.cssText = `--t-bg:${bg};--t-card:${card};--t-accent:${accent};` +
-      `--t-text:${dark ? "#F1F1EE" : "#1D211E"};--t-on:${dark ? "#0D0D0D" : "#FFFFFF"};--t-line:${tint}${dark ? "55" : "66"};`;
+  // background, card, accent and tint - its light set, its dark set, or
+  // both for a theme that has both.
+  const classics = document.querySelectorAll(".theme[data-light], .theme[data-dark]");
+  for (const el of classics) {
     el.insertAdjacentHTML("afterbegin", `
       <div class="screen"><div class="card">
         <span class="label">Grind</span>
@@ -297,6 +334,32 @@
         <div class="row"><span class="label">${el.dataset.n}</span><span class="pill">Brew</span></div>
       </div></div>`);
   }
+  function paintClassics(mode) {
+    for (const el of classics) {
+      // A theme made for one mode wears it whichever is switched on.
+      const worn = el.dataset[mode] ? mode : (el.dataset.light ? "light" : "dark");
+      const [bg, card, accent, tint] = el.dataset[worn].split(" ");
+      const dark = worn === "dark";
+      el.style.cssText = `--t-bg:${bg};--t-card:${card};--t-accent:${accent};` +
+        `--t-text:${dark ? "#F1F1EE" : "#1D211E"};--t-on:${dark ? "#0D0D0D" : "#FFFFFF"};--t-line:${tint}${dark ? "55" : "66"};`;
+    }
+  }
+
+  // The light and dark switch. It turns this page only, and until it is
+  // touched the page follows the system as that changes.
+  const root = document.documentElement;
+  const systemDark = matchMedia("(prefers-color-scheme: dark)");
+  const modeButtons = document.querySelectorAll(".mode button");
+  let switched = false;
+  function setMode(mode) {
+    root.dataset.mode = mode;
+    for (const b of modeButtons) b.setAttribute("aria-pressed", String(b.dataset.set === mode));
+    paintClassics(mode);
+    for (const el of document.querySelectorAll("[data-day]")) el.textContent = mode === "light" ? el.dataset.day : el.dataset.night;
+  }
+  for (const b of modeButtons) b.addEventListener("click", () => { switched = true; setMode(b.dataset.set); });
+  systemDark.addEventListener("change", e => { if (!switched) setMode(e.matches ? "dark" : "light"); });
+  setMode(root.dataset.mode);
 
   // Split-Flap: each flap steps through the drum to its next letter, the way
   // a real board does, so a word arrives a letter at a time.
