@@ -50,6 +50,8 @@
   .card > h2 { margin-bottom: 4px; }
   /* The fifth tile has the last row to itself. */
   .card.wide { grid-column: 1 / -1; }
+  .card .links { display: flex; gap: 24px; flex-wrap: wrap; margin-top: auto; padding-top: 12px; align-self: end; }
+  .card .links .seeall { margin-top: 0; padding-top: 0; }
   .seeall { margin-top: auto; padding-top: 12px; align-self: end; font-size: 15px; font-weight: 600; text-decoration: none; }
   .seeall:hover { text-decoration: underline; }
   .seeall.open::after { content: " \2193"; }
@@ -98,6 +100,15 @@
   .result .mark { font-weight: 700; margin-right: 6px; }
   .result.yes .mark { color: var(--accent); }
   .result.no .mark { color: var(--gold); }
+
+  .request-form label { display: block; font-size: 14px; font-weight: 600; margin: 12px 0 4px; }
+  .request-form input, .request-form textarea {
+    width: 100%; padding: 10px 12px; font: inherit; font-size: 16px; color: var(--text); background: var(--bg);
+    border: 1px solid var(--border); border-radius: 10px; outline: none;
+  }
+  .request-form input:focus, .request-form textarea:focus { border-color: var(--accent); }
+  .request-form textarea { min-height: 96px; resize: vertical; }
+  .request-form .button { margin-top: 18px; border: 0; font: 600 16px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; cursor: pointer; }
 
   .ask { margin-top: 40px; text-align: center; }
   .ask p { color: var(--muted); margin: 0 auto 14px; }
@@ -179,7 +190,10 @@
     <ul class="suggest" role="listbox" hidden></ul>
     <p class="result" aria-live="polite" hidden></p>
   </div>
-  <a class="seeall" href="#all-recipes">See all <span data-count></span> recipes</a>
+  <div class="links">
+    <a class="seeall" href="#all-recipes">See all <span data-count></span> recipes</a>
+    <a class="seeall" href="#request-recipe">Request a recipe</a>
+  </div>
 </div>
 </div>
 
@@ -584,6 +598,18 @@
   </ul>
   <a class="back" href="#top">Back to the top</a>
 </section>
+<section class="all" id="request-recipe" hidden>
+  <h2>Request a recipe</h2>
+  <p class="note">A drink you'd like the app to come with? Tell us about it.</p>
+  <form class="request-form" id="ask-recipe">
+    <label for="r-name">Recipe</label>
+    <input type="text" id="r-name" placeholder="Like Irish coffee or an espresso tonic" required>
+    <label for="r-how">How it's made, or a link to it (optional)</label>
+    <textarea id="r-how" placeholder="What it's brewed with, the dose and water, the steps, where it's from..."></textarea>
+    <button class="button" type="submit">Send request</button>
+  </form>
+  <a class="back" href="#top">Back to the top</a>
+</section>
 
 <div class="ask">
   <p>Missing your machine, grinder, scale, roaster or recipe?</p>
@@ -610,16 +636,33 @@
       + list.querySelectorAll("li[data-name]").length;
   }
 
-  // "See all" shows that list under the grid, one at a time, and goes to it.
-  for (const link of document.querySelectorAll(".seeall")) {
-    link.addEventListener("click", e => {
-      e.preventDefault();
-      const target = document.querySelector(link.getAttribute("href"));
-      for (const panel of document.querySelectorAll(".all")) panel.hidden = panel !== target;
-      for (const l of document.querySelectorAll(".seeall")) l.classList.toggle("open", l === link);
-      target.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
-    });
+  // "See all" and "Request" show their panel under the grid, one at a time,
+  // and go to it.
+  function openPanel(href) {
+    const target = document.querySelector(href);
+    for (const panel of document.querySelectorAll(".all")) panel.hidden = panel !== target;
+    for (const l of document.querySelectorAll(".seeall")) l.classList.toggle("open", l.getAttribute("href") === href);
+    target.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
   }
+  for (const link of document.querySelectorAll(".seeall")) {
+    link.addEventListener("click", e => { e.preventDefault(); openPanel(link.getAttribute("href")); });
+  }
+
+  // The recipe request, opened from its link or from a search that came up
+  // empty, and sent as an email.
+  function openRequest(name) {
+    openPanel("#request-recipe");
+    const field = document.getElementById("r-name");
+    if (name) field.value = name;
+    field.focus({ preventScroll: true });
+  }
+  document.getElementById("ask-recipe").addEventListener("submit", e => {
+    e.preventDefault();
+    const name = document.getElementById("r-name").value.trim();
+    const how = document.getElementById("r-how").value.trim();
+    const body = `Recipe: ${name}\n\nHow it's made, or a link to it:\n${how || "-"}\n`;
+    location.href = `mailto:${EMAIL}?subject=${encodeURIComponent("Recipe request: " + name)}&body=${encodeURIComponent(body)}`;
+  });
 
   const EMAIL = "quarterturn.support@gmail.com";
   const norm = t => t.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/['\u2019]/g, "").replace(/[^a-z0-9]+/g, " ").trim();
@@ -685,6 +728,13 @@
     // The x closes the note and leaves it closed. It used to hand focus back
     // to the box, whose focus handler searched again and reopened the note.
     result.addEventListener("click", e => {
+      const request = e.target.closest("[data-request]");
+      if (request) {
+        e.preventDefault();
+        say("", ""); close();
+        openRequest(request.dataset.request);
+        return;
+      }
       if (!e.target.closest(".x")) return;
       say("", ""); close();
     });
@@ -706,8 +756,8 @@
       const body = encodeURIComponent(`Brand and model: ${q}\n\nAnything that would help (a link, the dial's range and steps):\n`);
       let html = `<span class="mark">?</span>We don't have <strong>${esc(q)}</strong> yet.`;
       if (kind === "roasters") html += " If they sell online it will probably work anyway - try pasting a link to one of their coffees in the app.";
-      if (kind === "recipes") html += " You can write it as your own recipe in the app.";
-      html += ` Would you like to ask us to add it? <a href="mailto:${EMAIL}?subject=${subject}&body=${body}">Contact support</a>`;
+      if (kind === "recipes") html += ` You can write it as your own recipe in the app, or <a href="#request-recipe" data-request="${esc(q)}">request it</a>.`;
+      else html += ` Would you like to ask us to add it? <a href="mailto:${EMAIL}?subject=${subject}&body=${body}">Contact support</a>`;
       say("no", html);
     }
 
