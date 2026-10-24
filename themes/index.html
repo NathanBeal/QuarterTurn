@@ -8,8 +8,9 @@
 <link rel="icon" href="../icon.png">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
 <script>
-  // The page starts in the visitor's light or dark; the switch by the title
-  // can turn it, and every preview with it, to the other.
+  // The previews start in the visitor's light or dark; the switch by the
+  // title turns them, and only them, to the other. The page itself stays in
+  // the visitor's own.
   document.documentElement.dataset.mode = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 </script>
 <style>
@@ -19,16 +20,11 @@
     --text: #1f2a24; --muted: #5d6b63; --accent: #3f5e4c; --gold: #b47a32;
   }
   @media (prefers-color-scheme: dark) {
-    :root:not([data-mode="light"]) {
+    :root {
       color-scheme: dark;
       --bg: #121614; --card: #1a201d; --border: #2b3530; --chip: #222a26;
       --text: #e6ebe7; --muted: #9aa8a0; --accent: #8fbf9f; --gold: #d9a05f;
     }
-  }
-  :root[data-mode="dark"] {
-    color-scheme: dark;
-    --bg: #121614; --card: #1a201d; --border: #2b3530; --chip: #222a26;
-    --text: #e6ebe7; --muted: #9aa8a0; --accent: #8fbf9f; --gold: #d9a05f;
   }
   * { box-sizing: border-box; }
   html { scrollbar-gutter: stable; }
@@ -51,9 +47,9 @@
   .mode button { padding: 5px 16px; border: 0; border-radius: 999px; background: none; color: var(--muted); font: 600 14px/1.3 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; cursor: pointer; }
   .mode button[aria-pressed="true"] { background: var(--card); color: var(--text); box-shadow: 0 1px 3px rgba(0, 0, 0, .14); }
 
-  /* Turning the switch fades the page and the previews across. */
-  body, .theme, .panel, .screen, .screen .card, .pill, .flap, .mode button { transition: background-color .3s, border-color .3s, color .3s; }
-  @media (prefers-reduced-motion: reduce) { body, .theme, .panel, .screen, .screen .card, .pill, .flap, .mode button { transition: none; } }
+  /* Turning the switch fades the previews across. */
+  .screen, .screen .card, .pill, .flap, .mode button { transition: background-color .3s, border-color .3s, color .3s; }
+  @media (prefers-reduced-motion: reduce) { .screen, .screen .card, .pill, .flap, .mode button { transition: none; } }
 
   .row-label { margin: 28px 0 8px; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
   .row-label.special { color: var(--gold); }
@@ -233,17 +229,17 @@
 
 <p class="row-label">Classic</p>
 <div class="grid">
-  <div class="theme" data-light="#E9F1F5 #F8FBFC #2878A5 #3FA7A0" data-n="Kenya Kii" data-v="12.5">
-    <h3>Glacier</h3><span class="group">Light</span>
+  <div class="theme" data-light="#F3F6F1 #FFFFFF #3E5B4A #7D8B93" data-dark="#131714 #1C211D #8FA896 #7D8B93" data-n="Brazil Cerrado" data-v="14.0">
+    <h3>Yosemite</h3><span class="group">Light or dark</span>
+    <p>Sage, granite and meadow gold. The default.</p>
+  </div>
+  <div class="theme" data-light="#E9F1F5 #F8FBFC #2878A5 #3FA7A0" data-dark="#07101C #0E1A28 #3D93C8 #3FA7A0" data-n="Kenya Kii" data-v="12.5">
+    <h3>Glacier</h3><span class="group">Light or dark</span>
     <p>Arctic blue, meltwater and huckleberry.</p>
   </div>
-  <div class="theme" data-dark="#000000 #070A12 #2F7BFF #9AA3AD" data-n="Colombia Huila" data-v="9.0">
-    <h3>Crater Lake</h3><span class="group">Dark</span>
+  <div class="theme" data-light="#EEF0F3 #FFFFFF #1F5FD6 #9AA3AD" data-dark="#000000 #070A12 #2F7BFF #9AA3AD" data-n="Colombia Huila" data-v="9.0">
+    <h3>Crater Lake</h3><span class="group">Light or dark</span>
     <p>Black water, cobalt and rim lichen.</p>
-  </div>
-  <div class="theme" data-light="#F3F6F1 #FFFFFF #3E5B4A #7D8B93" data-dark="#131714 #1C211D #8FA896 #7D8B93" data-n="Brazil Cerrado" data-v="14.0">
-    <h3>Yosemite</h3><span class="group">Light and dark</span>
-    <p>Sage, granite and meadow gold. The default.</p>
   </div>
 </div>
 
@@ -269,11 +265,11 @@
   <ul class="themes">
     <li><span class="sw"><i style="--l:#F3F6F1; --d:#131714"></i><i style="--l:#3E5B4A; --d:#8FA896"></i><i style="--l:#7D8B93"></i></span><span><strong>Yosemite</strong> <span class="what">Sage, granite and meadow gold</span><small>The default - light or dark</small></span></li>
     <li><span class="sw"><i style="background:#EEE5D5"></i><i style="background:#B85F32"></i><i style="background:#6E7FA0"></i></span><span><strong>Great Sand Dunes</strong> <span class="what">Dune sand, ridge shadow and cottonwood gold</span><small>Light</small></span></li>
-    <li><span class="sw"><i style="background:#E9F1F5"></i><i style="background:#2878A5"></i><i style="background:#3FA7A0"></i></span><span><strong>Glacier</strong> <span class="what">Arctic blue, meltwater and huckleberry</span><small>Light</small></span></li>
+    <li><span class="sw"><i style="--l:#E9F1F5; --d:#07101C"></i><i style="--l:#2878A5; --d:#3D93C8"></i><i style="--l:#3FA7A0"></i></span><span><strong>Glacier</strong> <span class="what">Arctic blue, meltwater and huckleberry</span><small>Light or dark</small></span></li>
     <li><span class="sw"><i style="background:#07131D"></i><i style="background:#35D0BA"></i><i style="background:#5E8C5A"></i></span><span><strong>Biscayne</strong> <span class="what">Night sea, shallow aqua and morning sun</span><small>Dark</small></span></li>
     <li><span class="sw"><i style="background:#08120D"></i><i style="background:#73C991"></i><i style="background:#8AA6B8"></i></span><span><strong>Olympic</strong> <span class="what">Evergreen, coastal fog and chanterelle</span><small>Dark</small></span></li>
     <li><span class="sw"><i style="background:#1A0D17"></i><i style="background:#FF8A5B"></i><i style="background:#A884D6"></i></span><span><strong>Joshua Tree</strong> <span class="what">Plum dusk, warm orange and yucca bloom</span><small>Dark</small></span></li>
-    <li><span class="sw"><i style="background:#000000"></i><i style="background:#2F7BFF"></i><i style="background:#9AA3AD"></i></span><span><strong>Crater Lake</strong> <span class="what">Black water, cobalt and rim lichen</span><small>Dark</small></span></li>
+    <li><span class="sw"><i style="--l:#EEF0F3; --d:#000000"></i><i style="--l:#1F5FD6; --d:#2F7BFF"></i><i style="--l:#9AA3AD"></i></span><span><strong>Crater Lake</strong> <span class="what">Black water, cobalt and rim lichen</span><small>Light or dark</small></span></li>
   </ul>
 
   <h3>Cities</h3>
@@ -345,8 +341,8 @@
     }
   }
 
-  // The light and dark switch. It turns this page only, and until it is
-  // touched the page follows the system as that changes.
+  // The light and dark switch. It turns the previews only, and until it is
+  // touched they follow the system as that changes.
   const root = document.documentElement;
   const systemDark = matchMedia("(prefers-color-scheme: dark)");
   const modeButtons = document.querySelectorAll(".mode button");
