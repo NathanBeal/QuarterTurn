@@ -43,12 +43,11 @@
   .dial { position: relative; width: 200px; height: 200px; margin: 0 auto; cursor: grab; touch-action: none; user-select: none; -webkit-user-select: none; outline: none; }
   .dial.turning { cursor: grabbing; }
   .dial:focus-visible { border-radius: 50%; box-shadow: 0 0 0 3px var(--glow), 0 0 0 1px var(--accent); }
-  .dial .index { fill: var(--gold); }
   .dial img { pointer-events: none; -webkit-user-drag: none; }
   .readout { position: absolute; left: 50%; top: calc(100% + 2px); transform: translateX(-50%); white-space: nowrap;
     font: 500 12px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .06em; color: var(--muted); transition: color .2s; }
   .readout.live { color: var(--gold); font-size: 14px; font-weight: 700; }
-  .dial svg { position: absolute; inset: 0; width: 100%; height: 100%; color: var(--muted); overflow: visible; }
+  .dial svg { position: absolute; inset: 0; width: 100%; height: 100%; color: var(--muted); }
   .dial .ring { transform-origin: 50% 50%; animation: turn 1.6s cubic-bezier(.2, .8, .2, 1) .2s both; }
   .dial .mark { color: var(--gold); }
   .dial img {
@@ -67,18 +66,6 @@
   .badge::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--gold); }
   .platforms { margin-top: 12px; font-size: 14px; color: var(--muted); }
 
-  .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 56px; }
-  @media (max-width: 560px) { .features { grid-template-columns: 1fr; } }
-  .all { text-align: center; margin: 18px 0 0; font-weight: 600; }
-  .all a { text-decoration: none; }
-  .feature {
-    background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 18px 18px 16px;
-    transition: transform .2s, border-color .2s;
-  }
-  .feature:hover { transform: translateY(-2px); border-color: var(--gold); }
-  .feature .num { font: 600 12px/1 ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--gold); letter-spacing: .08em; }
-  .feature h3 { margin: 10px 0 4px; font-size: 17px; }
-  .feature p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.5; }
 
   .quote { margin: 56px auto 0; max-width: 30em; text-align: center; font-size: 19px; color: var(--muted); }
   .quote strong { color: var(--text); font-weight: 600; }
@@ -108,9 +95,8 @@
   <div class="dial" id="dial" tabindex="0" role="slider" aria-label="Grind dial - drag or use the arrow keys to turn it" aria-valuemin="0" aria-valuemax="14.75" aria-valuenow="0">
     <svg viewBox="0 0 200 200" aria-hidden="true">
       <g class="ring"><g id="ring"></g></g>
-      <path class="index" d="M100 0 l-4.5 -8 h9 z"/>
     </svg>
-    <img src="icon.png" alt="Quarter Turn app icon">
+    <img src="dial-icon.png" alt="Quarter Turn app icon">
     <span class="readout" id="readout">give it a quarter turn</span>
   </div>
   <h1>Quarter Turn</h1>
@@ -118,25 +104,6 @@
   <span class="badge">Coming soon to the App Store</span>
   <p class="platforms">For iPhone and iPad</p>
 </section>
-
-<section class="features">
-  <div class="feature">
-    <span class="num">01</span>
-    <h3>Every bag on the shelf</h3>
-    <p>Rest counted from roast day.</p>
-  </div>
-  <div class="feature">
-    <span class="num">02</span>
-    <h3>Grind that follows the bean</h3>
-    <p>Start where it worked last time.</p>
-  </div>
-  <div class="feature">
-    <span class="num">03</span>
-    <h3>Shots, graphed</h3>
-    <p>Straight from your machine.</p>
-  </div>
-</section>
-<p class="all"><a href="features/">See all features</a></p>
 
 <footer>
   <span>Quarter Turn</span>
@@ -150,7 +117,8 @@
 </main>
 <script>
   // Grinder-collar ticks around the icon: a long one at every whole number,
-  // four clicks apart, and a gold mark at zero.
+  // four clicks apart, and a gold mark at zero. Zero sits at six o'clock,
+  // where the icon's index points down at the grind number.
   const ring = document.getElementById("ring");
   const ns = "http://www.w3.org/2000/svg";
   for (let i = 0; i < 60; i++) {
@@ -162,7 +130,7 @@
     line.setAttribute("stroke-width", major ? 2.5 : 1.2);
     line.setAttribute("stroke-linecap", "round");
     line.setAttribute("opacity", major ? 0.9 : 0.45);
-    line.setAttribute("transform", `rotate(${i * 6} 100 100)`);
+    line.setAttribute("transform", `rotate(${i * 6 + 180} 100 100)`);
     if (i === 0) line.setAttribute("class", "mark");
     ring.appendChild(line);
   }
