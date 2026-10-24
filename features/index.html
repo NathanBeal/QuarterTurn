@@ -27,9 +27,8 @@
   nav { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; margin-bottom: 32px; }
   nav .home { display: flex; align-items: center; gap: 10px; margin-right: auto; font-weight: 600; color: var(--text); text-decoration: none; }
   nav .home img { width: 30px; height: 30px; border-radius: 7px; }
-  /* On a phone the name has the first line and the pages share the second. */
-  @media (max-width: 560px) { nav { justify-content: space-between; gap: 10px 0; } nav .home { flex-basis: 100%; } }
-  @media (max-width: 360px) { nav a:not(.home) { font-size: 15px; } }
+  /* On a phone the name has the first line and the pages sit under it, three to a row. */
+  @media (max-width: 560px) { nav { gap: 6px 0; } nav .home { flex-basis: 100%; margin-bottom: 4px; } nav a:not(.home) { flex: 0 0 33.333%; padding: 4px 0; } }
   nav a { text-decoration: none; }
   nav a:hover { text-decoration: underline; }
   nav a.here { color: var(--text); font-weight: 600; }
@@ -66,9 +65,10 @@
   <a class="home" href="../"><img src="../icon.png" alt="">Quarter Turn</a>
   <a href="../">Home</a>
   <a class="here" href="./">Features</a>
-  <a href="../gear/">Gear</a>
+  <a href="../gear/">Catalog</a>
   <a href="../themes/">Themes</a>
   <a href="../support/">Support</a>
+  <a href="../privacy/">Privacy</a>
 </nav>
 
 <h1>Features</h1>
@@ -130,7 +130,7 @@
   <h2>Grind that follows the bean</h2>
   <p>Dialling in is the part worth remembering.</p>
   <ul>
-    <li><strong>Your grinder's own dial.</strong> 198 grinders are drawn with their real collar and steps, including stepped, stepless and lettered dials. See them all on the <a href="../gear/">Gear page</a>.</li>
+    <li><strong>Your grinder's own dial.</strong> 198 grinders are drawn with their real collar and steps, including stepped, stepless and lettered dials. See them all in the <a href="../gear/">Catalog</a>.</li>
     <li><strong>A collar you can feel.</strong> Flick it and it coasts and settles; detents click with haptics that scale with speed.</li>
     <li><strong>Where it worked before.</strong> Marks on the dial show every setting already brewed on that bean, and the app starts from the last good one.</li>
     <li><strong>Per set of burrs.</strong> Swap burrs and each set keeps its own history.</li>
@@ -173,7 +173,7 @@
     <li><strong>From the bag.</strong> Scan the QR code printed on it.</li>
     <li><strong>From a collection.</strong> Paste a roaster's "new arrivals" page and pick the coffee you bought.</li>
     <li><strong>Even after it sells out.</strong> If the page is gone, the app looks for a saved copy in the Internet Archive.</li>
-    <li><strong>Almost any shop.</strong> It reads roasters' own sites whatever they are built on, in a dozen languages. See the 191 tested roasters on the <a href="../gear/">Gear page</a>.</li>
+    <li><strong>Almost any shop.</strong> It reads roasters' own sites whatever they are built on, in a dozen languages. See the 191 tested roasters in the <a href="../gear/">Catalog</a>.</li>
   </ul>
   <a class="back" href="#top">Back to the top</a>
 </section>
@@ -193,7 +193,7 @@
 <footer>
   <span>Quarter Turn</span>
   <a href="./">Features</a>
-  <a href="../gear/">Gear</a>
+  <a href="../gear/">Catalog</a>
   <a href="../themes/">Themes</a>
   <a href="../support/">Support</a>
   <a href="../privacy/">Privacy</a>

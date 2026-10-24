@@ -20,9 +20,8 @@
   nav { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; margin-bottom: 32px; }
   nav .home { display: flex; align-items: center; gap: 10px; margin-right: auto; font-weight: 600; color: var(--text); text-decoration: none; }
   nav .home img { width: 30px; height: 30px; border-radius: 7px; }
-  /* On a phone the name has the first line and the pages share the second. */
-  @media (max-width: 560px) { nav { justify-content: space-between; gap: 10px 0; } nav .home { flex-basis: 100%; } }
-  @media (max-width: 360px) { nav a:not(.home) { font-size: 15px; } }
+  /* On a phone the name has the first line and the pages sit under it, three to a row. */
+  @media (max-width: 560px) { nav { gap: 6px 0; } nav .home { flex-basis: 100%; margin-bottom: 4px; } nav a:not(.home) { flex: 0 0 33.333%; padding: 4px 0; } }
   nav a { text-decoration: none; }
   nav a.here { color: var(--text); font-weight: 600; }
 </style>
@@ -33,9 +32,10 @@
   <a class="home" href="../"><img src="../icon.png" alt="">Quarter Turn</a>
   <a href="../">Home</a>
   <a href="../features/">Features</a>
-  <a href="../gear/">Gear</a>
+  <a href="../gear/">Catalog</a>
   <a href="../themes/">Themes</a>
   <a class="here" href="../support/">Support</a>
+  <a href="../privacy/">Privacy</a>
 </nav>
 <h1>Support</h1>
 <p class="muted">Quarter Turn</p>
@@ -54,7 +54,7 @@ Syncing goes through iCloud. Check that both devices are signed in to the same A
 In the app, open Settings and choose Export library to Files. To bring a backup back, choose Restore from a backup.</p>
 
 <p><strong>Which scales work with the app?</strong><br>
-Bluetooth scales from BOOKOO, plus Acaia, Decent, DiFluid, Eureka Precisa, Felicita, Hiroia, Skale, Timemore and Varia in beta: their support hasn't been tried on every model yet, so please tell us if something misbehaves. The full list is on the <a href="../gear/">Gear page</a>. Bluetooth must be allowed for Quarter Turn in Settings &gt; Privacy &amp; Security &gt; Bluetooth.</p>
+Bluetooth scales from BOOKOO, plus Acaia, Decent, DiFluid, Eureka Precisa, Felicita, Hiroia, Skale, Timemore and Varia in beta: their support hasn't been tried on every model yet, so please tell us if something misbehaves. The full list is in the <a href="../gear/">Catalog</a>. Bluetooth must be allowed for Quarter Turn in Settings &gt; Privacy &amp; Security &gt; Bluetooth.</p>
 
 <p><strong>The app can't find my espresso machine.</strong><br>
 Gaggiuino and GaggiMate machines are reached over your home network. The phone needs to be on the same Wi-Fi network as the machine, and Local Network must be allowed for Quarter Turn in Settings &gt; Privacy &amp; Security &gt; Local Network.</p>

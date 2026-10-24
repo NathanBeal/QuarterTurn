@@ -33,9 +33,8 @@
   nav { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
   nav .home { display: flex; align-items: center; gap: 10px; margin-right: auto; font-weight: 600; color: var(--text); text-decoration: none; }
   nav .home img { width: 30px; height: 30px; border-radius: 7px; }
-  /* On a phone the name has the first line and the pages share the second. */
-  @media (max-width: 560px) { nav { justify-content: space-between; gap: 10px 0; } nav .home { flex-basis: 100%; } }
-  @media (max-width: 360px) { nav a:not(.home) { font-size: 15px; } }
+  /* On a phone the name has the first line and the pages sit under it, three to a row. */
+  @media (max-width: 560px) { nav { gap: 6px 0; } nav .home { flex-basis: 100%; margin-bottom: 4px; } nav a:not(.home) { flex: 0 0 33.333%; padding: 4px 0; } }
   nav a { text-decoration: none; }
   nav a:hover { text-decoration: underline; }
   nav a.here { color: var(--text); font-weight: 600; }
@@ -90,6 +89,7 @@
   }
   footer a { color: var(--muted); }
   @media (max-width: 480px) { h1 { font-size: 36px; } .lede { font-size: 18px; } }
+  @media (max-width: 360px) { .badge { padding: 10px 16px; font-size: 15px; white-space: nowrap; } }
 </style>
 </head>
 <body>
@@ -98,9 +98,10 @@
   <a class="home" href="./"><img src="icon.png" alt="">Quarter Turn</a>
   <a class="here" href="./">Home</a>
   <a href="features/">Features</a>
-  <a href="gear/">Gear</a>
+  <a href="gear/">Catalog</a>
   <a href="themes/">Themes</a>
   <a href="support/">Support</a>
+  <a href="privacy/">Privacy</a>
 </nav>
 
 <section class="hero">
@@ -113,7 +114,7 @@
     <span class="readout" id="readout">give it a quarter turn</span>
   </div>
   <h1>Quarter Turn</h1>
-  <p class="lede">A coffee log that remembers your grind for every bean.</p>
+  <p class="lede">A simpler way to log coffee and make drinks.</p>
   <span class="badge">Coming soon to the App Store</span>
   <p class="platforms">For iPhone and iPad</p>
 </section>
@@ -140,7 +141,7 @@
 <footer>
   <span>Quarter Turn</span>
   <a href="features/">Features</a>
-  <a href="gear/">Gear</a>
+  <a href="gear/">Catalog</a>
   <a href="themes/">Themes</a>
   <a href="support/">Support</a>
   <a href="privacy/">Privacy</a>

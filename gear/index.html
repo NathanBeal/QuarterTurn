@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Quarter Turn - Gear</title>
-<meta name="description" content="The espresso machines, grinders, scales and roaster sites Quarter Turn knows.">
+<title>Quarter Turn - Catalog</title>
+<meta name="description" content="The espresso machines, grinders, scales, roaster sites and recipes Quarter Turn knows.">
 <link rel="icon" href="../icon.png">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
 <style>
@@ -27,9 +27,8 @@
   nav { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; margin-bottom: 32px; }
   nav .home { display: flex; align-items: center; gap: 10px; margin-right: auto; font-weight: 600; color: var(--text); text-decoration: none; }
   nav .home img { width: 30px; height: 30px; border-radius: 7px; }
-  /* On a phone the name has the first line and the pages share the second. */
-  @media (max-width: 560px) { nav { justify-content: space-between; gap: 10px 0; } nav .home { flex-basis: 100%; } }
-  @media (max-width: 360px) { nav a:not(.home) { font-size: 15px; } }
+  /* On a phone the name has the first line and the pages sit under it, three to a row. */
+  @media (max-width: 560px) { nav { gap: 6px 0; } nav .home { flex-basis: 100%; margin-bottom: 4px; } nav a:not(.home) { flex: 0 0 33.333%; padding: 4px 0; } }
   nav a { text-decoration: none; }
   nav a:hover { text-decoration: underline; }
   nav a.here { color: var(--text); font-weight: 600; }
@@ -49,6 +48,8 @@
     }
   }
   .card > h2 { margin-bottom: 4px; }
+  /* The fifth tile has the last row to itself. */
+  .card.wide { grid-column: 1 / -1; }
   .seeall { margin-top: auto; padding-top: 12px; align-self: end; font-size: 15px; font-weight: 600; text-decoration: none; }
   .seeall:hover { text-decoration: underline; }
   .seeall.open::after { content: " \2193"; }
@@ -112,13 +113,14 @@
   <a class="home" href="../"><img src="../icon.png" alt="">Quarter Turn</a>
   <a href="../">Home</a>
   <a href="../features/">Features</a>
-  <a class="here" href="./">Gear</a>
+  <a class="here" href="./">Catalog</a>
   <a href="../themes/">Themes</a>
   <a href="../support/">Support</a>
+  <a href="../privacy/">Privacy</a>
 </nav>
 
-<h1>Gear</h1>
-<p class="lede">What Quarter Turn works with. Anything else can still be added by name.</p>
+<h1>Catalog</h1>
+<p class="lede">What Quarter Turn knows out of the box. Anything else can still be added by name.</p>
 
 <div class="tiles">
 <div class="card" data-list="all-machines">
@@ -167,6 +169,17 @@
     <p class="result" aria-live="polite" hidden></p>
   </div>
   <a class="seeall" href="#all-roasters">See all <span data-count></span> roasters</a>
+</div>
+
+<div class="card wide" data-list="all-recipes">
+  <h2>Recipes</h2>
+  <p>From a V60 to an Einspänner, ready to brew, scaled to your dose and walked through step by step.</p>
+  <div class="search" data-kind="recipes" data-noun="a recipe">
+    <input type="search" placeholder="Search recipes, like Cortado" autocomplete="off" aria-label="Search recipes" role="combobox" aria-expanded="false">
+    <ul class="suggest" role="listbox" hidden></ul>
+    <p class="result" aria-live="polite" hidden></p>
+  </div>
+  <a class="seeall" href="#all-recipes">See all <span data-count></span> recipes</a>
 </div>
 </div>
 
@@ -537,16 +550,50 @@
   </ul>
   <a class="back" href="#top">Back to the top</a>
 </section>
+<section class="all" id="all-recipes" hidden>
+  <h2>All recipes</h2>
+  <p class="note">Each scales to your dose and walks you through it step by step. Copy one to make it your own, or write your own from scratch.</p>
+  <h3>Espresso drinks</h3>
+  <ul class="plain">
+    <li data-name="Espresso" data-also="The dial-in reference">Espresso <span class="muted">The dial-in reference</span></li>
+    <li data-name="Americano" data-also="Espresso lengthened with hot water">Americano <span class="muted">Espresso lengthened with hot water</span></li>
+    <li data-name="Cortado" data-also="Equal parts espresso and milk">Cortado <span class="muted">Equal parts espresso and milk</span></li>
+    <li data-name="Cappuccino" data-also="Thirds of espresso, milk and foam">Cappuccino <span class="muted">Thirds of espresso, milk and foam</span></li>
+    <li data-name="Latte" data-also="Long milk, thin microfoam">Latte <span class="muted">Long milk, thin microfoam</span></li>
+    <li data-name="Flat White" data-also="Small, strong, barely any foam">Flat White <span class="muted">Small, strong, barely any foam</span></li>
+    <li data-name="Café Cubano" data-also="Cuba, whipped with demerara">Café Cubano <span class="muted">Cuba, whipped with demerara</span></li>
+    <li data-name="Café Bombón" data-also="Valencia, espresso over condensed milk">Café Bombón <span class="muted">Valencia, espresso over condensed milk</span></li>
+    <li data-name="Freddo Espresso" data-also="Greece, shaken and poured over ice">Freddo Espresso <span class="muted">Greece, shaken and poured over ice</span></li>
+    <li data-name="Marocchino" data-also="Piedmont, cocoa, espresso and foam">Marocchino <span class="muted">Piedmont, cocoa, espresso and foam</span></li>
+    <li data-name="Mont Blanc" data-also="Chestnut cream under whipped cream">Mont Blanc <span class="muted">Chestnut cream under whipped cream</span></li>
+    <li data-name="Mazagran" data-also="Portugal, espresso, lemon and ice">Mazagran <span class="muted">Portugal, espresso, lemon and ice</span></li>
+    <li data-name="Affogato" data-also="Italy, espresso over gelato">Affogato <span class="muted">Italy, espresso over gelato</span></li>
+    <li data-name="Einspänner" data-also="Austria, double espresso under cold cream">Einspänner <span class="muted">Austria, double espresso under cold cream</span></li>
+  </ul>
+  <h3>Pour over</h3>
+  <ul class="plain">
+    <li data-name="Standard Pour Over" data-also="Hoffmann's ultimate V60">Standard Pour Over <span class="muted">Hoffmann's ultimate V60</span></li>
+    <li data-name="Flash-Brewed Iced Coffee" data-also="Hoffmann's iced filter">Flash-Brewed Iced Coffee <span class="muted">Hoffmann's iced filter</span></li>
+    <li data-name="Vietnamese Iced Coffee" data-also="Cà Phê Sữa Đá">Vietnamese Iced Coffee <span class="muted">Cà Phê Sữa Đá</span></li>
+    <li data-name="Tahini Iced Coffee (V60)" data-also="Edith's-style, flash-brewed">Tahini Iced Coffee <span class="muted">Edith's-style, flash-brewed</span></li>
+  </ul>
+  <h3>Cold brew</h3>
+  <ul class="plain">
+    <li data-name="Cold Brew" data-also="Ground fine, fined, poured clear">Cold Brew <span class="muted">Ground fine, fined, poured clear</span></li>
+    <li data-name="Tahini Iced Coffee (cold brew)" data-also="Edith's-style, on cold brew">Tahini Iced Coffee <span class="muted">Edith's-style, on cold brew</span></li>
+  </ul>
+  <a class="back" href="#top">Back to the top</a>
+</section>
 
 <div class="ask">
-  <p>Missing your machine, grinder, scale or roaster?</p>
-  <a class="button" href="mailto:quarterturn.support@gmail.com?subject=Gear%20request%3A%20">Request gear</a>
+  <p>Missing your machine, grinder, scale, roaster or recipe?</p>
+  <a class="button" href="mailto:quarterturn.support@gmail.com?subject=Please%20add%3A%20">Ask us to add it</a>
 </div>
 
 <footer>
   <span>Quarter Turn</span>
   <a href="../features/">Features</a>
-  <a href="./">Gear</a>
+  <a href="./">Catalog</a>
   <a href="../themes/">Themes</a>
   <a href="../support/">Support</a>
   <a href="../privacy/">Privacy</a>
@@ -647,7 +694,7 @@
     function found(item) {
       input.value = item.name;
       close();
-      let html = `<span class="mark">&#10003;</span><strong>${esc(item.name)}</strong> is supported.`;
+      let html = `<span class="mark">&#10003;</span><strong>${esc(item.name)}</strong> ${kind === "recipes" ? "comes with the app." : "is supported."}`;
       if (item.beta) html += " Support for it is in beta: written from its published protocol and not yet tried on one. If you have one, we'd love to hear how it goes.";
       if (kind === "roasters") html += " Paste a link to one of their coffees in the app.";
       say("yes", html);
@@ -659,6 +706,7 @@
       const body = encodeURIComponent(`Brand and model: ${q}\n\nAnything that would help (a link, the dial's range and steps):\n`);
       let html = `<span class="mark">?</span>We don't have <strong>${esc(q)}</strong> yet.`;
       if (kind === "roasters") html += " If they sell online it will probably work anyway - try pasting a link to one of their coffees in the app.";
+      if (kind === "recipes") html += " You can write it as your own recipe in the app.";
       html += ` Would you like to ask us to add it? <a href="mailto:${EMAIL}?subject=${subject}&body=${body}">Contact support</a>`;
       say("no", html);
     }
