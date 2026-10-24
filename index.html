@@ -33,8 +33,12 @@
   nav { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
   nav .home { display: flex; align-items: center; gap: 10px; margin-right: auto; font-weight: 600; color: var(--text); text-decoration: none; }
   nav .home img { width: 30px; height: 30px; border-radius: 7px; }
+  /* On a phone the name has the first line and the pages share the second. */
+  @media (max-width: 560px) { nav { justify-content: space-between; gap: 10px 0; } nav .home { flex-basis: 100%; } }
+  @media (max-width: 360px) { nav a:not(.home) { font-size: 15px; } }
   nav a { text-decoration: none; }
   nav a:hover { text-decoration: underline; }
+  nav a.here { color: var(--text); font-weight: 600; }
 
   .hero { text-align: center; padding: 40px 0 8px; }
   .dial { position: relative; width: 200px; height: 200px; margin: 0 auto; cursor: grab; touch-action: none; user-select: none; -webkit-user-select: none; outline: none; }
@@ -45,7 +49,7 @@
   .readout { position: absolute; left: 50%; top: calc(100% + 2px); transform: translateX(-50%); white-space: nowrap;
     font: 500 12px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .06em; color: var(--muted); transition: color .2s; }
   .readout.live { color: var(--gold); font-size: 14px; font-weight: 700; }
-  .dial svg { position: absolute; inset: 0; width: 100%; height: 100%; color: var(--muted); }
+  .dial svg { position: absolute; inset: 0; width: 100%; height: 100%; color: var(--muted); overflow: visible; }
   .dial .ring { transform-origin: 50% 50%; animation: turn 1.6s cubic-bezier(.2, .8, .2, 1) .2s both; }
   .dial .mark { color: var(--gold); }
   .dial img {
@@ -92,6 +96,7 @@
 <main>
 <nav>
   <a class="home" href="./"><img src="icon.png" alt="">Quarter Turn</a>
+  <a class="here" href="./">Home</a>
   <a href="features/">Features</a>
   <a href="gear/">Gear</a>
   <a href="themes/">Themes</a>
@@ -99,10 +104,10 @@
 </nav>
 
 <section class="hero">
-  <div class="dial" id="dial" tabindex="0" role="slider" aria-label="Grind dial - drag or use the arrow keys to turn it" aria-valuemin="0" aria-valuemax="29.5" aria-valuenow="0">
+  <div class="dial" id="dial" tabindex="0" role="slider" aria-label="Grind dial - drag or use the arrow keys to turn it" aria-valuemin="0" aria-valuemax="14.75" aria-valuenow="0">
     <svg viewBox="0 0 200 200" aria-hidden="true">
       <g class="ring"><g id="ring"></g></g>
-      <path class="index" d="M100 23 l-4 7 h8 z"/>
+      <path class="index" d="M100 0 l-4.5 -8 h9 z"/>
     </svg>
     <img src="icon.png" alt="Quarter Turn app icon">
     <span class="readout" id="readout">give it a quarter turn</span>
@@ -143,11 +148,12 @@
 </footer>
 </main>
 <script>
-  // Grinder-collar ticks around the icon: a long one every 10, a gold mark at the top.
+  // Grinder-collar ticks around the icon: a long one at every whole number,
+  // four clicks apart, and a gold mark at zero.
   const ring = document.getElementById("ring");
   const ns = "http://www.w3.org/2000/svg";
   for (let i = 0; i < 60; i++) {
-    const major = i % 10 === 0;
+    const major = i % 4 === 0;
     const line = document.createElementNS(ns, "line");
     line.setAttribute("x1", 100); line.setAttribute("x2", 100);
     line.setAttribute("y1", major ? 4 : 9); line.setAttribute("y2", 18);
@@ -161,7 +167,7 @@
   }
 
   // The collar turns: drag it round, let go and it coasts, then it settles
-  // on the nearest tick - one tick is half a step of grind.
+  // on the nearest tick - one tick is a quarter step of grind.
   const dial = document.getElementById("dial");
   const readout = document.getElementById("readout");
   const TICK = 6;
@@ -178,8 +184,8 @@
       lastTick = tick;
       if (navigator.vibrate) navigator.vibrate(3);
       // Turning the collar clockwise grinds finer, as on most grinders.
-      const setting = (((-tick % 60) + 60) % 60) / 2;
-      readout.textContent = setting.toFixed(1);
+      const setting = (((-tick % 60) + 60) % 60) / 4;
+      readout.textContent = setting.toFixed(2);
       readout.classList.add("live");
       dial.setAttribute("aria-valuenow", setting);
     }

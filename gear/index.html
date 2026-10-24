@@ -27,6 +27,9 @@
   nav { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; margin-bottom: 32px; }
   nav .home { display: flex; align-items: center; gap: 10px; margin-right: auto; font-weight: 600; color: var(--text); text-decoration: none; }
   nav .home img { width: 30px; height: 30px; border-radius: 7px; }
+  /* On a phone the name has the first line and the pages share the second. */
+  @media (max-width: 560px) { nav { justify-content: space-between; gap: 10px 0; } nav .home { flex-basis: 100%; } }
+  @media (max-width: 360px) { nav a:not(.home) { font-size: 15px; } }
   nav a { text-decoration: none; }
   nav a:hover { text-decoration: underline; }
   nav a.here { color: var(--text); font-weight: 600; }
@@ -41,12 +44,11 @@
   @supports (grid-template-rows: subgrid) {
     @media (min-width: 561px) {
       .tiles { grid-auto-rows: auto; row-gap: 12px; }
-      .card { display: grid; grid-row: span 5; grid-template-rows: subgrid; row-gap: 0; align-content: start; }
-      .card > .chips, .card > .search { align-self: start; }
+      .card { display: grid; grid-row: span 4; grid-template-rows: subgrid; row-gap: 0; align-content: start; }
+      .card > .search { align-self: start; }
     }
   }
   .card > h2 { margin-bottom: 4px; }
-  .card > .chips { margin-top: 12px; }
   .seeall { margin-top: auto; padding-top: 12px; align-self: end; font-size: 15px; font-weight: 600; text-decoration: none; }
   .seeall:hover { text-decoration: underline; }
   .seeall.open::after { content: " \2193"; }
@@ -60,8 +62,6 @@
   h2 { font-size: 19px; margin: 0 0 4px; }
   .card > p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.5; }
 
-  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
-  .chip { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 999px; background: var(--chip); font-size: 14px; font-weight: 600; }
   .tag { font-size: 10px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--gold); border: 1px solid var(--gold); border-radius: 999px; padding: 0 6px; }
 
   dl { margin: 10px 0 0; font-size: 14px; line-height: 1.5; }
@@ -110,6 +110,7 @@
 <main id="top">
 <nav>
   <a class="home" href="../"><img src="../icon.png" alt="">Quarter Turn</a>
+  <a href="../">Home</a>
   <a href="../features/">Features</a>
   <a class="here" href="./">Gear</a>
   <a href="../themes/">Themes</a>
@@ -123,9 +124,12 @@
 <div class="card" data-list="all-machines">
   <h2>Espresso machines</h2>
   <p>Gaggiuino and GaggiMate connect over Wi-Fi, so every shot logs itself.</p>
-  <div class="chips"><span class="chip">Gaggiuino</span><span class="chip" data-also="Gaggia Classic Pro with GaggiMate">GaggiMate</span></div>
+  <ul class="extra" hidden>
+    <li data-name="Gaggiuino" data-also=""></li>
+    <li data-name="GaggiMate" data-also=""></li>
+  </ul>
   <div class="search" data-kind="machines" data-noun="an espresso machine">
-    <input type="search" placeholder="Search for your machine, like "Silvia"" autocomplete="off" aria-label="Search machines" role="combobox" aria-expanded="false">
+    <input type="search" placeholder="Search machines, like Silvia" autocomplete="off" aria-label="Search machines" role="combobox" aria-expanded="false">
     <ul class="suggest" role="listbox" hidden></ul>
     <p class="result" aria-live="polite" hidden></p>
   </div>
@@ -135,9 +139,8 @@
 <div class="card" data-list="all-grinders">
   <h2>Grinders</h2>
   <p>Each comes with its burrs and a dial drawn like the grinder's own collar.</p>
-  <div class="chips"><span class="chip">Niche</span><span class="chip">DF64</span><span class="chip">Comandante</span></div>
   <div class="search" data-kind="grinders" data-noun="a grinder">
-    <input type="search" placeholder="Search for your grinder, like "Niche"" autocomplete="off" aria-label="Search grinders" role="combobox" aria-expanded="false">
+    <input type="search" placeholder="Search grinders, like Niche" autocomplete="off" aria-label="Search grinders" role="combobox" aria-expanded="false">
     <ul class="suggest" role="listbox" hidden></ul>
     <p class="result" aria-live="polite" hidden></p>
   </div>
@@ -147,13 +150,8 @@
 <div class="card" data-list="all-scales">
   <h2>Scales</h2>
   <p>Bluetooth scales read dose and yield live, with tare and timer in the app.</p>
-  <div class="chips">
-    <span class="chip" data-also="Themis">BOOKOO</span>
-    <span class="chip" data-also="Lunar, Pearl, Pyxis">Acaia <span class="tag">Beta</span></span>
-    <span class="chip" data-also="Decent Scale">Decent <span class="tag">Beta</span></span>
-  </div>
   <div class="search" data-kind="scales" data-noun="a scale">
-    <input type="search" placeholder="Search for your scale, like "Lunar"" autocomplete="off" aria-label="Search scales" role="combobox" aria-expanded="false">
+    <input type="search" placeholder="Search scales, like Lunar" autocomplete="off" aria-label="Search scales" role="combobox" aria-expanded="false">
     <ul class="suggest" role="listbox" hidden></ul>
     <p class="result" aria-live="polite" hidden></p>
   </div>
@@ -162,10 +160,9 @@
 
 <div class="card" data-list="all-roasters">
   <h2>Roaster imports</h2>
-  <p>Paste a coffee's link or scan the bag's QR code, and the bag fills itself in, from roasters' own shops in a dozen languages.</p>
-  <div class="chips"><span class="chip" data-also="Onyx Coffee Lab">Onyx</span><span class="chip" data-also="Tim Wendelboe Coffee">Tim Wendelboe</span><span class="chip" data-also="Counter Culture Coffee">Counter Culture</span><span class="chip" data-also="Nomad Coffee">Nomad</span><span class="chip">Starbucks</span><span class="chip">Lavazza</span></div>
+  <p>Paste a coffee's link or scan the bag's QR code, and the bag fills itself in.</p>
   <div class="search" data-kind="roasters" data-noun="a roaster">
-    <input type="search" placeholder="Search for your roaster" autocomplete="off" aria-label="Search roasters" role="combobox" aria-expanded="false">
+    <input type="search" placeholder="Search roasters, like Onyx" autocomplete="off" aria-label="Search roasters" role="combobox" aria-expanded="false">
     <ul class="suggest" role="listbox" hidden></ul>
     <p class="result" aria-live="polite" hidden></p>
   </div>
@@ -557,8 +554,8 @@
 </footer>
 </main>
 <script>
-  // Each card's search reads the names already on the page: its "See all"
-  // list if it has one, its chips otherwise, so the two can't disagree.
+  // Each card's search reads the names already on the page - its "See all"
+  // list - so the two can't disagree.
   for (const c of document.querySelectorAll("[data-count]")) {
     const card = c.closest(".card");
     const list = document.getElementById(card.dataset.list);
@@ -592,10 +589,11 @@
     for (const li of document.getElementById(card.dataset.list).querySelectorAll("li[data-name]")) {
       items.push({ name: li.dataset.name, beta: li.hasAttribute("data-beta"), keys: norm(li.dataset.name + " " + li.dataset.also) });
     }
-    for (const chip of card.querySelectorAll(".chips .chip")) {
-      const name = chip.firstChild.textContent.trim();
-      if (items.some(i => norm(i.name).startsWith(norm(name)))) continue;
-      items.push({ name, beta: !!chip.querySelector(".tag"), keys: norm(name + " " + (chip.dataset.also || "")) });
+    // And what the lists don't carry, kept on the card itself: the boards
+    // fitted to a machine rather than sold as one.
+    for (const li of card.querySelectorAll(".extra li[data-name]")) {
+      if (items.some(i => norm(i.name) === norm(li.dataset.name))) continue;
+      items.push({ name: li.dataset.name, beta: false, keys: norm(li.dataset.name + " " + li.dataset.also) });
     }
     return items;
   }
